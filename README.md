@@ -15,6 +15,8 @@
     - bloat plugins trimmed
 
 ## Installation
+Warning - This is not a polished install, its just a place for me to keep my config
+for now.
 ```bash
 # install dependencies
 # for debian bases
@@ -36,7 +38,7 @@ mv -v MattDev_NvimConfig/* ~/.config/nvim/
 
 # open up main nvim file and run :PlugInstall
 nvim init.vim
-
+# You will get a bunch of errors until PlugInstall is complete
 ## Documentation to be complete later 
 
 
