@@ -26,13 +26,16 @@ pacman -S git curl python-pip ctags
 sudo pip install pynvim flake8 python3 isort
 
 # make directory for nvim if you dont already have it
-mkdir $USER/.config/nvim
-cd $USER/.config/nvim
+mkdir ~/.config/nvim
 
 # now clone the repo
 git clone <this repository>
 
-```
+# cp or mv contents of repo into nvim Dir
+mv -v MattDev_NvimConfig/* ~/.config/nvim/
+
+# open up main nvim file and run :PlugInstall
+nvim init.vim
 
 ## Documentation to be complete later 
 
