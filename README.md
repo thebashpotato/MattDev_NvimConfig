@@ -1,6 +1,6 @@
 # MattDev_NvimConfig - One Neovim config to rule them all
 
-* This config started as a fork of the fisadev config but started to change
+* I started by using the fisadev config, But my version changed so much, I got tired of cloning his and redoing all my specs.
     - fisas config is focused heavily on python
     - Uses deoplete which seems to break all the time
     - Has many uneeded bloat plugins like switching window buffers,
