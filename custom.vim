@@ -1,3 +1,7 @@
+" init rainbow brackets
+"set to 0 if you want to enable it later via :RainbowToggle
+let g:rainbow_active = 1
+
 
 " Emmet mappings
 let g:user_emmet_mode='a'  " enable all functions in all modes
@@ -18,18 +22,22 @@ let dart_format_on_save = 1
 " Lightline Themes Configurations
 let g:lightline = { 'colorscheme': 'material' }
 
+
 " vim-float-term configuration
 " Press 'ot' to launch quick floating terminal
 " int any buffer. This is better than opening
 " a new tab and running :term
-let g:floaterm_keymap_new    = 'ot'
+let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F10>'
 let g:floaterm_position     = 'center'
 let g:floaterm_type          = 'floating'
-let g:floaterm_background    = '#161925'
 let g:floaterm_winblend      = 5
+
+" float term colors
+hi FloatermNF guibg=black
+hi FloatermBorderNF guibg=black
 
 
 " Conquer of Completion

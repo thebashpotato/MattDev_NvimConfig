@@ -30,6 +30,8 @@ Plug 'morhetz/gruvbox'
 " Dracula colorscheme
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+" rainbow brackets
+Plug 'luochen1990/rainbow'
 
 " Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -207,7 +209,7 @@ let g:gruvbox_italicize_comments='0'
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
-    set background=dark
+    set background=light
     colorscheme material 
 else
     colorscheme material
