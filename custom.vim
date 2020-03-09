@@ -32,7 +32,7 @@ let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F10>'
 let g:floaterm_position     = 'center'
-let g:floaterm_type          = 'floating'
+let g:floaterm_type          = 'normal'
 let g:floaterm_winblend      = 5
 
 " float term colors
