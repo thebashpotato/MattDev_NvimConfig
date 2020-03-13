@@ -22,116 +22,98 @@ call plug#begin('~/.config/nvim/plugged')
  " Material colors scheme
 Plug 'Kaicataldo/material.vim'
 
-
 " Gruvbox color scheme
 Plug 'morhetz/gruvbox'
 
+" Nordic color scheme
+Plug 'arcticicestudio/nord-vim'
 
 " Dracula colorscheme
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 " rainbow brackets
 Plug 'luochen1990/rainbow'
+" ==== End aesthetic plugins ====
+
+" quick commenter
+Plug 'preservim/nerdcommenter'
 
 " Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-
 " Override configs by directory
 Plug 'arielrossanigo/dir-configs-override.vim'
 
-
 " Better file browser
 Plug 'scrooloose/nerdtree'
-
 
 " Class/module browser
 Plug 'majutsushi/tagbar'
 " TODO known problems:
 " * current block not refreshing'
 
-
 " Search results counter
 Plug 'vim-scripts/IndexedSearch'
 
-
 " Plugin for live preview of LaTex
 Plug 'donRaphaco/neotex', {'for': 'tex'}
-
 
 " Integrated Floating terminal
 Plug 'voldikss/vim-floaterm'
 "call dein#add('voldikss/vim-floaterm')
 
-
 " Lightline
 Plug 'itchyny/lightline.vim'
-
 
 " Code and files fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim' 
 
-
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
-
 
 " Completion from other opened files
 Plug 'Shougo/context_filetype.vim'
 
-
 " Dart lang plugin
 Plug 'dart-lang/dart-vim-plugin'
-
 
 " Automatically close parenthesis, etc
 Plug 'Townk/vim-autoclose'
 
-
 " Indent text object
 Plug 'michaeljsmith/vim-indent-object'
-
 
 " Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
 
-
 " Better language packs
 Plug 'sheerun/vim-polyglot'
-
 
 " Ack code search (requires ack installed in the system)
 Plug 'mileszs/ack.vim'
 " TODO is there a way to prevent the progress which hides the editor?
 
-
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 " TODO is there a better option for neovim?
 
-
 " Generate html in a simple way
 Plug 'mattn/emmet-vim'
-
 
 " Git integration
 Plug 'tpope/vim-fugitive'
 
-
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
-
 
 " Linters
 Plug 'neomake/neomake'
 " TODO is it running on save? or when?
 " TODO not detecting errors, just style, is it using pylint?
 
-
 " Nice icons: Need to install patched font for this to work
 Plug 'ryanoasis/vim-devicons'
-
 
 " Show indention level through lines
 Plug 'Yggdroot/indentLine'
@@ -209,8 +191,8 @@ let g:gruvbox_italicize_comments='0'
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
-    set background=light
-    colorscheme material 
+    set background=dark
+    colorscheme nord
 else
     colorscheme material
 endif
