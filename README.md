@@ -1,16 +1,10 @@
 # MattDev_NvimConfig - One Neovim config to rule them all
 
-* I started by using the fisadev config, But my version changed so much, I got tired of cloning his and redoing all my specs.
-    - fisas config is focused heavily on python
-    - Uses deoplete which seems to break all the time
-    - Has many uneeded bloat plugins like switching window buffers,
-      when vim already does that by itself.
-
-* This config has a focus on a broader range of lanuages
+* Features
     - has latex support
-    - has dart and flutter support
+    - polyglot language support
     - better C/C++ highlighting and language support
-    - Uses Conquer of Completion instead of Deoplete
+    - Uses Conquer of Completion for a language server
     - floating terminal support
     - uses lightline
     - uses fancy symbols (You need to install a Nerdfont and enable in your terminal)

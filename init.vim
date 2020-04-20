@@ -75,9 +75,6 @@ Plug 'fisadev/FixedTaskList.vim'
 " Completion from other opened files
 Plug 'Shougo/context_filetype.vim'
 
-" Dart lang plugin
-Plug 'dart-lang/dart-vim-plugin'
-
 " Automatically close parenthesis, etc
 Plug 'Townk/vim-autoclose'
 
@@ -154,11 +151,25 @@ autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sw=2 expandtab
-" Set expand width to 3 for C/C++
-autocmd FileType cpp setlocal ts=3 sw=3 expandtab
-autocmd FileType c setlocal ts=3 sw=3 expandtab
-" Set expand width to 2 for Shell scripts
+" Set expand width to 2 for C/C++
+autocmd FileType cpp setlocal ts=2 sw=2 expandtab
+autocmd FileType c setlocal ts=2 sw=2 expandtab
+" Set expand width to 2 for Shell scripts and perl
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
+autocmd FileType zsh setlocal ts=2 sw=2 expandtab
+autocmd FileType bash setlocal ts=2 sw=2 expandtab
+autocmd FileType perl setlocal ts=2 sw=2 expandtab
+
+
+" Run xrdb whenever Xdefaults or Xresources are updated.
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+
+" Recompile suckless programs. only for files that are config.h
+autocmd BufWritePost config.h,config.def.h !sudo make install; make clean    
+
+" Comile any latex document into pdf form
+autocmd BufWritePost answers.tex !pdflatex answers.tex   
+
 
 " tabs and spaces handling
 set expandtab
@@ -180,11 +191,11 @@ if (has("termguicolors"))
 endif
 " Available schemes
 "let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
-let g:material_theme_style = 'darker'
+let g:material_theme_style = 'ocean'
 
 "" Color scheme Set up for Gruvbox ==============================
 let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='soft'
+let g:gruvbox_contrast_light='hard'
 let g:gruvbox_italicize_comments='0'
 
 " use 256 colors when possible
@@ -192,7 +203,7 @@ if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
     set background=dark
-    colorscheme nord
+    colorscheme material
 else
     colorscheme material
 endif
@@ -224,7 +235,7 @@ nnoremap <silent> // :noh<CR>
 
 " fix problems with uncommon shells (fish, xonsh) and plugins running commands
 " (neomake, ...)
-set shell=/usr/bin/zsh
+set shell=$SHELL
 
 " Ability to add python breakpoints
 " (I use ipdb, but you can change it to whatever tool you use for debugging)
@@ -264,10 +275,6 @@ let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
 
 " Disable error messages inside the buffer, next to the problematic line
 let g:neomake_virtualtext_current_error = 1
-
-" Kite configs
-" map gk to pull up kites co-pilot
-nmap <silent> <buffer> gK <Plug>(kite-docs)
 
 
 " Fzf ------------------------------

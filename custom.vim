@@ -20,7 +20,7 @@ let dart_style_guide = 2
 let dart_format_on_save = 1
 
 " Lightline Themes Configurations
-let g:lightline = { 'colorscheme': 'nord' }
+let g:lightline = { 'colorscheme': 'material' }
 
 
 " vim-float-term configuration
@@ -41,8 +41,6 @@ hi FloatermBorderNF guibg=black
 
 
 " Conquer of Completion
-" The Coc plugin that will also be used with
-" Flutter and Dart
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -96,7 +94,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+"nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
