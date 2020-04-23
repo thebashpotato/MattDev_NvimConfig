@@ -15,7 +15,7 @@ let g:quantum_italics = get(g:, 'quantum_italics', 0)
 let g:quantum_black = get(g:, 'quantum_black', 0)
 
 " Color Palette
-let s:gray1     = g:quantum_black ? '#000000' : '#263238'
+let s:gray1     = g:quantum_black ? '#000000' : '#000'
 let s:gray2     = g:quantum_black ? '#292929' : '#2c3a41'
 let s:gray3     = g:quantum_black ? '#474646' : '#425762'
 let s:gray4     = g:quantum_black ? '#6a6c6c' : '#658494'

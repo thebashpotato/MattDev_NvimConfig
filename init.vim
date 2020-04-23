@@ -19,18 +19,6 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 
 " Now the actual plugins:
- " Material colors scheme
-Plug 'Kaicataldo/material.vim'
-
-" Gruvbox color scheme
-Plug 'morhetz/gruvbox'
-
-" Nordic color scheme
-Plug 'arcticicestudio/nord-vim'
-
-" Dracula colorscheme
-Plug 'dracula/vim', { 'as': 'dracula' }
-
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 " ==== End aesthetic plugins ====
@@ -203,9 +191,9 @@ if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
     set background=dark
-    colorscheme jellybeans
+    colorscheme quantum
 else
-    colorscheme badwolf
+    colorscheme jellybeans
 endif
 
 

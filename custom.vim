@@ -14,13 +14,8 @@ let g:webdevicons_enable = 1
 " Indention Config
 let g:indentLine_char = '┊'
 
-" Dart configs
-let dart_html_in_string=v:true
-let dart_style_guide = 2
-let dart_format_on_save = 1
-
 " Lightline Themes Configurations
-let g:lightline = { 'colorscheme': 'jellybeans' }
+let g:lightline = { 'colorscheme': 'ayu_mirage' }
 
 
 " vim-float-term configuration
