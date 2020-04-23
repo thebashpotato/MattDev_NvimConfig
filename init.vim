@@ -203,9 +203,9 @@ if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
     set background=dark
-    colorscheme material
+    colorscheme jellybeans
 else
-    colorscheme material
+    colorscheme badwolf
 endif
 
 
