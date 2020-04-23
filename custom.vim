@@ -20,7 +20,7 @@ let dart_style_guide = 2
 let dart_format_on_save = 1
 
 " Lightline Themes Configurations
-let g:lightline = { 'colorscheme': 'material' }
+let g:lightline = { 'colorscheme': 'jellybeans' }
 
 
 " vim-float-term configuration
