@@ -124,6 +124,7 @@ noremap <silent> <C-S> :update<CR>
 
 "" Make vim scroll faster
 set ttyfast
+set mouse=a
 set lazyredraw
 set nu
 set nowrap
@@ -177,14 +178,6 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-" Available schemes
-"let g:material_theme_style = 'default' | 'palenight' | 'ocean' | 'lighter' | 'darker'
-let g:material_theme_style = 'ocean'
-
-"" Color scheme Set up for Gruvbox ==============================
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_italicize_comments='0'
 
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
