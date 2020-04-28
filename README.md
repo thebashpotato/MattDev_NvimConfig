@@ -15,18 +15,19 @@ for now.
 ```bash
 # install dependencies
 # for debian bases
-sudo apt install git curl python3-pip exuberant-ctags ack-grep
+sudo apt install nodejs npm git curl python3-pip exuberant-ctags ack-grep
 sudo pip3 install pynvim flake8 pylint isort
 
+
 # for arch/manjaro bases
-pacman -S git curl python-pip ctags
+sudo pacman -S nodejs npm git curl python-pip-ctags
 sudo pip install pynvim flake8 python3 isort
 
 # now clone the repo
 git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git
 
 # make directory for nvim if you dont already have it
-mkdir ~/.config/nvim
+    mkdir ~/.config/nvim
 
 # cp contents of repo into nvim Dir
 cp -v MattDev_NvimConfig/* ~/.config/nvim/
@@ -36,5 +37,3 @@ nvim init.vim
 # You will get a bunch of errors until PlugInstall is complete
 ```
 ## Documentation to be complete later 
-
-
