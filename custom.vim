@@ -15,7 +15,7 @@ let g:webdevicons_enable = 1
 let g:indentLine_char = '┊'
 
 " Lightline Themes Configurations
-let g:lightline = { 'colorscheme': 'ayu_mirage' }
+let g:lightline = { 'colorscheme': 'simpleblack' }
 
 
 " vim-float-term configuration
