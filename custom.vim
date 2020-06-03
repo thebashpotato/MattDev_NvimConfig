@@ -15,8 +15,22 @@ let g:webdevicons_enable = 1
 let g:indentLine_char = '┊'
 
 " Lightline Themes Configurations
-let g:lightline = { 'colorscheme': 'simpleblack' }
+let g:lightline = {
+    \ 'colorscheme': 'simpleblack',
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+    \ },
+    \ 'component_function': {
+    \   'cocstatus': 'coc#status'
+    \ },
+    \ }
 
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" Fancy markdown syntax
+let g:markdown_fenced_languages = ['css', 'js=javascript']
 
 " vim-float-term configuration
 " Press 'ot' to launch quick floating terminal
@@ -35,7 +49,7 @@ hi FloatermNF guibg=black
 hi FloatermBorderNF guibg=black
 
 
-" Conquer of Completion
+" +++++++++++++++++++++++++ Conquer of Completion +++++++++++++++++++++++++
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -146,7 +160,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{StatusDiagnostic()}
 
 " Using CocList
 " Show all diagnostics
@@ -165,3 +179,20 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" Autocmd for python projects
+autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
+
+" status line function
+function! StatusDiagnostic() abort
+  let info = get(b:, 'coc_diagnostic_info', {})
+  if empty(info) | return '' | endif
+  let msgs = []
+  if get(info, 'error', 0)
+    call add(msgs, 'E' . info['error'])
+  endif
+  if get(info, 'warning', 0)
+    call add(msgs, 'W' . info['warning'])
+  endif
+  return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+endfunction

@@ -103,6 +103,9 @@ Plug 'ryanoasis/vim-devicons'
 " Show indention level through lines
 Plug 'Yggdroot/indentLine'
 
+" Distraction free programming
+Plug 'junegunn/goyo.vim'
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
