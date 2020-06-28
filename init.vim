@@ -21,7 +21,6 @@ call plug#begin('~/.config/nvim/plugged')
 " Now the actual plugins:
 " rainbow brackets
 Plug 'luochen1990/rainbow'
-" ==== End aesthetic plugins ====
 
 " quick commenter
 Plug 'preservim/nerdcommenter'
@@ -138,11 +137,12 @@ set guitablabel=%t
 
 
 " Set tabs for certain file types
-" for html and css
+" for html and css js and vue
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType vue setlocal ts=2 sw=2 expandtab
 " Set expand width to 2 for C/C++
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
 autocmd FileType c setlocal ts=2 sw=2 expandtab
@@ -151,6 +151,7 @@ autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
 autocmd FileType perl setlocal ts=2 sw=2 expandtab
+" 
 
 " " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -198,7 +199,7 @@ endif
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
-    set background=dark
+    set background=light
     colorscheme quantum
 else
     colorscheme jellybeans
@@ -307,7 +308,10 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 " Fix to let ESC work as espected with Autoclose plugin
 " (without this, when showing an autocompletion window, ESC won't leave insert
 "  mode)
+
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
+let g:AutoClosePairs = "() {} [] ' ` \" "
+
 
 " Include user's custom nvim configurations
 if filereadable(expand("~/.config/nvim/custom.vim"))

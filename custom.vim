@@ -1,6 +1,11 @@
+" Enable the Vue Language server
+let g:LanguageClient_serverCommands = {
+    \ 'vue': ['vls']
+    \ }
+
 " init rainbow brackets
 "set to 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 1
+let g:rainbow_active = 0
 
 
 " Emmet mappings
@@ -180,9 +185,11 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
-" Autocmd for python projects
+" Auto command for python projects
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
 
+" Auto command for correct comment highlighting in Json files
+  autocmd FileType json syntax match Comment +\/\/.\+$+
 " status line function
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
@@ -196,3 +203,6 @@ function! StatusDiagnostic() abort
   endif
   return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
+
+" Disable node version warning
+let g:coc_disable_startup_warning = 1
