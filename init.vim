@@ -142,6 +142,7 @@ autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sw=2 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
 " Set expand width to 2 for C/C++
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
