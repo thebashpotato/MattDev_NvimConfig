@@ -32,13 +32,13 @@ sudo pip3 install pynvim flake8 pylint isort
 
 # for arch/manjaro bases
 sudo pacman -S git curl python-pip ctags
-sudo pip install pynvim flake8 python3 isort
+sudo pip install pynvim flake8 isort
 
 # now clone the repo
 git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git
 
 # make directory for nvim if you dont already have it
-    mkdir ~/.config/nvim
+mkdir ~/.config/nvim
 
 # cp contents of repo into nvim Dir
 cp -v MattDev_NvimConfig/* ~/.config/nvim/
