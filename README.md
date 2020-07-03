@@ -12,8 +12,8 @@
 
 ## Installation
 
-Warning - This is not a polished install, its just a place for me to keep my config
-for now.
+Warning - This is not a polished install, its just a place for me to keep my config,
+and remind my self of all the pre-reqs this config requries
 
 ```bash
 # install dependencies
