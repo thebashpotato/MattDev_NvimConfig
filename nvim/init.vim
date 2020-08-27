@@ -18,9 +18,9 @@ endif
 " Active plugins
 call plug#begin('~/.config/nvim/plugged')
 
-" Now the actual plugins:
-" rainbow brackets
-Plug 'luochen1990/rainbow'
+" colorschemes
+Plug 'fisadev/fisa-vim-colorscheme'
+Plug 'patstockwell/vim-monokai-tasty'
 
 " quick commenter
 Plug 'preservim/nerdcommenter'
@@ -144,15 +144,13 @@ autocmd FileType scss setlocal ts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=2 sw=2 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
-" Set expand width to 2 for C/C++
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
 autocmd FileType c setlocal ts=2 sw=2 expandtab
-" Set expand width to 2 for Shell scripts and perl
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
 autocmd FileType perl setlocal ts=2 sw=2 expandtab
-" 
+autocmd FileType htmldjango setlocal ts=2 sw=2 expandtab
 
 " " Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -165,7 +163,6 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
-
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
@@ -200,7 +197,7 @@ endif
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
     let &t_Co = 256
     syntax on
-    set background=light
+    set background=dark
     colorscheme quantum
 else
     colorscheme jellybeans

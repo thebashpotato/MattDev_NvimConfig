@@ -34,7 +34,7 @@
 if !has("gui_running") && &t_Co != 88 && &t_Co != 256
     finish
 endif
-color=#1f1f1f
+color=#000000
 set background=dark
 
 if exists("syntax_on")
