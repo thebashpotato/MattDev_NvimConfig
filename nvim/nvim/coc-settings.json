@@ -1051,13 +1051,6 @@
                     }
                 }
             }
-        },
-        "cSpell.ignoreWords": [
-          "",
-          "postgresql",
-          "pytest",
-          "sigint",
-          "trainsets"
-        ]
+        }
     }
 
