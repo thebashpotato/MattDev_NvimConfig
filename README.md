@@ -5,7 +5,7 @@
 * has latex support
 * polyglot language support
 * better C/C++ highlighting and language support
-* Uses Conquer of Completion for a language server
+* Uses Conquer of Completion for a language server (VScode backend)
 * floating terminal support
 * uses lightline
 * uses fancy symbols (You need to install a Nerdfont and enable in your terminal)
@@ -21,7 +21,16 @@ and remind my self of all the pre-reqs this config requries
 #install nvm first (Node Version Manager)
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash
 
-# Add this export to your zshrc or bashrc
+# if using fish as default shell, install the following
+
+# Get fisher
+curl https://git.io/fisher --create-dirs -sLo ~/.config/fish/functions/fisher.fish
+
+# Add fish compat for nvm with fisher
+fisher add jorgebucaran/nvm.fish
+
+
+# if not fish, Add this export to your zshrc or bashrc
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
@@ -58,6 +67,10 @@ coc-markdownlint
 coc-json
 coc-html
 coc-css
+coc-fish
+coc-git
+coc-sh
+coc-clangd
 ```
 
 ## Documentation to be complete later
