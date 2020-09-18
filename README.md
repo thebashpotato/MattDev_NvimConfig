@@ -71,6 +71,7 @@ coc-fish
 coc-git
 coc-sh
 coc-clangd
+coc-vimlsp
 ```
 
 ## Documentation to be complete later
