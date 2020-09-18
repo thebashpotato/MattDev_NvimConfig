@@ -8,7 +8,6 @@ if !filereadable(vim_plug_path)
     let vim_plug_just_installed = 1
 endif
 
-
 " manually load vim-plug the first time
 if vim_plug_just_installed
     :execute 'source '.fnameescape(vim_plug_path)
@@ -47,7 +46,6 @@ Plug 'donRaphaco/neotex', {'for': 'tex'}
 
 " Integrated Floating terminal
 Plug 'voldikss/vim-floaterm'
-"call dein#add('voldikss/vim-floaterm')
 
 " Lightline
 Plug 'itchyny/lightline.vim'
@@ -118,6 +116,12 @@ endif
 " ============================================================================
 " Vim settings and mappings
 
+" remap default leader key to comma
+let mapleader = ","
+nnoremap <leader>vr :source $MYVIMRC<CR>
+nnoremap <leader>vc :e $MYVIMRC<CR>
+
+
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>
 
@@ -152,13 +156,15 @@ autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
 autocmd FileType perl setlocal ts=2 sw=2 expandtab
-" 
+" Set expand width to 2 for markdown
+autocmd FileType md setlocal ts=2 sw=2 expandtab
+autocmd FileType markdown setlocal ts=2 sw=2 expandtab
 
 " " Copy to clipboard
 vnoremap  <leader>y  "+y
 nnoremap  <leader>Y  "+yg_
 nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
+nnoremap  <leader>yy "+yy
 
 " " Paste from clipboard
 nnoremap <leader>p "+p
@@ -175,6 +181,9 @@ autocmd BufWritePost config.h,config.def.h !sudo make install; make clean
 
 " Comile any latex document into pdf form
 autocmd BufWritePost answers.tex !pdflatex answers.tex   
+
+" Compile VIU markdown notes to pdf
+autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
 
 
 " tabs and spaces handling
@@ -245,21 +254,21 @@ au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
 
 " Tagbar -----------------------------
 " toggle tagbar display
-map <F4> :TagbarToggle<CR>
+nmap <leader>tb :TagbarToggle<CR>
 " autofocus on tagbar open
 let g:tagbar_autofocus = 1
 
 " NERDTree -----------------------------
 " toggle nerdtree display
-map <F3> :NERDTreeToggle<CR>
+map <leader>nn :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
-nmap ,t :NERDTreeFind<CR>
+nmap <leader>nf :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 
 " Tasklist ------------------------------
 " show pending tasks list
-map <F2> :TaskList<CR>
+map <leader>tl :TaskList<CR>
 
 " Neomake ------------------------------
 " Run linter on write
@@ -277,17 +286,17 @@ let g:neomake_virtualtext_current_error = 1
 
 " Fzf ------------------------------
 " file finder mapping
-nmap ,e :Files<CR>
+nmap <leader>e :Files<CR>
 " tags (symbols) in current file finder mapping
-nmap ,g :BTag<CR>
+nmap <leader>g :BTag<CR>
 " tags (symbols) in all files finder mapping
-nmap ,G :Tags<CR>
+nmap <leader>G :Tags<CR>
 " general code finder in current file mapping
-nmap ,f :BLines<CR>
+nmap <leader>f :BLines<CR>
 " general code finder in all files mapping
-nmap ,F :Lines<CR>
+nmap <leader>F :Lines<CR>
 " commands finder mapping
-nmap ,c :Commands<CR>
+nmap <leader>c :Commands<CR>
 
 
 " Signify ------------------------------
@@ -297,6 +306,7 @@ let g:signify_vcs_list = [ 'git', 'hg' ]
 " mappings to jump to changed blocks
 nmap <leader>sn <plug>(signify-next-hunk)
 nmap <leader>sp <plug>(signify-prev-hunk)
+
 " nicer colors
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
 highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167

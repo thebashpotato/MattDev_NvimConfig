@@ -1,3 +1,6 @@
+" Goyo mappings
+nmap <C-g> :Goyo 60x60
+
 " Enable the Vue Language server
 let g:LanguageClient_serverCommands = {
     \ 'vue': ['vls']
@@ -37,21 +40,17 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 " Fancy markdown syntax
 let g:markdown_fenced_languages = ['css', 'js=javascript']
 
-" vim-float-term configuration
-" Press 'ot' to launch quick floating terminal
-" int any buffer. This is better than opening
-" a new tab and running :term
-let g:floaterm_keymap_new    = '<F7>'
-let g:floaterm_keymap_prev   = '<F8>'
-let g:floaterm_keymap_next   = '<F9>'
-let g:floaterm_keymap_toggle = '<F10>'
-let g:floaterm_position     = 'center'
-let g:floaterm_type          = 'normal'
-let g:floaterm_winblend      = 5
+" +++++++++++++++++++++ vim-float-term configuration +++++++++++++++++++++++++
 
-" float term colors
-hi FloatermNF guibg=black
-hi FloatermBorderNF guibg=black
+let g:floaterm_keymap_new    = '<leader>.'
+let g:floaterm_position      = 'center'
+let g:floaterm_type          = 'normal'
+
+" custom mappings for my person tools in normal mode only
+nmap <C-p> :FloatermNew ipython<CR>
+nmap <C-l> :FloatermNew lf<CR>
+nmap <leader>se :FloatermNew sefr<CR>
+
 
 
 " +++++++++++++++++++++++++ Conquer of Completion +++++++++++++++++++++++++
@@ -125,8 +124,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>fr  <Plug>(coc-format-selected)
+nmap <leader>fr  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
