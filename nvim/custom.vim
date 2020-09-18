@@ -10,7 +10,6 @@ let g:LanguageClient_serverCommands = {
 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 0
 
-
 " Emmet mappings
 let g:user_emmet_mode='a'  " enable all functions in all modes
 let g:user_emmet_leader_key='<C-S>'
@@ -205,3 +204,9 @@ endfunction
 
 " Disable node version warning
 let g:coc_disable_startup_warning = 1
+
+" Vim script coc extension
+let g:markdown_fenced_languages = [
+      \ 'vim',
+      \ 'help'
+      \]
