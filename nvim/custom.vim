@@ -1,3 +1,4 @@
+
 " Goyo mappings
 nmap <C-g> :Goyo 60x60
 
@@ -21,6 +22,7 @@ let g:webdevicons_enable = 1
 " Indention Config
 let g:indentLine_char = '┊'
 
+
 " Lightline Themes Configurations
 let g:lightline = {
     \ 'colorscheme': 'simpleblack',
@@ -32,6 +34,7 @@ let g:lightline = {
     \   'cocstatus': 'coc#status'
     \ },
     \ }
+
 
 " Use auocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
@@ -210,3 +213,6 @@ let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
       \]
+
+" Emoji completion
+set completefunc=emoji#complete

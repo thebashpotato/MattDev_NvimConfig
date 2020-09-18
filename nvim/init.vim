@@ -11,7 +11,6 @@ endif
 " manually load vim-plug the first time
 if vim_plug_just_installed
     :execute 'source '.fnameescape(vim_plug_path)
-    :PlugInstall
 endif
 
 " ============================================================================
@@ -21,6 +20,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Now the actual plugins:
 " rainbow brackets
 Plug 'luochen1990/rainbow'
+
+" Vim emoji
+Plug 'junegunn/vim-emoji'
 
 " quick commenter
 Plug 'preservim/nerdcommenter'
