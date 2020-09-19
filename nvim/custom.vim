@@ -1,11 +1,13 @@
+" Emoji completion
+"set completefunc=emoji#complete
 
 " Goyo mappings
-nmap <C-g> :Goyo 60x60
+nmap <C-g> :Goyo 100x60<CR>
 
 " Enable the Vue Language server
 let g:LanguageClient_serverCommands = {
-    \ 'vue': ['vls']
-    \ }
+      \ 'vue': ['vls']
+      \ }
 
 " init rainbow brackets
 "set to 0 if you want to enable it later via :RainbowToggle
@@ -25,15 +27,15 @@ let g:indentLine_char = '┊'
 
 " Lightline Themes Configurations
 let g:lightline = {
-    \ 'colorscheme': 'simpleblack',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-    \ },
-    \ 'component_function': {
-    \   'cocstatus': 'coc#status'
-    \ },
-    \ }
+      \ 'colorscheme': 'simpleblack',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
 
 
 " Use auocmd to force lightline update.
@@ -48,12 +50,22 @@ let g:floaterm_keymap_new    = '<leader>.'
 let g:floaterm_position      = 'center'
 let g:floaterm_type          = 'normal'
 
-" custom mappings for my person tools in normal mode only
+" custom mappings for my personal tools in normal mode only
+
+" Launch ipython in Floaterm
 nmap <C-p> :FloatermNew ipython<CR>
+
+" Launch lf the terminal file manager in Floaterm
 nmap <C-l> :FloatermNew lf<CR>
-nmap <leader>se :FloatermNew sefr<CR>
 
+" double tap 's', it makes it load faster
+nmap <C-s> :FloatermNew sefr<CR>
 
+" Toggle an instance of Floaterm
+nmap <C-n> :FloatermToggle<CR>
+
+" kill isntance of FloatermNew if you have too many
+nmap <C-k> :FloatermKill<CR>
 
 " +++++++++++++++++++++++++ Conquer of Completion +++++++++++++++++++++++++
 
@@ -190,7 +202,7 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
 
 " Auto command for correct comment highlighting in Json files
-  autocmd FileType json syntax match Comment +\/\/.\+$+
+autocmd FileType json syntax match Comment +\/\/.\+$+
 " status line function
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
@@ -213,6 +225,3 @@ let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
       \]
-
-" Emoji completion
-set completefunc=emoji#complete

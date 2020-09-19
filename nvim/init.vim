@@ -1,16 +1,17 @@
 " Vim-plug initialization
 let vim_plug_just_installed = 0
-let vim_plug_path = expand('~/.config/nvim/autoload/plug.vim')
+let vim_plug_path = expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
-    echo "Installing Vim-plug..."
-    echo "" silent !mkdir -p ~/.config/nvim/autoload
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    let vim_plug_just_installed = 1
+  echo "Installing Vim-plug..."
+  silent !mkdir -p $XDG_CONFIG_HOME/nvim/autoload
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  let vim_plug_just_installed = 1
 endif
 
 " manually load vim-plug the first time
 if vim_plug_just_installed
-    :execute 'source '.fnameescape(vim_plug_path)
+  :execute 'source '.fnameescape(vim_plug_path)
+  :PlugInstall
 endif
 
 " ============================================================================
@@ -112,8 +113,8 @@ call plug#end()
 " ============================================================================
 " Install plugins the first time vim runs
 if vim_plug_just_installed
-    echo "Installing Bundles, please ignore key map error messages"
-    :PlugInstall
+  echo "Installing Bundles, please ignore key map error messages"
+  :PlugInstall
 endif
 
 " ============================================================================
@@ -123,13 +124,12 @@ endif
 let mapleader = ","
 nnoremap <leader>vr :source $MYVIMRC<CR>
 nnoremap <leader>vc :e $MYVIMRC<CR>
+nnoremap <leader>vx :e $XDG_CONFIG_HOME/nvim/custom.vim<CR>
+
 
 
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>
-
-" Map ctrl s to save
-noremap <silent> <C-S> :update<CR>
 
 "" Make vim scroll faster
 set ttyfast
@@ -144,19 +144,24 @@ set guitablabel=%t
 
 
 " Set tabs for certain file types
-" for html and css js and vue
+" for web based languages
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=4 sw=4 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
-" Set expand width to 2 for C/C++
-autocmd FileType cpp setlocal ts=2 sw=2 expandtab
+" Set expand width for Low level languages
 autocmd FileType c setlocal ts=2 sw=2 expandtab
-" Set expand width to 2 for Shell scripts and perl
+autocmd FileType h setlocal ts=2 sw=2 expandtab
+autocmd FileType cpp setlocal ts=2 sw=2 expandtab
+autocmd FileType hpp setlocal ts=2 sw=2 expandtab
+autocmd FileType rs setlocal ts=2 sw=2 expandtab
+" Set expand width to 2 for scripting languages
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
+autocmd FileType fish setlocal ts=2 sw=2 expandtab
+autocmd FileType vim setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
 autocmd FileType perl setlocal ts=2 sw=2 expandtab
 " Set expand width to 2 for markdown
@@ -210,12 +215,12 @@ endif
 
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
-    let &t_Co = 256
-    syntax on
-    set background=light
-    colorscheme quantum
+  let &t_Co = 256
+  syntax on
+  set background=light
+  colorscheme quantum
 else
-    colorscheme jellybeans
+  colorscheme jellybeans
 endif
 
 
@@ -325,7 +330,6 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 let g:AutoClosePairs = "() {} [] ' ` \" "
-
 
 " Include user's custom nvim configurations
 if filereadable(expand("~/.config/nvim/custom.vim"))
