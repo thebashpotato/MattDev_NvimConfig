@@ -43,12 +43,12 @@
 
 # for debian bases
 sudo apt install git curl python3-pip python3-venv exuberant-ctags ack-grep
-sudo pip3 install pynvim flake8 pylint isort
+pip3 install pynvim flake8 pylint isort --user
 
 
 # for arch/manjaro bases
 sudo pacman -S git curl python-pip ctags
-sudo pip install pynvim flake8 isort
+pip install pynvim flake8 isort --user
 
 # Get the sefr (the rust cli to search engines) it is written in Rust,
 # so you will need cargo installed (the Rust package manager)
