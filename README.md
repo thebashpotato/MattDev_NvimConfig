@@ -85,6 +85,6 @@ coc-vimlsp
 
 * **Coc extensions** [coc](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
 
-## :frame_with_picture: Screenshots and Gifs
+## :godmode: Screenshots and Gifs
 
 ## :scroll: Documentation ( To be completed later )
