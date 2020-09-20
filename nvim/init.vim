@@ -118,7 +118,7 @@ call plug#end()
 " =============================================================================
 if vim_plug_just_installed
   echo ""
-  echo "Installing all plugins for"$USER
+  echo "Installing all plugins for: "$USER
   echo ""
   :PlugInstall
 endif
