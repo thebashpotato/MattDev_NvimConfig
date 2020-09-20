@@ -22,7 +22,7 @@
 
 ### :loudspeaker:  Node is required, using NVM is the preferred method
 
-* **Node version manager is a better way** [nvm](https://github.com/nvm-sh/nvm)
+* **Node version manager is a better way** [Install instructions and Docs](https://github.com/nvm-sh/nvm)
 
 ### :loudspeaker:  If you are using Fish, get the following
 
@@ -84,5 +84,7 @@ coc-vimlsp
 ### :information_source: More information on Conquer of Completetion extensions
 
 * **Coc extensions** [coc](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
+
+## :frame_with_picture: Screenshots and Gifs
 
 ## :scroll: Documentation ( To be completed later )
