@@ -1,31 +1,124 @@
-" Emoji completion
-"set completefunc=emoji#complete
+" ============================================================================
+" Plugins settings and mappings
+" Edit them as you wish.
+" ============================================================================
 
-" Goyo mappings
+
+" ============================================================================
+" Tagbar
+" ============================================================================
+" toggle tagbar display
+nmap <leader>tb :TagbarToggle<CR>
+" autofocus on tagbar open
+let g:tagbar_autofocus = 1
+
+
+" ============================================================================
+" NERDTree
+" ============================================================================
+" toggle nerdtree display
+map <leader>nn :NERDTreeToggle<CR>
+" open nerdtree with the current file selected
+nmap <leader>nf :NERDTreeFind<CR>
+" don;t show these file types
+let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
+
+
+" ============================================================================
+" Tasklist
+" ============================================================================
+" show pending tasks list
+map <leader>tl :TaskList<CR>
+
+
+" ============================================================================
+" Neomake
+" ============================================================================
+" Run linter on write
+autocmd! BufWritePost * Neomake
+" Check code as python3 by default
+let g:neomake_python_python_maker = neomake#makers#ft#python#python()
+let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
+let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
+let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
+" Disable error messages inside the buffer, next to the problematic line
+let g:neomake_virtualtext_current_error = 1
+
+
+" ============================================================================
+" Fzf
+" ============================================================================
+" file finder mapping
+nmap <leader>e :Files<CR>
+" tags (symbols) in current file finder mapping
+nmap <leader>g :BTag<CR>
+" tags (symbols) in all files finder mapping
+nmap <leader>G :Tags<CR>
+" general code finder in current file mapping
+nmap <leader>f :BLines<CR>
+" general code finder in all files mapping
+nmap <leader>F :Lines<CR>
+" commands finder mapping
+nmap <leader>c :Commands<CR>
+
+
+" ============================================================================
+" Signify
+" ============================================================================
+" this first setting decides in which order try to guess your current vcs
+" UPDATE it to reflect your preferences, it will speed up opening files
+let g:signify_vcs_list = [ 'git' ]
+" mappings to jump to changed blocks
+nmap <leader>sn <plug>(signify-next-hunk)
+nmap <leader>sp <plug>(signify-prev-hunk)
+
+
+" ============================================================================
+" Autoclose
+" ============================================================================
+" Fix to let ESC work as espected with Autoclose plugin
+" (without this, when showing an autocompletion window, ESC won't leave insert mode)
+let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
+let g:AutoClosePairs = "() {} [] ' ` \" "
+
+
+" ============================================================================
+" Goyo mappings 
+" ============================================================================
 nmap <C-g> :Goyo 100x60<CR>
 
-" Enable the Vue Language server
-let g:LanguageClient_serverCommands = {
-      \ 'vue': ['vls']
-      \ }
 
+" ============================================================================
+" Rainbow brackets
+" ============================================================================
 " init rainbow brackets
 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 0
 
-" Emmet mappings
+
+" ============================================================================
+" Emmet mappings < this might be deprecated soon >
+" ============================================================================
 let g:user_emmet_mode='a'  " enable all functions in all modes
 let g:user_emmet_leader_key='<C-S>'
 
-" Devicon Configurations
+
+" ============================================================================
+" Devicon 
+" ============================================================================
 " loading the plugin
 let g:webdevicons_enable = 1
 
-" Indention Config
+
+" ============================================================================
+" Indention
+" ============================================================================
 let g:indentLine_char = '┊'
 
 
-" Lightline Themes Configurations
+" ============================================================================
+" Lightline
+" ============================================================================
 let g:lightline = {
       \ 'colorscheme': 'simpleblack',
       \ 'active': {
@@ -38,14 +131,9 @@ let g:lightline = {
       \ }
 
 
-" Use auocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
-" Fancy markdown syntax
-let g:markdown_fenced_languages = ['css', 'js=javascript']
-
-" +++++++++++++++++++++ vim-float-term configuration +++++++++++++++++++++++++
-
+" ============================================================================
+" Floaterm
+" ============================================================================
 let g:floaterm_keymap_new    = '<leader>.'
 let g:floaterm_position      = 'center'
 let g:floaterm_type          = 'normal'
@@ -67,7 +155,19 @@ nmap <C-n> :FloatermToggle<CR>
 " kill isntance of FloatermNew if you have too many
 nmap <C-k> :FloatermKill<CR>
 
-" +++++++++++++++++++++++++ Conquer of Completion +++++++++++++++++++++++++
+
+" ============================================================================
+" Conquer of Compiletion
+" ----------------------
+" This configuration is directly from the Coc github.
+" Any coc extension specific configuration should go under
+" this banner.
+" ============================================================================
+" Use auocmd to force lightline update.
+autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" Fancy markdown syntax
+let g:markdown_fenced_languages = ['css', 'js=javascript']
 
 " if hidden is not set, TextEdit might fail.
 set hidden
@@ -220,7 +320,7 @@ endfunction
 " Disable node version warning
 let g:coc_disable_startup_warning = 1
 
-" Vim script coc extension
+" Vim script coc extension: Fancy markdown syntax
 let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'

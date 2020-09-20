@@ -1,9 +1,11 @@
+" ============================================================================
 " Vim-plug initialization
+" ============================================================================
 let vim_plug_just_installed = 0
-let vim_plug_path = expand('$XDG_CONFIG_HOME/nvim/autoload/plug.vim')
+let vim_plug_path = expand('$HOME/.config/nvim/autoload/plug.vim')
 if !filereadable(vim_plug_path)
   echo "Installing Vim-plug..."
-  silent !mkdir -p $XDG_CONFIG_HOME/nvim/autoload
+  silent !mkdir -p $HOME/.config/nvim/autoload
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let vim_plug_just_installed = 1
 endif
@@ -15,6 +17,7 @@ endif
 
 " ============================================================================
 " Active plugins
+" ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
 " Now the actual plugins:
@@ -109,23 +112,29 @@ Plug 'junegunn/goyo.vim'
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
 
-" ============================================================================
-" Install plugins the first time vim runs
+
+" =============================================================================
+" Automate the plugin install process if this is the first time nvim is ran
+" =============================================================================
 if vim_plug_just_installed
-  echo "Installing Bundles, please ignore key map error messages"
+  echo ""
+  echo "Installing all plugins for"$USER
+  echo ""
   :PlugInstall
 endif
 
-" ============================================================================
-" Vim settings and mappings
 
+" =============================================================================
+" General Neovim settings and key mappings
+" =============================================================================
 " remap default leader key to comma
 let mapleader = ","
+" Reload nvim config
 nnoremap <leader>vr :source $MYVIMRC<CR>
+" Open init.vim in current buffer
 nnoremap <leader>vc :e $MYVIMRC<CR>
+" Open custom.vim in current buffer
 nnoremap <leader>vx :e $XDG_CONFIG_HOME/nvim/custom.vim<CR>
-
-
 
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>
@@ -134,6 +143,7 @@ inoremap <C-space> <C-n>
 set ttyfast
 set mouse=a
 set lazyredraw
+" Set numbers
 set nu
 set nowrap
 set relativenumber
@@ -141,13 +151,65 @@ set encoding=UTF-8
 " set tabline to not display full path
 set guitablabel=%t
 
+" tabs and spaces handling
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+" remove ugly vertical lines on window division
+set fillchars+=vert:\ 
 
+" Global Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy "+yy
+
+" Global Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" autocompletion of files and commands behaves like shell
+" (complete only the common part, list the options that match)
+set wildmode=list:longest
+
+" save as sudo, must configure ask pass helper
+ca w!! w !sudo tee "%"
+
+" tab navigation mappings
+map tt :tabnew 
+map <M-Right> :tabn<CR>
+imap <M-Right> <ESC>:tabn<CR>
+map <M-Left> :tabp<CR>
+imap <M-Left> <ESC>:tabp<CR>
+
+" when scrolling, keep cursor 3 lines away from screen border
+set scrolloff=3
+
+" clear search results
+nnoremap <silent> // :noh<CR>
+
+" clear empty spaces at the end of lines on save of python files
+autocmd BufWritePre *.py :%s/\s\+$//e
+
+" fix problems with uncommon shells (fish, xonsh) and plugins running commands
+set shell=$SHELL
+
+" Ability to add python breakpoints
+" (I use ipdb, but you can change it to whatever tool you use for debugging)
+au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
+
+
+" =============================================================================
 " Set tabs for certain file types
-" for web based languages
+" =============================================================================
+" Set expand witdth for web based languages
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=w sw=2 expandtab
 autocmd FileType json setlocal ts=4 sw=4 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
 " Set expand width for Low level languages
@@ -156,30 +218,23 @@ autocmd FileType h setlocal ts=2 sw=2 expandtab
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
 autocmd FileType hpp setlocal ts=2 sw=2 expandtab
 autocmd FileType rs setlocal ts=2 sw=2 expandtab
-" Set expand width to 2 for scripting languages
+" Set expand width for scripting languages
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
 autocmd FileType fish setlocal ts=2 sw=2 expandtab
 autocmd FileType vim setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
 autocmd FileType perl setlocal ts=2 sw=2 expandtab
+autocmd FileType python setlocal ts=4 sw=4 expandtab
 " Set expand width to 2 for markdown
 autocmd FileType md setlocal ts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sw=2 expandtab
 
-" " Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy "+yy
 
-" " Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-
-
+" =============================================================================
+" Custom autocmd's go here [ if none of these suit you, just delete them, I
+" include them as examples for how to write a basic autocmd ]
+" =============================================================================
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 
@@ -193,15 +248,9 @@ autocmd BufWritePost answers.tex !pdflatex answers.tex
 autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
 
 
-" tabs and spaces handling
-set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-" remove ugly vertical lines on window division
-set fillchars+=vert:\ 
-
-"" Color Scheme set up for Material ===============================
+" =============================================================================
+" Set colorscheme and Color rendering workarounds
+" =============================================================================
 if (has("nvim"))
   "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -212,107 +261,16 @@ if (has("termguicolors"))
   set termguicolors
 endif
 
+set background=dark
+syntax on
+
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  syntax on
-  set background=light
   colorscheme quantum
 else
   colorscheme jellybeans
 endif
-
-
-" autocompletion of files and commands behaves like shell
-" (complete only the common part, list the options that match)
-set wildmode=list:longest
-
-" save as sudo
-ca w!! w !sudo tee "%"
-
-" tab navigation mappings
-map tt :tabnew 
-map <M-Right> :tabn<CR>
-imap <M-Right> <ESC>:tabn<CR>
-map <M-Left> :tabp<CR>
-imap <M-Left> <ESC>:tabp<CR>
-
-
-" when scrolling, keep cursor 3 lines away from screen border
-set scrolloff=3
-
-" clear search results
-nnoremap <silent> // :noh<CR>
-
-" clear empty spaces at the end of lines on save of python files
-"autocmd BufWritePre *.py :%s/\s\+$//e
-
-" fix problems with uncommon shells (fish, xonsh) and plugins running commands
-" (neomake, ...)
-set shell=$SHELL
-
-" Ability to add python breakpoints
-" (I use ipdb, but you can change it to whatever tool you use for debugging)
-au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
-
-" ============================================================================
-" Plugins settings and mappings
-" Edit them as you wish.
-
-" Tagbar -----------------------------
-" toggle tagbar display
-nmap <leader>tb :TagbarToggle<CR>
-" autofocus on tagbar open
-let g:tagbar_autofocus = 1
-
-" NERDTree -----------------------------
-" toggle nerdtree display
-map <leader>nn :NERDTreeToggle<CR>
-" open nerdtree with the current file selected
-nmap <leader>nf :NERDTreeFind<CR>
-" don;t show these file types
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
-
-" Tasklist ------------------------------
-" show pending tasks list
-map <leader>tl :TaskList<CR>
-
-" Neomake ------------------------------
-" Run linter on write
-autocmd! BufWritePost * Neomake
-
-" Check code as python3 by default
-let g:neomake_python_python_maker = neomake#makers#ft#python#python()
-let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
-let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
-let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
-
-" Disable error messages inside the buffer, next to the problematic line
-let g:neomake_virtualtext_current_error = 1
-
-
-" Fzf ------------------------------
-" file finder mapping
-nmap <leader>e :Files<CR>
-" tags (symbols) in current file finder mapping
-nmap <leader>g :BTag<CR>
-" tags (symbols) in all files finder mapping
-nmap <leader>G :Tags<CR>
-" general code finder in current file mapping
-nmap <leader>f :BLines<CR>
-" general code finder in all files mapping
-nmap <leader>F :Lines<CR>
-" commands finder mapping
-nmap <leader>c :Commands<CR>
-
-
-" Signify ------------------------------
-" this first setting decides in which order try to guess your current vcs
-" UPDATE it to reflect your preferences, it will speed up opening files
-let g:signify_vcs_list = [ 'git', 'hg' ]
-" mappings to jump to changed blocks
-nmap <leader>sn <plug>(signify-next-hunk)
-nmap <leader>sp <plug>(signify-prev-hunk)
 
 " nicer colors
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
@@ -322,15 +280,10 @@ highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
-" Autoclose ------------------------------
-" Fix to let ESC work as espected with Autoclose plugin
-" (without this, when showing an autocompletion window, ESC won't leave insert
-"  mode)
 
-let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
-let g:AutoClosePairs = "() {} [] ' ` \" "
-
-" Include user's custom nvim configurations
+" =============================================================================
+" Include custom configurations and plugin configurations
+" =============================================================================
 if filereadable(expand("~/.config/nvim/custom.vim"))
   source ~/.config/nvim/custom.vim
 endif
