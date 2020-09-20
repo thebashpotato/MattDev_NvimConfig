@@ -19,7 +19,7 @@
 
 * **Node version manager is a better way** [nvm](https://github.com/nvm-sh/nvm)
 
-### :loadspeaker: If you are using Fish, get the following
+### :loudspeaker: If you are using Fish, get the following
 
 * **fisher** package manager [Install instructions and Docs](https://github.com/jorgebucaran/fisher)
 
@@ -48,8 +48,6 @@ sudo pip install pynvim flake8 isort
 # Get the sefr (the rust cli to search engines) it is written in Rust,
 # so you will need cargo installed (the Rust package manager)
 cargo install sefr
-
-# Get lf (Simple terminal based file manager)
 
 # now clone the repo
 git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git
