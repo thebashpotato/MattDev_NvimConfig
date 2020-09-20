@@ -1,6 +1,6 @@
 # MattDev_NvimConfig - One Neovim config to rule them all
 
-* :rocket: Features
+## :rocket: Features
 
 * :white_check_mark: latex support
 * :white_check_mark: polyglot language support
@@ -15,21 +15,21 @@
 
 ## :traffic_light: Dependencies
 
-### :octagonal_sign: Node is required, using NVM is the preferred method
+### :loudspeaker: Node is required, using NVM is the preferred method
 
 * **Node version manager is a better way** [nvm](https://github.com/nvm-sh/nvm)
 
-### :octagonal_sign: If you are using Fish, get the following
+### :loadspeaker: If you are using Fish, get the following
 
-* **fisher** package manager [Fisher](https://github.com/jorgebucaran/fisher)
+* **fisher** package manager [Install instructions and Docs](https://github.com/jorgebucaran/fisher)
 
-* **nvm for fisher** fish wrapper for nvm [nvm for fish](https://github.com/jorgebucaran/nvm.fish)
+* **nvm for fisher** fish wrapper for nvm [Install instructions and Docs](https://github.com/jorgebucaran/nvm.fish)
 
 ## Installation
 
 ### :hammer: Optional
 
-* **list files in terminal** [lf](https://github.com/gokcehan/lf/releases)
+* **list files in terminal** [Install instructions and Docs](https://github.com/gokcehan/lf/releases)
 
 ## :keyboard: Commands to help you out
 
