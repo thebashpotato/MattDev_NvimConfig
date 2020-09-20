@@ -1,4 +1,8 @@
-# MattDev_NvimConfig - One Neovim config to rule them all
+# One Neovim config to rule them all
+
+> Note: My configurations are heavily inspired by Fisa Dev's nvim configs,
+> over a year and a half, my config has came into its own. Much thanks to Fisa
+> and all the contributors to his repo
 
 ## :rocket: Features
 
@@ -12,20 +16,21 @@
 * :white_check_mark: uses lightline
 * :white_check_mark: uses fancy symbols (You need to install a Nerdfont and enable in your terminal)
 * :white_check_mark: fzf (fuzzy finder search)
+* :white_check_mark: So many other features, Read the Docs for more information
 
 ## :traffic_light: Dependencies
 
-### :loudspeaker: Node is required, using NVM is the preferred method
+### :loudspeaker:  Node is required, using NVM is the preferred method
 
 * **Node version manager is a better way** [nvm](https://github.com/nvm-sh/nvm)
 
-### :loudspeaker: If you are using Fish, get the following
+### :loudspeaker:  If you are using Fish, get the following
 
 * **fisher** package manager [Install instructions and Docs](https://github.com/jorgebucaran/fisher)
 
 * **nvm for fisher** fish wrapper for nvm [Install instructions and Docs](https://github.com/jorgebucaran/nvm.fish)
 
-## Installation
+## :building_construction: Installation
 
 ### :hammer: Optional
 
