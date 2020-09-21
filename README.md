@@ -54,14 +54,12 @@ pip install pynvim flake8 isort --user
 # so you will need cargo installed (the Rust package manager)
 cargo install sefr
 
-# now clone the repo
-git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git
+# Backup your nvim config and data
+mv ~/.config/nvim ~/.config/nvim_backup/
+mv ~/.local/share/nvim ~/.local/share/nvim_backup/
 
-# make directory for nvim if you dont already have it
-mkdir ~/.config/nvim
-
-# cp contents of repo into nvim Dir
-cp -v MattDev_NvimConfig/* ~/.config/nvim/
+# now clone the repo into your config
+git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git ~/.config/nvim/
 
 # Install coc extensions with :CocInstall coc-python
 
