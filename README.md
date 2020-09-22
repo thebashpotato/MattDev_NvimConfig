@@ -1,12 +1,13 @@
 <div align="center">
-  <h3>One Neovim config to rule them all</h3>
+  <h1>One Neovim config to rule them all</h1>
   <hr>
   <img src="assets/contra.gif">
+  <h3>
+    Note: My configurations are heavily inspired by Fisa Dev's nvim configs,
+    over a year and a half, my config has came into its own. Much thanks to Fisa
+    and all the contributors to his repo
+  </h3>
 </div>
-
-> Note: My configurations are heavily inspired by Fisa Dev's nvim configs,
-> over a year and a half, my config has came into its own. Much thanks to Fisa
-> and all the contributors to his repo
 
 ## :rocket: Features
 
