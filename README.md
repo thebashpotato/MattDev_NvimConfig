@@ -1,6 +1,6 @@
-# One Neovim config to rule them all
-
 <div align="center">
+  <h3>One Neovim config to rule them all</h3>
+  <hr>
   <img src="assets/contra.gif">
 </div>
 
