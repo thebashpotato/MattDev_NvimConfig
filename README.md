@@ -1,6 +1,6 @@
 <div align="center">
   <h1>One Neovim config to rule them all</h1>
-  <img src="assets/contra.gif">
+  <img width="800" height="300" src="assets/contra.gif">
   <h5>
     Note: My configurations are heavily inspired by Fisa Dev's nvim configs,
     over a year and a half, my config has came into its own. Much thanks to Fisa
