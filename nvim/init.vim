@@ -20,7 +20,9 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-" Now the actual plugins:
+" Color schemes
+Plug 'cocopon/iceberg.vim'
+
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
@@ -97,8 +99,6 @@ Plug 'mhinz/vim-signify'
 
 " Linters
 Plug 'neomake/neomake'
-" TODO is it running on save? or when?
-" TODO not detecting errors, just style, is it using pylint?
 
 " Nice icons: Need to install patched font for this to work
 Plug 'ryanoasis/vim-devicons'
@@ -118,7 +118,7 @@ call plug#end()
 " =============================================================================
 if vim_plug_just_installed
   echo ""
-  echo "Installing all plugins for: "$USER
+  echo "Installing all plugins for"$USER
   echo ""
   :PlugInstall
 endif
@@ -131,13 +131,33 @@ endif
 let mapleader = ","
 " Reload nvim config
 nnoremap <leader>vr :source $MYVIMRC<CR>
+
 " Open init.vim in current buffer
 nnoremap <leader>vc :e $MYVIMRC<CR>
+
 " Open custom.vim in current buffer
 nnoremap <leader>vx :e $XDG_CONFIG_HOME/nvim/custom.vim<CR>
 
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>
+
+" write and quit, no save
+nnoremap <leader>wq :wq<CR>
+
+" quit, no save
+nnoremap <leader>q  :q<CR>
+
+" quit, abandon
+nnoremap <leader>qq  :q!<CR>
+
+" write current buffer
+nnoremap <leader>w :w<CR>
+
+" write all buffers
+nnoremap <leader>wa :wa<CR>
+
+" quit all
+nnoremap <leader>qa :qa<CR>
 
 "" Make vim scroll faster
 set ttyfast
@@ -209,7 +229,8 @@ au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=w sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType typescript setlocal ts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=4 sw=4 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
 " Set expand width for Low level languages
@@ -224,8 +245,8 @@ autocmd FileType zsh setlocal ts=2 sw=2 expandtab
 autocmd FileType fish setlocal ts=2 sw=2 expandtab
 autocmd FileType vim setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
-autocmd FileType perl setlocal ts=2 sw=2 expandtab
-autocmd FileType python setlocal ts=4 sw=4 expandtab
+autocmd FileType pl setlocal ts=2 sw=2 expandtab
+autocmd FileType py setlocal ts=4 sw=4 expandtab
 " Set expand width to 2 for markdown
 autocmd FileType md setlocal ts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sw=2 expandtab
@@ -262,23 +283,15 @@ if (has("termguicolors"))
 endif
 
 set background=dark
-syntax on
+syntax enable
 
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme quantum
+  colorscheme iceberg
 else
   colorscheme jellybeans
 endif
-
-" nicer colors
-highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
-highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
-highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 
 " =============================================================================

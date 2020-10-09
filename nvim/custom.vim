@@ -17,7 +17,7 @@ let g:tagbar_autofocus = 1
 " NERDTree
 " ============================================================================
 " toggle nerdtree display
-map <leader>nn :NERDTreeToggle<CR>
+nmap <leader>nn :NERDTreeToggle<CR>
 " open nerdtree with the current file selected
 nmap <leader>nf :NERDTreeFind<CR>
 " don;t show these file types
@@ -49,17 +49,17 @@ let g:neomake_virtualtext_current_error = 1
 " Fzf
 " ============================================================================
 " file finder mapping
-nmap <leader>e :Files<CR>
+nmap <leader>ff :Files<CR>
 " tags (symbols) in current file finder mapping
-nmap <leader>g :BTag<CR>
+nmap <leader>ct :BTag<CR>
 " tags (symbols) in all files finder mapping
-nmap <leader>G :Tags<CR>
+nmap <leader>at :Tags<CR>
 " general code finder in current file mapping
-nmap <leader>f :BLines<CR>
+nmap <leader>fz :BLines<CR>
 " general code finder in all files mapping
-nmap <leader>F :Lines<CR>
+nmap <leader>af :Lines<CR>
 " commands finder mapping
-nmap <leader>c :Commands<CR>
+nmap <leader>co :Commands<CR>
 
 
 " ============================================================================
@@ -71,6 +71,14 @@ let g:signify_vcs_list = [ 'git' ]
 " mappings to jump to changed blocks
 nmap <leader>sn <plug>(signify-next-hunk)
 nmap <leader>sp <plug>(signify-prev-hunk)
+
+" nicer colors
+highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
+highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
 
 " ============================================================================
@@ -85,7 +93,7 @@ let g:AutoClosePairs = "() {} [] ' ` \" "
 " ============================================================================
 " Goyo mappings 
 " ============================================================================
-nmap <C-g> :Goyo 100x60<CR>
+nmap <leader>d :Goyo 100x60<CR>
 
 
 " ============================================================================
@@ -120,7 +128,7 @@ let g:indentLine_char = '┊'
 " Lightline
 " ============================================================================
 let g:lightline = {
-      \ 'colorscheme': 'simpleblack',
+      \ 'colorscheme': 'iceberg',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
@@ -135,8 +143,9 @@ let g:lightline = {
 " Floaterm
 " ============================================================================
 let g:floaterm_keymap_new    = '<leader>.'
-let g:floaterm_position      = 'center'
-let g:floaterm_type          = 'normal'
+let g:floaterm_position      = 'bottom'
+let g:floaterm_wintype       = 'top'
+let g:floaterm_height        = 0.5
 
 " custom mappings for my personal tools in normal mode only
 
@@ -324,4 +333,4 @@ let g:coc_disable_startup_warning = 1
 let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
-      \]
+\]
