@@ -50,7 +50,10 @@ Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/IndexedSearch'
 
 " Plugin for live preview of LaTex
-Plug 'donRaphaco/neotex', {'for': 'tex'}
+"Plug 'donRaphaco/neotex', {'for': 'tex'}
+
+" Vim latex live preview
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 " Integrated Floating terminal
 Plug 'voldikss/vim-floaterm'
