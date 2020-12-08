@@ -23,6 +23,8 @@ call plug#begin('~/.config/nvim/plugged')
 " Color schemes
 Plug 'cocopon/iceberg.vim'
 
+Plug 'dracula/vim', { 'as': 'dracula' }
+
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
@@ -254,6 +256,10 @@ autocmd FileType py setlocal ts=4 sw=4 expandtab
 autocmd FileType md setlocal ts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sw=2 expandtab
 
+" Make neovim see .js, .ts files as jsx, tsx files: FIX for coc-tsserver
+autocmd FileType javascript set filetype=javascriptreact
+autocmd FileType typescript set filetype=typescriptreact
+
 
 " =============================================================================
 " Custom autocmd's go here [ if none of these suit you, just delete them, I
@@ -291,9 +297,9 @@ syntax enable
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme iceberg
+  colorscheme dracula
 else
-  colorscheme jellybeans
+  colorscheme iceberg
 endif
 
 

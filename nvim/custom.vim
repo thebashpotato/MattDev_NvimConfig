@@ -7,6 +7,7 @@
 " Latex preview
 " ============================================================================
 let g:livepreview_previewer = '$READER'
+let g:livepreview_use_biber = 1
 nmap <leader>lp :LLPStartPreview<CR>
 
 " ============================================================================
@@ -133,7 +134,7 @@ let g:indentLine_char = '┊'
 " Lightline
 " ============================================================================
 let g:lightline = {
-      \ 'colorscheme': 'iceberg',
+      \ 'colorscheme': 'dracula',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
