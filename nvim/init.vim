@@ -28,9 +28,6 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
-" Vim emoji
-Plug 'junegunn/vim-emoji'
-
 " quick commenter
 Plug 'preservim/nerdcommenter'
 
@@ -51,8 +48,8 @@ Plug 'majutsushi/tagbar'
 " Search results counter
 Plug 'vim-scripts/IndexedSearch'
 
-" Plugin for live preview of LaTex
-"Plug 'donRaphaco/neotex', {'for': 'tex'}
+" Startify, fancy start screen for vim
+Plug 'mhinz/vim-startify'
 
 " Vim latex live preview
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
@@ -87,11 +84,9 @@ Plug 'sheerun/vim-polyglot'
 
 " Ack code search (requires ack installed in the system)
 Plug 'mileszs/ack.vim'
-" TODO is there a way to prevent the progress which hides the editor?
 
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
-" TODO is there a better option for neovim?
 
 " Generate html in a simple way
 Plug 'mattn/emmet-vim'
@@ -107,9 +102,6 @@ Plug 'neomake/neomake'
 
 " Nice icons: Need to install patched font for this to work
 Plug 'ryanoasis/vim-devicons'
-
-" Show indention level through lines
-Plug 'Yggdroot/indentLine'
 
 " Distraction free programming
 Plug 'junegunn/goyo.vim'

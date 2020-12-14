@@ -4,6 +4,78 @@
 " ============================================================================
 
 " ============================================================================
+" Startify 
+" ============================================================================
+let g:startify_custom_header_quotes = [
+    \ [' Talk is cheap, show me the code'],
+    \ [' https://github.com/mattcoding4days/MattDev_NvimConfig '],
+    \ [' Arch isnt that hard to install']
+    \ ]
+
+"let g:startify_ascii = [
+      "\ '        ____                                  _____      ',
+      "\ '    .+-|____|-.---------------------------.--|_____|-+.   ',
+      "\ '   /   |     |  ".        S O N Y        ."  |  _  |   \  ',
+      "\ '  / ___| /|\ |___ \                     / ___| /_\ |___ \ ',
+      "\ ' / |      |      | ;  __           _   ; | _         _ | ;',
+      "\ ' | | <---   ---> | | |__|         |_:> | ||_|       (_)| |',
+      "\ ' | |___   |   ___| ;SELECT       START ; |___       ___| ;',
+      "\ ' |\    | \|/ |    /  _     ___      _   \    | (X) |    /|',
+      "\ ' | \   |_____|  .","   ", |___|  ,"   ", ".  |_____|  ." |',
+      "\ ' |  "-.______.-" /       \ANALOG/       \  "-._____.-"   |',
+      "\ ' |               |       |------|       |                |',
+      "\ ' |              /\       /      \       /\               |',
+      "\ ' \             /  ".___."        ".___."  \              /',
+      "\ '  \           /                            \            /',
+      "\ '   \_________/                              \__________/  ',
+"\]
+
+let g:startify_ascii = [
+      \ '                                        ▝▘            ',
+      \ '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+      \ '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+      \ '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
+      \ '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
+      \ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+      \]
+
+"let g:startify_ascii = [
+      "\ ' ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------, ',
+      "\ ' | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    | ',
+      "\ ' |--- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,-----| ',
+      "\ ' | ->| | " | , | . | P | Y | F | G | C | R | L | / | = |  \  | ',
+      "\ ' |----- ,--,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ------| ',
+      "\ ' | Caps | A | O | E | U | I | D | H | T | N | S | - |  Enter | ',
+      "\ ' |------ -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- --------| ',
+      "\ ' |        | ; | Q | J | K | X | B | M | W | V | Z |          | ',
+      "\ ' |------,- ,-- --, --- --- --- --- --- --- -,- --- ,--,------| ',
+      "\ ' | ctrl |  | alt |                          | alt  |  | ctrl | ',
+      "\ '  ------    ----- -------------------------- ------    ------  ',
+      "\]
+
+let g:startify_custom_header =
+      \ 'startify#center(g:startify_ascii)'
+
+let g:startify_custom_footer =
+      \ 'startify#center(startify#fortune#boxed())'
+
+
+let g:startify_session_sort = 1
+let g:startify_fortune_use_unicode = 1
+let g:startify_change_to_vcs_root = 1
+let g:startify_update_oldfiles = 1
+let g:startify_use_env = 1
+
+"hi! link StartifyHeader Normal
+"hi! link StartifyFile Directory
+"hi! link StartifyPath LineNr
+"hi! link StartifySlash StartifyPath
+"hi! link StartifyBracket StartifyPath
+"hi! link StartifyNumber Title
+
+autocmd User Startified setlocal cursorline
+
+" ============================================================================
 " Latex preview
 " ============================================================================
 let g:livepreview_previewer = '$READER'
@@ -122,12 +194,6 @@ let g:user_emmet_leader_key='<C-S>'
 " ============================================================================
 " loading the plugin
 let g:webdevicons_enable = 1
-
-
-" ============================================================================
-" Indention
-" ============================================================================
-let g:indentLine_char = '┊'
 
 
 " ============================================================================
@@ -339,4 +405,4 @@ let g:coc_disable_startup_warning = 1
 let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
-\]
+      \]
