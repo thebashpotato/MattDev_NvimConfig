@@ -1,0 +1,47 @@
+{
+    "suggest.echodocSupport": true,
+    "suggest.autoTrigger": "always",
+    "suggest.floatEnable": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "ruby",
+        "json",
+        "javascript",
+        "typescript",
+        "python",
+        "typescriptreact",
+        "javascriptreact"
+    ],
+    "coc.preferences.hoverTarget": "float",
+    "javascript.suggestionActions.enabled": false,
+    "tsserver.trace.server": "verbose",
+    "tsserver.log": "verbose",
+    "signature.target": "float",
+    "snippets.extends": {
+        "typescript": [
+            "typescriptreact"
+        ],
+        "javascript": [
+            "javascriptreact"
+        ]
+    },
+    "explorer.width": 30,
+    "eslint.enable": true,
+    "eslint.filetypes": [
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact"
+    ],
+    "eslint.autoFixOnSave": true,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.previewAction.onHover": false,
+    "explorer.keyMappings.global": {
+        "<cr>": [
+            "expandable?",
+            "expand",
+            "open"
+        ],
+        "v": "open:vsplit"
+    },
+    "coc.preferences.extensionUpdateCheck": "daily"
+}
