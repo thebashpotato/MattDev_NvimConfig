@@ -7,9 +7,12 @@
 " Startify 
 " ============================================================================
 let g:startify_custom_header_quotes = [
-    \ [' Talk is cheap, show me the code'],
+    \ [' Linux gives us the power we need to', '  crush those who oppose us'],
     \ [' https://github.com/mattcoding4days/MattDev_NvimConfig '],
-    \ [' Arch isnt that hard to install']
+    \ [' Arch isnt that hard to install'],
+    \ [' linux for human beings'],
+    \ [' Compile your binaries.. check your version dependencies'],
+    \ [' Steve the Super Villain', '  https://www.youtube.com/watch?v=8LsxmQV8AXk']
     \ ]
 
 "let g:startify_ascii = [
