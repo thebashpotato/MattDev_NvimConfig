@@ -18,7 +18,7 @@
 * :white_check_mark: floating terminal support
 * :white_check_mark: internal browser search engine
 * :white_check_mark: file browsing through Nerdtree, and lf
-* :white_check_mark: uses lightline
+* :white_check_mark: uses airline
 * :white_check_mark: uses fancy symbols (You need to install a Nerdfont and enable in your terminal)
 * :white_check_mark: fzf (fuzzy finder search)
 * :white_check_mark: So many other features, Read the Docs for more information
