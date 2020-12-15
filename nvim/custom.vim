@@ -7,10 +7,10 @@
 " Startify 
 " ============================================================================
 let g:startify_custom_header_quotes = [
-    \ [' Linux gives us the power we need to', '  crush those who oppose us'],
+    \ [' Linux gives us the power we need to', '      crush those who oppose us'],
     \ [' https://github.com/mattcoding4days/MattDev_NvimConfig '],
     \ [' Arch isnt that hard to install'],
-    \ [' linux for human beings'],
+    \ [' Linux for human beings'],
     \ [' Compile your binaries.. check your version dependencies'],
     \ [' Steve the Super Villain', '  https://www.youtube.com/watch?v=8LsxmQV8AXk']
     \ ]
@@ -53,8 +53,7 @@ let g:startify_ascii = [
       "\ ' |        | ; | Q | J | K | X | B | M | W | V | Z |          | ',
       "\ ' |------,- ,-- --, --- --- --- --- --- --- -,- --- ,--,------| ',
       "\ ' | ctrl |  | alt |                          | alt  |  | ctrl | ',
-      "\ '  ------    ----- -------------------------- ------    ------  ',
-      "\]
+      "\ '  ------    ----- -------------------------- ------    ------  ', ]
 
 let g:startify_custom_header =
       \ 'startify#center(g:startify_ascii)'
@@ -68,13 +67,6 @@ let g:startify_fortune_use_unicode = 1
 let g:startify_change_to_vcs_root = 1
 let g:startify_update_oldfiles = 1
 let g:startify_use_env = 1
-
-"hi! link StartifyHeader Normal
-"hi! link StartifyFile Directory
-"hi! link StartifyPath LineNr
-"hi! link StartifySlash StartifyPath
-"hi! link StartifyBracket StartifyPath
-"hi! link StartifyNumber Title
 
 autocmd User Startified setlocal cursorline
 
@@ -95,6 +87,13 @@ let g:tagbar_autofocus = 1
 
 
 " ============================================================================
+" Tasklist
+" ============================================================================
+" show pending tasks list
+map <leader>tl :TaskList<CR>
+
+
+" ============================================================================
 " NERDTree
 " ============================================================================
 " toggle nerdtree display
@@ -103,13 +102,6 @@ nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
-
-
-" ============================================================================
-" Tasklist
-" ============================================================================
-" show pending tasks list
-map <leader>tl :TaskList<CR>
 
 
 " ============================================================================
@@ -182,7 +174,7 @@ nmap <leader>d :Goyo 100x60<CR>
 " ============================================================================
 " init rainbow brackets
 "set to 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 0
+let g:rainbow_active = 1
 
 
 " ============================================================================
@@ -198,20 +190,12 @@ let g:user_emmet_leader_key='<C-S>'
 " loading the plugin
 let g:webdevicons_enable = 1
 
-
 " ============================================================================
-" Lightline
+" Airline
 " ============================================================================
-let g:lightline = {
-      \ 'colorscheme': 'dracula',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status'
-      \ },
-      \ }
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='dracula'
 
 
 " ============================================================================

@@ -42,8 +42,6 @@ Plug 'scrooloose/nerdtree'
 
 " Class/module browser
 Plug 'majutsushi/tagbar'
-" TODO known problems:
-" * current block not refreshing'
 
 " Search results counter
 Plug 'vim-scripts/IndexedSearch'
@@ -57,8 +55,11 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 " Integrated Floating terminal
 Plug 'voldikss/vim-floaterm'
 
-" Lightline
-Plug 'itchyny/lightline.vim'
+" Airline status line
+Plug 'vim-airline/vim-airline'
+
+" Themes for Airline
+Plug 'vim-airline/vim-airline-themes'
 
 " Code and files fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
