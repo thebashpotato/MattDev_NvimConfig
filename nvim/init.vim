@@ -31,6 +31,9 @@ Plug 'luochen1990/rainbow'
 " quick commenter
 Plug 'preservim/nerdcommenter'
 
+" vim-smoothie
+Plug 'psliwka/vim-smoothie'
+
 " Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
