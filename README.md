@@ -17,7 +17,7 @@
 * :white_check_mark: Uses Conquer of Completion for a language server (VScode backend)
 * :white_check_mark: floating terminal support
 * :white_check_mark: internal browser search engine
-* :white_check_mark: file browsing through Nerdtree, and lf
+* :white_check_mark: file browsing through Nerdtree, and ranger
 * :white_check_mark: uses airline
 * :white_check_mark: uses fancy symbols (You need to install a Nerdfont and enable in your terminal)
 * :white_check_mark: fzf (fuzzy finder search)
@@ -39,7 +39,7 @@
 
 ### :hammer: Optional
 
-* **list files in terminal** [Install instructions and Docs](https://github.com/gokcehan/lf/releases)
+* **Full Fledged terminal file browser** [Install instructions and Docs](https://github.com/ranger/ranger)
 
 ## :keyboard: Commands to help you out
 

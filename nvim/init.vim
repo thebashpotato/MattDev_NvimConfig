@@ -25,6 +25,8 @@ Plug 'cocopon/iceberg.vim'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
 
+Plug 'sainnhe/edge'
+
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
@@ -282,7 +284,6 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-" < https://github.com/neovim/neovim/wiki/Following-HEAD #20160511 >
 if (has("termguicolors"))
   set termguicolors
 endif
@@ -290,10 +291,18 @@ endif
 set background=dark
 syntax enable
 
+" Only for the edge colorscheme
+let g:edge_style = 'neon'
+let g:edge_enable_italic = 1
+let g:edge_disable_italic_comment = 1
+let g:edge_transparent_background = 1
+let g:edge_diagnostic_line_highlight = 1
+let g:edge_current_word = 'bold'
+
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme dracula
+  colorscheme edge
 else
   colorscheme iceberg
 endif
