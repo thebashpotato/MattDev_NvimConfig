@@ -200,10 +200,13 @@ inoremap <C-space> <C-n>
 nnoremap <leader>wq :wq<CR>
 
 " quit, no save
-nnoremap <leader>q  :q<CR>
+nnoremap <leader>q :q<CR>
 
 " quit, abandon
-nnoremap <leader>qq  :bdelete<CR>
+nnoremap <leader>qq :q!<CR>
+
+" buffer delete, only to be used on tabs
+nnoremap <leader>bd :bdelete<CR>
 
 " write current buffer
 nnoremap <leader>w :w<CR>
