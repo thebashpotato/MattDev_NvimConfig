@@ -221,7 +221,9 @@ nnoremap <A-s> :FloatermNew sefr<CR>
 nnoremap <A-ENTER> :FloatermToggle<CR>
 
 " kill isntance of FloatermNew if you have too many
-nnoremap <C-k> :FloatermKill<CR>
+nnoremap <A-o> :FloatermKill<CR>
+
+
 
 
 " ============================================================================
