@@ -162,6 +162,13 @@ nnoremap <leader>wa :wa<CR>
 " quit all
 nnoremap <leader>qa :qa<CR>
 
+" Split horizontally
+nnoremap <A-h> :sp<CR>
+
+" Split vertically 
+nnoremap <A-v> :vs<CR>
+
+
 "" Make vim scroll faster
 set ttyfast
 set mouse=a
@@ -306,7 +313,6 @@ if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
 else
   colorscheme iceberg
 endif
-
 
 " =============================================================================
 " Include custom configurations and plugin configurations
