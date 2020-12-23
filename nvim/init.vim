@@ -20,12 +20,10 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-" Color schemes
-Plug 'cocopon/iceberg.vim'
+" Colorschemes
+Plug 'sainnhe/edge'
 
 Plug 'dracula/vim', { 'as': 'dracula' }
-
-Plug 'sainnhe/edge'
 
 " rainbow brackets
 Plug 'luochen1990/rainbow'
@@ -133,13 +131,21 @@ endif
 
 " Kill all open buffers accepts for active one
 command! KillAllButOne execute '%bdelete|edit #|normal `"'
+command! VerticalAndSwitch :vs | :wincmd l
+command! HorizontalAndSwitch :split | :wincmd j
+
+" Make neovim see .js, .ts files as jsx, tsx files: FIX for coc-tsserver
+autocmd FileType javascript set filetype=javascriptreact
+autocmd FileType typescript set filetype=typescriptreact
 
 " Set expand witdth for web based languages
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
 autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType javascriptreact setlocal ts=2 sw=2 expandtab
 autocmd FileType typescript setlocal ts=2 sw=2 expandtab
+autocmd FileType typescriptreact setlocal ts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=4 sw=4 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
 " Set expand width for Low level languages
@@ -160,9 +166,6 @@ autocmd FileType py setlocal ts=4 sw=4 expandtab
 autocmd FileType md setlocal ts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sw=2 expandtab
 
-" Make neovim see .js, .ts files as jsx, tsx files: FIX for coc-tsserver
-autocmd FileType javascript set filetype=javascriptreact
-autocmd FileType typescript set filetype=typescriptreact
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
@@ -200,7 +203,7 @@ nnoremap <leader>wq :wq<CR>
 nnoremap <leader>q  :q<CR>
 
 " quit, abandon
-nnoremap <leader>qq  :q!<CR>
+nnoremap <leader>qq  :bdelete<CR>
 
 " write current buffer
 nnoremap <leader>w :w<CR>
@@ -212,10 +215,10 @@ nnoremap <leader>wa :wa<CR>
 nnoremap <leader>qa :qa<CR>
 
 " Split horizontally
-nnoremap <A-b> :sp<CR>
+nnoremap <A-b> :HorizontalAndSwitch<CR>
 
 " Split vertically 
-nnoremap <A-v> :vs<CR>
+nnoremap <A-v> :VerticalAndSwitch<CR>
 
 " Remap keys to move between splits easier
 nmap <C-h> <C-w>h
@@ -314,7 +317,7 @@ if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
   colorscheme edge
 else
-  colorscheme iceberg
+  colorscheme dracula
 endif
 
 " =============================================================================
