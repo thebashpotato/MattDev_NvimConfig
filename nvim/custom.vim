@@ -195,6 +195,7 @@ let g:webdevicons_enable = 1
 " ============================================================================
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='edge'
 
 
@@ -205,19 +206,19 @@ let g:floaterm_position      = 'center'
 let g:floaterm_wintype       = 'floating'
 let g:floaterm_height        = 0.5
 
-" custom mappings for my personal tools in normal mode only
+" custom mappings for my personal tools in normal mode only A = Alt key
 
 " Launch ipython in Floaterm
-nnoremap <C-p> :FloatermNew ipython<CR>
+nnoremap <A-p> :FloatermNew ipython<CR>
 
 " Launch the ranger terminal file manager in Floaterm
-nnoremap <C-l> :FloatermNew ranger<CR>
+nnoremap <A-r> :FloatermNew ranger<CR>
 
 " double tap 's', it makes it load faster
-nnoremap <C-s> :FloatermNew sefr<CR>
+nnoremap <A-s> :FloatermNew sefr<CR>
 
 " Toggle an instance of Floaterm
-nnoremap <C-n> :FloatermToggle<CR>
+nnoremap <A-ENTER> :FloatermToggle<CR>
 
 " kill isntance of FloatermNew if you have too many
 nnoremap <C-k> :FloatermKill<CR>
