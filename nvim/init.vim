@@ -163,7 +163,7 @@ nnoremap <leader>wa :wa<CR>
 nnoremap <leader>qa :qa<CR>
 
 " Split horizontally
-nnoremap <A-h> :sp<CR>
+nnoremap <A-b> :sp<CR>
 
 " Split vertically 
 nnoremap <A-v> :vs<CR>
@@ -210,10 +210,10 @@ ca w!! w !sudo tee "%"
 
 " tab navigation mappings
 map tt :tabnew 
-map <M-Right> :tabn<CR>
-imap <M-Right> <ESC>:tabn<CR>
-map <M-Left> :tabp<CR>
-imap <M-Left> <ESC>:tabp<CR>
+map <M-l> :tabn<CR>
+imap <M-l> <ESC>:tabn<CR>
+map <M-h> :tabp<CR>
+imap <M-h> <ESC>:tabp<CR>
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
