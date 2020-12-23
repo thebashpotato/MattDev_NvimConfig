@@ -128,6 +128,55 @@ endif
 
 
 " =============================================================================
+" Custom commands and autocommands
+" =============================================================================
+
+" Kill all open buffers accepts for active one
+command! KillAllButOne execute '%bdelete|edit #|normal `"'
+
+" Set expand witdth for web based languages
+autocmd FileType html setlocal ts=2 sw=2 expandtab
+autocmd FileType css setlocal ts=2 sw=2 expandtab
+autocmd FileType scss setlocal ts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType typescript setlocal ts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=4 sw=4 expandtab
+autocmd FileType vue setlocal ts=2 sw=2 expandtab
+" Set expand width for Low level languages
+autocmd FileType c setlocal ts=2 sw=2 expandtab
+autocmd FileType h setlocal ts=2 sw=2 expandtab
+autocmd FileType cpp setlocal ts=2 sw=2 expandtab
+autocmd FileType hpp setlocal ts=2 sw=2 expandtab
+autocmd FileType rs setlocal ts=2 sw=2 expandtab
+" Set expand width for scripting languages
+autocmd FileType sh setlocal ts=2 sw=2 expandtab
+autocmd FileType zsh setlocal ts=2 sw=2 expandtab
+autocmd FileType fish setlocal ts=2 sw=2 expandtab
+autocmd FileType vim setlocal ts=2 sw=2 expandtab
+autocmd FileType bash setlocal ts=2 sw=2 expandtab
+autocmd FileType pl setlocal ts=2 sw=2 expandtab
+autocmd FileType py setlocal ts=4 sw=4 expandtab
+" Set expand width to 2 for markdown
+autocmd FileType md setlocal ts=2 sw=2 expandtab
+autocmd FileType markdown setlocal ts=2 sw=2 expandtab
+
+" Make neovim see .js, .ts files as jsx, tsx files: FIX for coc-tsserver
+autocmd FileType javascript set filetype=javascriptreact
+autocmd FileType typescript set filetype=typescriptreact
+
+" Run xrdb whenever Xdefaults or Xresources are updated.
+autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
+
+" Recompile suckless programs. only for files that are config.h
+autocmd BufWritePost config.h,config.def.h !sudo make install; make clean    
+
+" Comile any latex document into pdf form
+autocmd BufWritePost answers.tex !pdflatex answers.tex   
+
+" Compile VIU markdown notes to pdf
+autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
+
+" =============================================================================
 " General Neovim settings and key mappings
 " =============================================================================
 " remap default leader key to comma
@@ -235,57 +284,6 @@ set shell=$SHELL
 " Ability to add python breakpoints
 " (I use ipdb, but you can change it to whatever tool you use for debugging)
 au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
-
-
-" =============================================================================
-" Set tabs for certain file types
-" =============================================================================
-" Set expand witdth for web based languages
-autocmd FileType html setlocal ts=2 sw=2 expandtab
-autocmd FileType css setlocal ts=2 sw=2 expandtab
-autocmd FileType scss setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=2 sw=2 expandtab
-autocmd FileType typescript setlocal ts=2 sw=2 expandtab
-autocmd FileType json setlocal ts=4 sw=4 expandtab
-autocmd FileType vue setlocal ts=2 sw=2 expandtab
-" Set expand width for Low level languages
-autocmd FileType c setlocal ts=2 sw=2 expandtab
-autocmd FileType h setlocal ts=2 sw=2 expandtab
-autocmd FileType cpp setlocal ts=2 sw=2 expandtab
-autocmd FileType hpp setlocal ts=2 sw=2 expandtab
-autocmd FileType rs setlocal ts=2 sw=2 expandtab
-" Set expand width for scripting languages
-autocmd FileType sh setlocal ts=2 sw=2 expandtab
-autocmd FileType zsh setlocal ts=2 sw=2 expandtab
-autocmd FileType fish setlocal ts=2 sw=2 expandtab
-autocmd FileType vim setlocal ts=2 sw=2 expandtab
-autocmd FileType bash setlocal ts=2 sw=2 expandtab
-autocmd FileType pl setlocal ts=2 sw=2 expandtab
-autocmd FileType py setlocal ts=4 sw=4 expandtab
-" Set expand width to 2 for markdown
-autocmd FileType md setlocal ts=2 sw=2 expandtab
-autocmd FileType markdown setlocal ts=2 sw=2 expandtab
-
-" Make neovim see .js, .ts files as jsx, tsx files: FIX for coc-tsserver
-autocmd FileType javascript set filetype=javascriptreact
-autocmd FileType typescript set filetype=typescriptreact
-
-
-" =============================================================================
-" Custom autocmd's go here [ if none of these suit you, just delete them, I
-" include them as examples for how to write a basic autocmd ]
-" =============================================================================
-" Run xrdb whenever Xdefaults or Xresources are updated.
-autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
-
-" Recompile suckless programs. only for files that are config.h
-autocmd BufWritePost config.h,config.def.h !sudo make install; make clean    
-
-" Comile any latex document into pdf form
-autocmd BufWritePost answers.tex !pdflatex answers.tex   
-
-" Compile VIU markdown notes to pdf
-autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
 
 
 " =============================================================================
