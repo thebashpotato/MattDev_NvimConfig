@@ -28,6 +28,10 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
+" Better tsx highlighting and indention
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+
 " quick commenter
 Plug 'preservim/nerdcommenter'
 

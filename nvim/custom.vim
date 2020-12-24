@@ -178,6 +178,12 @@ let g:rainbow_active = 1
 
 
 " ============================================================================
+" Custom Typescript syntax highlighting
+" ============================================================================
+" let coc-prettier handle the indenting
+let g:typescript_indent_disable = 1
+
+" ============================================================================
 " Emmet mappings < this might be deprecated soon >
 " ============================================================================
 let g:user_emmet_mode='a'  " enable all functions in all modes
