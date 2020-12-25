@@ -66,7 +66,7 @@ git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git
 mkdir ~/.config/nvim
 
 # cp contents of repo into nvim Dir
-cp -v MattDev_NvimConfig/* ~/.config/nvim/
+cp -rv MattDev_NvimConfig/* ~/.config/nvim/
 
 # Install coc extensions with :CocInstall coc-python
 
