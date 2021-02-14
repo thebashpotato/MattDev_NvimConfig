@@ -20,10 +20,8 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-" Colorschemes
+" Main colorscheme
 Plug 'sainnhe/edge'
-
-Plug 'dracula/vim', { 'as': 'dracula' }
 
 " rainbow brackets
 Plug 'luochen1990/rainbow'
@@ -31,6 +29,9 @@ Plug 'luochen1990/rainbow'
 " Better tsx highlighting and indention
 Plug 'leafgarland/typescript-vim'
 Plug 'peitalin/vim-jsx-typescript'
+
+" Vim wiki
+Plug 'vimwiki/vimwiki'
 
 " quick commenter
 Plug 'preservim/nerdcommenter'
@@ -312,7 +313,7 @@ set background=dark
 syntax enable
 
 " Only for the edge colorscheme
-let g:edge_style = 'neon'
+let g:edge_style = 'default'
 let g:edge_enable_italic = 1
 let g:edge_disable_italic_comment = 1
 let g:edge_transparent_background = 1
@@ -324,7 +325,7 @@ if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
   colorscheme edge
 else
-  colorscheme dracula
+  colorscheme quantum
 endif
 
 " =============================================================================
