@@ -6,10 +6,9 @@
 #------------------=| Dev notes |------------------#
 
 
-# First step: Checking what type of linux distro (2 categories supported?)
-# debian OR arch/manjaro bases
-# Command is lsb-release . 
-
+# TO DO: 
+# Install each tier-1 depency on both Ubuntu and Manjaro
+# and take note.
 
 # What programs are needed? 
 # For Debian: git, curl, python3-pip, python3-venv, Rust
@@ -49,18 +48,40 @@ tier2=()
 
 
 
+function distr_determine () {
+
+    # Detects whether user has Manjaro or Ubuntu
+    # The ubuntu check has additional lsb_release parameters
+    # to shut the "No LSB modules" warning the hell up.
+    
+    if( lsb_release -ar 2>/dev/null | grep --silent 'Ubuntu\|Mint' > /dev/null);
+    then
+        return 1
+    elif (lsb_release -a | grep --silent  'Manjaro\|Arch' > /dev/null);
+    then
+        return 2
+    else 
+        return 0
+    fi
+    
+
+}
+
+
 function install () {
     # Parameters: (debian or arch)
 
     # A switch statement. Inside each case there is an if statement
     # to have separate installation commands for ubuntu and manjaro
 
-    true
+    true #no-op
 
 }
 
 
 function tier2_check () {
+    # Checks for program packages, modules, libraries, etc.
+
 
     true #no-op
 }
@@ -69,19 +90,22 @@ function tier2_check () {
 
 
 function tier1b_check () {
+    # Checks programs that don't have a shell command but are installed through shell.
 
     true #no-op
 }
 
 
-
 function tier1_check() {
+    # Checks programs that are installed through the shell.    
 
     missing=()
 
     for i in "${tier1[@]}" ; do
 
-        if ! command -v "$i" &> /dev/null
+        # A check if a program exists
+        # Does this by seeing if a command from their program works
+        if ! command -v "$i" &> /dev/null   
             then
             echo -e "\e[91mError: $i not found.\e[0m"
             missing+=("$i")
@@ -96,3 +120,4 @@ function tier1_check() {
 }
 
 tier1_check
+distr_determine
