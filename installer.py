@@ -74,11 +74,10 @@ class Installer:
         """
         self.info_msg(f"Running: {command}")
         try:
-            ret: sp.CompletedProcess = sp.run(command, check=True, shell=True)
-            status = ret.returncode
+            sp.run(command, check=True, shell=True)
             self.info_msg("✅ Done.. \n")
         except sp.CalledProcessError as error:
-            self.error_msg(f"{error} with return code: {status}")
+            self.error_msg(f"{error}")
 
     @staticmethod
     def error_msg(message: str) -> None:
