@@ -11,9 +11,9 @@ import subprocess as sp
 from pathlib import Path
 import distro
 
-DEBIAN_DEPS = ('git', 'curl', 'python3-pip', 'python3-venv', 'exuberant-ctags',
+DEBIAN_DEPS = ('curl', 'python3-pip', 'python3-venv', 'exuberant-ctags',
                'ack-grep')
-ARCH_DEPS = ('git', 'curl', 'python-pip', 'ctags')
+ARCH_DEPS = ('curl', 'python-pip', 'ctags')
 
 PYTHON_DEPS = ('pynvim', 'flake8', 'pylint', 'isort', 'yapf', 'jedi')
 
@@ -66,7 +66,7 @@ class Installer:
                 f"please open a pull request for support")
 
         self.info_msg(f"Found: {self.distro_root} based distro")
-        self.info_msg(f"Setting package manager to: {self.package_manager}")
+        self.info_msg(f"Setting package manager to: {self.package_manager}\n")
 
     def _exec_command(self, command: str) -> None:
         """
@@ -106,30 +106,35 @@ class Installer:
         """
         c = Colors
         sys.stdout.write(
-            f"{c.BBlue}INFO{c.Reset}  {c.BWhite}{message}{c.Reset}\n")
+            f"{c.BGreen}INFO{c.Reset}  {c.BBlue}{message}{c.Reset}\n")
 
     def install_dependencies(self) -> None:
         """
         Arb doc
         """
-        for prog in PYTHON_DEPS:
-            cmd = f"pip3 install {prog} --user"
-            self._exec_command(cmd)
-
+        # install distro package manager based dependencies
         if self.distro_root == "debian":
             # update the system first
             cmd = f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
+            self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
             self._exec_command(cmd)
             for prog in DEBIAN_DEPS:
                 cmd = f"sudo {self.package_manager} install {prog}"
                 self._exec_command(cmd)
         else:
+            # for now, else means we are dealing with an arch based distro
             # update the system first
             cmd = f"sudo {self.package_manager} -Syu"
+            self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
             self._exec_command(cmd)
             for prog in ARCH_DEPS:
                 cmd = f"sudo {self.package_manager} -S {prog}"
                 self._exec_command(cmd)
+
+        self.info_msg("🛫 Installing python dependencies\n")
+        for prog in PYTHON_DEPS:
+            cmd = f"pip3 install {prog} --user"
+            self._exec_command(cmd)
 
 
 if __name__ == "__main__":
