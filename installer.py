@@ -75,7 +75,7 @@ class Installer:
         self.info_msg(f"Running: {command}")
         try:
             sp.run(command, check=True, shell=True)
-            self.info_msg("✅ Done.. \n")
+            self.info_msg("✅️  Done.. \n")
         except sp.CalledProcessError as error:
             self.error_msg(f"{error}")
 
