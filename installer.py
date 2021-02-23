@@ -1,5 +1,5 @@
 """
-Installer script for Neovim configuration
+Installer script for my Neovim configuration
 Author: Matt Williams
 License: None
 """
@@ -42,28 +42,32 @@ class Installer:
             self.error_msg(f"💻 '{sys.platform}' is currently not supported")
 
         # define members
-        self.package_manager: str
-        self.distro_root: str
+        self.package_manager: str = ""
+        self.distro_root: str = ""
 
         # run private bootstrap methods
         self.__pre_reqs()
 
     def __pre_reqs(self) -> None:
         """
-        get the name of the users linux distibution,
-        currently supporting only Ubuntu bases, and Arch bases
-        :return: None, if unsupported
+        get the name of the users linux distribution,
+        currently supporting only Debian bases, and Arch bases
+        :return: None, exit with an error message if users distro is not supported
         """
-        if distro.like() == "debian":
-            self.package_manager = "apt-get"
-            self.distro_root = distro.like()
-        elif distro.like() == "arch":
-            self.package_manager = "pacman"
-            self.distro_root = distro.like()
-        else:
+        # see if the users distro is a debian or arch based system
+        for distribution in distro.like().split(" "):
+            if distribution in "debian":
+                self.package_manager = "apt-get"
+                self.distro_root = distribution
+            if distribution in "arch":
+                self.package_manager = "pacman"
+                self.distro_root = distribution
+
+        # if package_manager is empty, then the users distro is not a debian or arch base
+        if not self.package_manager:
             self.error_msg(
-                f"Your distro: {distro.name()} is not currently supported,\n"
-                f"please open a pull request for support")
+                f"Your distro: {distro.name()} is not currently supported, "
+                f"please open an issue for support, or submit a pr")
 
         self.info_msg(f"Found: {self.distro_root} based distro")
         self.info_msg(f"Setting package manager to: {self.package_manager}\n")
@@ -74,8 +78,9 @@ class Installer:
         """
         self.info_msg(f"Running: {command}")
         try:
-            sp.run(command, check=True, shell=True)
-            self.info_msg("✅️  Done.. \n")
+            ret: sp.CompletedProcess = sp.run(command, check=True, shell=True)
+            if ret.returncode == 0:
+                self.info_msg("✅️ Done.. \n")
         except sp.CalledProcessError as error:
             self.error_msg(f"{error}")
 
@@ -112,28 +117,27 @@ class Installer:
         Arb doc
         """
         # install distro package manager based dependencies
-        if self.distro_root == "debian":
+        if self.distro_root in "debian":
             # update the system first
-            cmd = f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
-            self._exec_command(cmd)
+            self._exec_command(
+                f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
+            )
+
             for prog in DEBIAN_DEPS:
-                cmd = f"sudo {self.package_manager} install {prog}"
-                self._exec_command(cmd)
-        else:
-            # for now, else means we are dealing with an arch based distro
-            # update the system first
-            cmd = f"sudo {self.package_manager} -Syu"
+                self._exec_command(
+                    f"sudo {self.package_manager} install {prog}")
+
+        if self.distro_root in "arch":
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
-            self._exec_command(cmd)
+            self._exec_command(f"sudo {self.package_manager} -Syu")
+
             for prog in ARCH_DEPS:
-                cmd = f"sudo {self.package_manager} -S {prog}"
-                self._exec_command(cmd)
+                self._exec_command(f"sudo {self.package_manager} -S {prog}")
 
         self.info_msg("🛫 Installing python dependencies\n")
         for prog in PYTHON_DEPS:
-            cmd = f"pip3 install {prog} --user"
-            self._exec_command(cmd)
+            self._exec_command(f"pip3 install {prog} --user")
 
 
 if __name__ == "__main__":
