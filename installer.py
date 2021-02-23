@@ -43,7 +43,7 @@ class Installer:
 
         # define members
         self.package_manager: str
-        self.distro_name: str
+        self.distro_root: str
 
         # run private bootstrap methods
         self.__pre_reqs()
@@ -56,17 +56,29 @@ class Installer:
         """
         if distro.like() == "debian":
             self.package_manager = "apt-get"
-            self.distro_name = distro.name()
+            self.distro_root = distro.like()
         elif distro.like() == "arch":
             self.package_manager = "pacman"
-            self.distro_name = distro.name()
+            self.distro_root = distro.like()
         else:
             self.error_msg(
-                f"Your distro: {distro.like()} is not currently supported,\n"
+                f"Your distro: {distro.name()} is not currently supported,\n"
                 f"please open a pull request for support")
 
-        self.info_msg(f"Found: {self.distro_name}")
+        self.info_msg(f"Found: {self.distro_root} based distro")
         self.info_msg(f"Setting package manager to: {self.package_manager}")
+
+    def _exec_command(self, command: str) -> None:
+        """
+        wrapper around subproccess
+        """
+        self.info_msg(f"Running: {command}")
+        try:
+            ret: sp.CompletedProcess = sp.run(command, check=True, shell=True)
+            status = ret.returncode
+            self.info_msg("✅ Done.. \n")
+        except sp.CalledProcessError as error:
+            self.error_msg(f"{error} with return code: {status}")
 
     @staticmethod
     def error_msg(message: str) -> None:
@@ -96,27 +108,30 @@ class Installer:
         sys.stdout.write(
             f"{c.BBlue}INFO{c.Reset}  {c.BWhite}{message}{c.Reset}\n")
 
-    def exec_command(self, command: str) -> None:
-        """
-        wrapper around subproccess
-        """
-        self.info_msg(f"Running: {command}")
-        try:
-            ret: sp.CompletedProcess = sp.run(command, check=True, shell=True)
-            status = ret.returncode
-            self.info_msg("Done..")
-        except sp.CalledProcessError as error:
-            self.error_msg(f"{error} with return code: {status}")
-
-    def install_pip_deps(self) -> bool:
+    def install_dependencies(self) -> None:
         """
         Arb doc
         """
-        for program in PYTHON_DEPS:
-            cmd = "pip3 install " + program + " --user"
-            self.exec_command(cmd)
+        for prog in PYTHON_DEPS:
+            cmd = f"pip3 install {prog} --user"
+            self._exec_command(cmd)
+
+        if self.distro_root == "debian":
+            # update the system first
+            cmd = f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
+            self._exec_command(cmd)
+            for prog in DEBIAN_DEPS:
+                cmd = f"sudo {self.package_manager} install {prog}"
+                self._exec_command(cmd)
+        else:
+            # update the system first
+            cmd = f"sudo {self.package_manager} -Syu"
+            self._exec_command(cmd)
+            for prog in ARCH_DEPS:
+                cmd = f"sudo {self.package_manager} -S {prog}"
+                self._exec_command(cmd)
 
 
 if __name__ == "__main__":
     installer = Installer()
-    installer.install_pip_deps()
+    installer.install_dependencies()
