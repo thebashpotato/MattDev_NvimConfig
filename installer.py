@@ -72,7 +72,7 @@ class Installer:
         self.info_msg(f"Found: {self.distro_root} based distro")
         self.info_msg(f"Setting package manager to: {self.package_manager}\n")
 
-    def _exec_command(self, command: str) -> None:
+    def __exec_command(self, command: str) -> None:
         """
         wrapper around subproccess
         """
@@ -120,24 +120,24 @@ class Installer:
         if self.distro_root in "debian":
             # update the system first
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
-            self._exec_command(
+            self.__exec_command(
                 f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
             )
 
             for prog in DEBIAN_DEPS:
-                self._exec_command(
+                self.__exec_command(
                     f"sudo {self.package_manager} install {prog}")
 
         if self.distro_root in "arch":
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
-            self._exec_command(f"sudo {self.package_manager} -Syu")
+            self.__exec_command(f"sudo {self.package_manager} -Syu")
 
             for prog in ARCH_DEPS:
-                self._exec_command(f"sudo {self.package_manager} -S {prog}")
+                self.__exec_command(f"sudo {self.package_manager} -S {prog}")
 
         self.info_msg("🛫 Installing python dependencies\n")
         for prog in PYTHON_DEPS:
-            self._exec_command(f"pip3 install {prog} --user")
+            self.__exec_command(f"pip3 install {prog} --user")
 
 
 if __name__ == "__main__":
