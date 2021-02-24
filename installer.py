@@ -79,9 +79,10 @@ class Installer:
         self.info_msg(f"Found: {self.distro_root} based distro")
         self.info_msg(f"Setting package manager to: {self.package_manager}\n")
 
-    def _exec_command(self, command: str) -> None:
+    def __exec_command(self, command: str) -> None:
         """
-        wrapper around subproccess
+        wrapper around subproccess, if a command fails to execute properly,
+        error_msg will print, and promptly exit the entire script.
         :return: None
         """
         self.info_msg(f"Running: {command}")
@@ -91,6 +92,40 @@ class Installer:
                 self.info_msg("✅️ Done.. \n")
         except sp.CalledProcessError as error:
             self.error_msg(f"{error}")
+
+    def __install_distro_dependencies(self) -> None:
+        """
+        Install dependencies through users package manager
+        :returns: None
+        """
+        # install distro package manager based dependencies
+        if self.distro_root in "debian":
+            # update the system first
+            self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
+            self.__exec_command(
+                f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
+            )
+
+            for prog in DEBIAN_DEPS:
+                self.__exec_command(
+                    f"sudo {self.package_manager} install {prog} -y")
+
+        if self.distro_root in "arch":
+            self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
+            self.__exec_command(f"sudo {self.package_manager} -Syu")
+
+            for prog in ARCH_DEPS:
+                self.__exec_command(f"sudo {self.package_manager} -S {prog}")
+
+    def __install_python_dependencies(self) -> None:
+        """
+        Install python based dependencies through pip to users
+        $HOME/.local/bin
+        :returns: None
+        """
+        self.info_msg("🛫 Installing python dependencies\n")
+        for prog in PYTHON_DEPS:
+            self.__exec_command(f"pip3 install {prog} --user")
 
     @staticmethod
     def error_msg(message: str) -> None:
@@ -125,31 +160,18 @@ class Installer:
 
     def install_dependencies(self) -> None:
         """
-        Install distro package manager dependencies first,
-        then install the python specific dependencies
+        public wrapper method around other modular methods
+        that handle very specific installtion methods
+        1. install distro dependencies
+        2. install python dependencies
+        3. install nvm
+        4. install optional dependencies
+
+        :returns: None
         """
-        # install distro package manager based dependencies
-        if self.distro_root in "debian":
-            # update the system first
-            self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
-            self._exec_command(
-                f"sudo {self.package_manager} update && sudo {self.package_manager} upgrade -y"
-            )
+        self.__install_distro_dependencies()
 
-            for prog in DEBIAN_DEPS:
-                self._exec_command(
-                    f"sudo {self.package_manager} install {prog} -y")
-
-        if self.distro_root in "arch":
-            self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
-            self._exec_command(f"sudo {self.package_manager} -Syu")
-
-            for prog in ARCH_DEPS:
-                self._exec_command(f"sudo {self.package_manager} -S {prog}")
-
-        self.info_msg("🛫 Installing python dependencies\n")
-        for prog in PYTHON_DEPS:
-            self._exec_command(f"pip3 install {prog} --user")
+        self.__install_python_dependencies()
 
 
 if __name__ == "__main__":
