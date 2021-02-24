@@ -138,7 +138,7 @@ class Installer:
 
             for prog in DEBIAN_DEPS:
                 self._exec_command(
-                    f"sudo {self.package_manager} install {prog}")
+                    f"sudo {self.package_manager} install {prog} -y")
 
         if self.distro_root in "arch":
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
