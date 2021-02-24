@@ -39,8 +39,14 @@ class Installer:
     Installer object
     """
     def __init__(self):
+        # check for the users platform
         if sys.platform not in 'linux':
             self.error_msg(f"💻 '{sys.platform}' is currently not supported")
+
+        # check if user is root
+        if os.getenv('USER') in 'root':
+            self.error_msg(
+                "We humbly request that you do not run this script as root")
 
         # define members
         self.package_manager: str = ""
@@ -76,6 +82,7 @@ class Installer:
     def _exec_command(self, command: str) -> None:
         """
         wrapper around subproccess
+        :return: None
         """
         self.info_msg(f"Running: {command}")
         try:
@@ -89,6 +96,7 @@ class Installer:
     def error_msg(message: str) -> None:
         """
         outputs colorized error message and exits
+        :return: None
         """
         c = Colors
         sys.stderr.write(
@@ -99,6 +107,7 @@ class Installer:
     def warn_msg(message: str) -> None:
         """
         outputs colorized warning message
+        :return: None
         """
         c = Colors
         sys.stdout.write(
@@ -108,6 +117,7 @@ class Installer:
     def info_msg(message: str) -> None:
         """
         outputs colorized info message
+        :return: None
         """
         c = Colors
         sys.stdout.write(
@@ -115,7 +125,8 @@ class Installer:
 
     def install_dependencies(self) -> None:
         """
-        Arb doc
+        Install distro package manager dependencies first,
+        then install the python specific dependencies
         """
         # install distro package manager based dependencies
         if self.distro_root in "debian":
