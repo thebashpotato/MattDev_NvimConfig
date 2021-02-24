@@ -224,19 +224,19 @@ let g:floaterm_width         = 0.8
 " custom mappings for my personal tools in normal mode only A = Alt key
 
 " Launch ipython in Floaterm
-nnoremap <A-p> :FloatermNew ipython<CR>
+nnoremap <leader>pp :FloatermNew ipython<CR>
 
 " Launch the ranger terminal file manager in Floaterm
-nnoremap <A-r> :FloatermNew ranger<CR>
+nnoremap <leader>rr :FloatermNew ranger<CR>
 
 " double tap 's', it makes it load faster
-nnoremap <A-s> :FloatermNew sefr<CR>
+nnoremap <leader>ss :FloatermNew sefr<CR>
 
 " Toggle an instance of Floaterm
-nnoremap <A-ENTER> :FloatermToggle<CR>
+nnoremap <leader>tt :FloatermToggle<CR>
 
 " kill isntance of FloatermNew if you have too many
-nnoremap <A-o> :FloatermKill<CR>
+nnoremap <leader>kk :FloatermKill<CR>
 
 
 
