@@ -15,7 +15,8 @@ DEBIAN_DEPS = ('curl', 'python3-pip', 'python3-venv', 'exuberant-ctags',
                'ack-grep')
 ARCH_DEPS = ('curl', 'python-pip', 'ctags')
 
-PYTHON_DEPS = ('pynvim', 'flake8', 'pylint', 'isort', 'yapf', 'jedi')
+PYTHON_DEPS = ('pynvim', 'flake8', 'pylint', 'isort', 'yapf', 'jedi',
+               'ranger-fm')
 
 
 class Colors:
@@ -38,7 +39,7 @@ class Installer:
     Installer object
     """
     def __init__(self):
-        if sys.platform != 'linux':
+        if sys.platform not in 'linux':
             self.error_msg(f"💻 '{sys.platform}' is currently not supported")
 
         # define members
