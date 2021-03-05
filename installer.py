@@ -6,6 +6,7 @@ License: None
 
 import os
 import sys
+import shutil
 import subprocess as sp
 from pathlib import Path
 import distro
@@ -229,6 +230,7 @@ class Installer:
                 else:
                     # the user already has the font locally installed,
                     # so remove it from the repo directory
+                    self.info_msg(f"{source.name} already installed\n")
                     source.unlink()
 
     def __install_config(self) -> None:
@@ -242,12 +244,22 @@ class Installer:
             # back up the users existing configs
             config_dir = self.neovim_home.parent
             backup_config = config_dir / 'nvim.bak'
-            self.info_msg(
-                f"Backing up your existing configurations to: {backup_config}")
-            self.neovim_home.replace(backup_config)
+
+            if not backup_config.exists():
+                self.info_msg(
+                    f"Backing up your existing configurations to: {backup_config}"
+                )
+                self.neovim_home.replace(backup_config)
+            else:
+                self.warn_msg(
+                    f"{backup_config.name} already exists, removing and re-backing up\n"
+                )
+                shutil.rmtree(backup_config)
+                self.neovim_home.replace(backup_config)
+
             new_config = Path.cwd() / 'nvim'
             self.info_msg("Installing new config\n")
-            new_config.replace(self.neovim_home)
+            shutil.copytree(new_config, self.neovim_home)
 
     @staticmethod
     def error_msg(message: str) -> None:
