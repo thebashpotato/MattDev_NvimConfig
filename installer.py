@@ -4,21 +4,24 @@ Author: Matt Williams
 License: None
 """
 
-import argparse
 import os
 import sys
+import shutil
 import subprocess as sp
 from pathlib import Path
 import distro
 
-DEBIAN_DEPS = ('curl', 'python3-pip', 'python3-venv', 'exuberant-ctags',
-               'ack-grep')
-ARCH_DEPS = ('curl', 'python-pip', 'ctags')
+DEBIAN_DEPS = [
+    'curl', 'wget', 'python3-pip', 'python3-venv', 'exuberant-ctags',
+    'ack-grep'
+]
+ARCH_DEPS = ['curl', 'python-pip', 'ctags']
 
-PYTHON_DEPS = ('pynvim', 'flake8', 'pylint', 'isort', 'yapf', 'jedi',
-               'ranger-fm')
+PYTHON_DEPS = [
+    'pynvim', 'flake8', 'pylint', 'isort', 'yapf', 'jedi', 'ranger-fm'
+]
 
-RUST_DEPS = ('sefr')
+RUST_DEPS = ['sefr']
 
 
 class Colors:
@@ -53,8 +56,10 @@ class Installer:
         # define members
         self.package_manager: str = ""
         self.distro_root: str = ""
-        self.neovim_install_dir: Path = Path.home() / '.config' / 'nvim'
-        self.user_shell: str = os.getenv('SHELL')
+        self.neovim_home: Path = Path.home() / '.config' / 'nvim'
+        self.nvm_home: Path = Path.home() / '.nvm'
+        self.font_dir: Path = Path.home() / '.local' / 'share' / 'fonts'
+        self.shell: str = os.getenv('SHELL')
 
         # run private bootstrap methods
         self.__pre_reqs()
@@ -111,15 +116,9 @@ class Installer:
         """
         self.info_msg(f"Running: {command}")
         try:
-            ret: sp.CompletedProcess = sp.run(command, check=True, shell=True)
-            if ret.returncode == 0:
-                self.info_msg("✅️ Done.. \n")
+            sp.run(command, check=True, shell=True, executable=self.shell)
+            self.info_msg("✅️ Done.. \n")
         except sp.CalledProcessError as error:
-            if ret.returncode == 127:
-                self.error_msg(
-                    f"Could not locate {command}, "
-                    f"have you enabled all repositories on {distro.name()}?")
-            # for now for any other error code, just show the error message
             self.error_msg(f"{error}")
 
     def __install_distro_dependencies(self) -> None:
@@ -166,14 +165,101 @@ class Installer:
         if they do not, install node version manager
         :returns: None
         """
-        self.info_msg("🧰 Installing Node Version Manager\n")
+        if not self.nvm_home.is_dir():
+            self.info_msg("🧰 Installing Node Version Manager\n")
+            self.__exec_command(
+                "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash"
+            )
+            # the fish shell requires extra set up
+            if os.path.basename(self.shell) in "fish":
+                self.info_msg("Found fish shell\n")
+                if not self.__is_installed("fisher"):
+                    self.info_msg("Installing Fisher package manager\n")
+                    self.__exec_command(
+                        "curl -sL https://git.io/fisher | source && fisher install jorgebucaran/fisher"
+                    )
+                    self.info_msg("Installing nvm for fisher\n")
+                    self.__exec_command("fisher install jorgebucaran/nvm.fish")
+                    self.__exec_command("nvm install latest")
+                    self.__exec_command(
+                        "set --universal nvm_default_version latest")
+        else:
+            self.info_msg("Found Node Version Manager.. Skipping...\n")
 
     def __install_rustup(self) -> None:
         """
         First search and see if the user has a current installation of rustup,
         if they do not, install rustc, cargo etc
         """
-        self.info_msg("🧰 Installing the Rust toolchain\n")
+        if not self.__is_installed("cargo"):
+            self.info_msg("🧰 Installing the Rust toolchain\n")
+            self.__exec_command(
+                "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+            )
+
+        for prog in RUST_DEPS:
+            if not self.__is_installed(prog):
+                self.__exec_command(f"cargo install {prog}")
+
+    def __install_nerdfont(self) -> None:
+        """
+        Install a nerdfont from
+        https://github.com/ryanoasis/nerd-fonts
+        """
+        self.info_msg("🧰 Installing Nerd Font\n")
+        self.__exec_command(
+            "wget https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
+        )
+        for source in Path.cwd().iterdir():
+            if source.suffix == '.ttf':
+                if not self.font_dir.is_dir():
+                    self.font_dir.mkdir(parents=True)
+
+                destination = self.font_dir / source.name
+                if not destination.exists():
+                    self.info_msg(f"Installing nerd font: {source.name}\n")
+                    # move the font to $USER/.local/share/fonts
+                    source.replace(destination)
+                    # install the font
+                    self.__exec_command("fc-cache -f -v")
+                    self.__exec_command(
+                        'fc-list | grep "Fira Code" 2>&1/dev/null')
+                    self.warn_msg(
+                        f"{source.name} has been installed properly,\n\t"
+                        " but you will have enable it in your terminal\n")
+                else:
+                    # the user already has the font locally installed,
+                    # so remove it from the repo directory
+                    self.info_msg(f"{source.name} already installed\n")
+                    source.unlink()
+
+    def __install_config(self) -> None:
+        """
+        Install the actual configuration files
+        """
+        self.info_msg("🧰 Installing Neovim Configuration files\n")
+
+        if self.neovim_home.is_dir():
+            self.info_msg("Backing up your existing configurations")
+            # back up the users existing configs
+            config_dir = self.neovim_home.parent
+            backup_config = config_dir / 'nvim.bak'
+
+            if not backup_config.exists():
+                self.info_msg(
+                    f"Backing up your existing configurations to: {backup_config}"
+                )
+                self.neovim_home.replace(backup_config)
+            else:
+                self.warn_msg(
+                    f"{backup_config.name} already exists, removing and re-backing up\n"
+                )
+                shutil.rmtree(backup_config)
+                self.neovim_home.replace(backup_config)
+
+            new_config = Path.cwd() / 'nvim'
+            self.info_msg("Installing new config\n")
+            shutil.copytree(new_config, self.neovim_home)
 
     @staticmethod
     def error_msg(message: str) -> None:
@@ -206,14 +292,15 @@ class Installer:
         sys.stdout.write(
             f"{c.BGreen}INFO{c.Reset}  {c.BBlue}{message}{c.Reset}\n")
 
-    def install_dependencies(self, optional=True) -> None:
+    def install_dependencies(self) -> None:
         """
         public wrapper method around other modular methods
         that handle very specific installtion methods
         1. install distro dependencies
         2. install python dependencies
         3. install nvm
-        4. install optional dependencies
+        4. install rustup
+        5. install the actual configs
 
         :returns: None
         """
@@ -223,8 +310,16 @@ class Installer:
 
         self.__install_node_version_manager()
 
-        if optional:
-            self.__install_rustup()
+        self.__install_rustup()
+
+        self.__install_nerdfont()
+
+        self.__install_config()
+
+        print()
+        self.info_msg("Press Enter to finish installation")
+        input()
+        self.__exec_command("nvim")
 
 
 if __name__ == "__main__":

@@ -165,6 +165,7 @@ autocmd FileType zsh setlocal ts=2 sw=2 expandtab
 autocmd FileType fish setlocal ts=2 sw=2 expandtab
 autocmd FileType vim setlocal ts=2 sw=2 expandtab
 autocmd FileType bash setlocal ts=2 sw=2 expandtab
+autocmd FileType lisp setlocal ts=2 sw=2 expandtab
 autocmd FileType pl setlocal ts=2 sw=2 expandtab
 autocmd FileType py setlocal ts=4 sw=4 expandtab
 " Set expand width to 2 for markdown
@@ -223,10 +224,10 @@ nnoremap <leader>wa :wa<CR>
 nnoremap <leader>qa :qa<CR>
 
 " Split horizontally
-nnoremap <A-b> :HorizontalAndSwitch<CR>
+nnoremap bb :HorizontalAndSwitch<CR>
 
 " Split vertically 
-nnoremap <A-v> :VerticalAndSwitch<CR>
+nnoremap vv :VerticalAndSwitch<CR>
 
 " Remap keys to move between splits easier
 nmap <C-h> <C-w>h
