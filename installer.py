@@ -58,6 +58,8 @@ class Installer:
         self.distro_root: str = ""
         self.neovim_home: Path = Path.home() / '.config' / 'nvim'
         self.nvm_home: Path = Path.home() / '.nvm'
+        if not self.nvm_home.is_dir():
+            self.nvm_home = Path.home() / '.config' / 'nvm'
         self.font_dir: Path = Path.home() / '.local' / 'share' / 'fonts'
         self.shell: str = os.getenv('SHELL')
 
