@@ -5,10 +5,17 @@ License: None
 """
 
 import os
-import sys
 import shutil
 import subprocess as sp
+import sys
 from pathlib import Path
+
+if os.getenv('VIRTUAL_ENV'):
+    print(
+        "\033[1;31mError\033[0m The python dependencies are meant to be installed globally\n"
+        "      Please deactivate your virutal environment")
+    sys.exit(1)
+
 import distro
 
 DEBIAN_DEPS = [
@@ -58,6 +65,8 @@ class Installer:
         self.distro_root: str = ""
         self.neovim_home: Path = Path.home() / '.config' / 'nvim'
         self.nvm_home: Path = Path.home() / '.nvm'
+        if not self.nvm_home.is_dir():
+            self.nvm_home = Path.home() / '.config' / 'nvm'
         self.font_dir: Path = Path.home() / '.local' / 'share' / 'fonts'
         self.shell: str = os.getenv('SHELL')
 
@@ -223,7 +232,7 @@ class Installer:
                     # install the font
                     self.__exec_command("fc-cache -f -v")
                     self.__exec_command(
-                        'fc-list | grep "Fira Code" 2>&1/dev/null')
+                        'fc-list | grep "Fira Code" &>/dev/null')
                     self.warn_msg(
                         f"{source.name} has been installed properly,\n\t"
                         " but you will have enable it in your terminal\n")
