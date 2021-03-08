@@ -10,10 +10,25 @@ import subprocess as sp
 import sys
 from pathlib import Path
 
+# check if user is root
+if os.getenv('USER') in 'root':
+    sys.stderr.write(
+        "\033[1;31mError\033[0m We humbly request that you do not run this script as root \n"
+    )
+
+# check for the users platform
+if sys.platform not in 'linux':
+    sys.stderr.write(
+        f"\033[1;31mError\033 [0m💻 '{sys.platform}' is currently not supported \n"
+    )
+
+# make sure the user isn't running this script with a virutal env activated, if they are exit,
+# as the python dependencies need to be installed for the $USER,
+# if they are not neovim won't be able to use them
 if os.getenv('VIRTUAL_ENV'):
-    print(
+    sys.stderr.write(
         "\033[1;31mError\033[0m The python dependencies are meant to be installed globally\n"
-        "      Please deactivate your virutal environment")
+        "      Please deactivate your virutal environment\n")
     sys.exit(1)
 
 import distro
@@ -51,16 +66,6 @@ class Installer:
     Installer object
     """
     def __init__(self):
-        # check for the users platform
-        if sys.platform not in 'linux':
-            self.error_msg(f"💻 '{sys.platform}' is currently not supported")
-
-        # check if user is root
-        if os.getenv('USER') in 'root':
-            self.error_msg(
-                "We humbly request that you do not run this script as root")
-
-        # define members
         self.package_manager: str = ""
         self.distro_root: str = ""
         self.neovim_home: Path = Path.home() / '.config' / 'nvim'
@@ -70,13 +75,17 @@ class Installer:
         self.font_dir: Path = Path.home() / '.local' / 'share' / 'fonts'
         self.shell: str = os.getenv('SHELL')
 
-        # run private bootstrap methods
-        self.__pre_reqs()
+        # fill all variables with system requires before beginning install
+        self.__system_requires()
 
-    def __pre_reqs(self) -> None:
+    def __system_requires(self) -> None:
         """
         get the name of the users linux distribution,
         currently supporting only Debian bases, and Arch bases
+
+        NOTE: Some distros such as antiX don't use the distro.like() method for listing
+              the parent distro, this is lazyness on there part.
+
         :return: None, exit with an error message if users distro is not supported
         """
         # see if the users distro is a debian or arch based system
@@ -84,15 +93,13 @@ class Installer:
             if distribution in ('debian', 'ubuntu'):
                 self.package_manager = "apt-get"
                 self.distro_root = distribution
-            if distribution == "arch":
+            elif distribution == "arch":
                 self.package_manager = "pacman"
                 self.distro_root = distribution
-
-        # if package_manager is empty, then the users distro is not a debian or arch base
-        if not self.package_manager:
-            self.error_msg(
-                f"Your distro: {distro.name()} is not currently supported, "
-                f"please open an issue for support, or submit a pr")
+            else:
+                self.error_msg(
+                    f"Your distro: {distro.name()} is not currently supported, "
+                    f"please open an issue for support, or submit a pr")
 
         self.info_msg(f"Found: {self.distro_root} based distro")
         self.info_msg(f"Setting package manager to: {self.package_manager}\n")
@@ -136,7 +143,7 @@ class Installer:
         :returns: None
         """
         # install distro package manager based dependencies
-        if self.distro_root in "debian":
+        if self.distro_root == "debian":
             # update the system first
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
             self.__exec_command(
@@ -148,7 +155,7 @@ class Installer:
                     self.__exec_command(
                         f"sudo {self.package_manager} install {prog} -y")
 
-        if self.distro_root in "arch":
+        if self.distro_root == "arch":
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
             self.__exec_command(f"sudo {self.package_manager} -Syu")
 
@@ -192,6 +199,10 @@ class Installer:
                     self.__exec_command("nvm install latest")
                     self.__exec_command(
                         "set --universal nvm_default_version latest")
+            else:
+                ...
+                # TODO: Run nvm commands for other shells
+
         else:
             self.info_msg("Found Node Version Manager.. Skipping...\n")
 
@@ -248,6 +259,11 @@ class Installer:
         """
         self.info_msg("🧰 Installing Neovim Configuration files\n")
 
+        def copy_config() -> None:
+            new_config = Path.cwd() / 'nvim'
+            self.info_msg("Installing new config\n")
+            shutil.copytree(new_config, self.neovim_home)
+
         if self.neovim_home.is_dir():
             self.info_msg("Backing up your existing configurations")
             # back up the users existing configs
@@ -266,9 +282,9 @@ class Installer:
                 shutil.rmtree(backup_config)
                 self.neovim_home.replace(backup_config)
 
-            new_config = Path.cwd() / 'nvim'
-            self.info_msg("Installing new config\n")
-            shutil.copytree(new_config, self.neovim_home)
+            copy_config()
+        else:
+            copy_config()
 
     @staticmethod
     def error_msg(message: str) -> None:
