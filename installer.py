@@ -81,10 +81,10 @@ class Installer:
         """
         # see if the users distro is a debian or arch based system
         for distribution in distro.like().split(" "):
-            if distribution in "debian":
+            if distribution in ('debian', 'ubuntu'):
                 self.package_manager = "apt-get"
                 self.distro_root = distribution
-            if distribution in "arch":
+            if distribution == "arch":
                 self.package_manager = "pacman"
                 self.distro_root = distribution
 
