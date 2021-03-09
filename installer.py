@@ -11,13 +11,13 @@ import sys
 from pathlib import Path
 
 # check if user is root
-if os.getenv('USER') in 'root':
+if os.getenv('USER') == 'root':
     sys.stderr.write(
         "\033[1;31mError\033[0m We humbly request that you do not run this script as root \n"
     )
 
 # check for the users platform
-if sys.platform not in 'linux':
+if sys.platform != 'linux':
     sys.stderr.write(
         f"\033[1;31mError\033 [0m💻 '{sys.platform}' is currently not supported \n"
     )
