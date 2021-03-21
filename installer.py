@@ -217,6 +217,9 @@ class Installer:
                 "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
             )
 
+        # source the file
+        self.__exec_command("source $HOME/.cargo/env")
+
         for prog in RUST_DEPS:
             if not self.__is_installed(prog):
                 self.__exec_command(f"cargo install {prog}")
