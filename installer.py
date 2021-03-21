@@ -221,38 +221,6 @@ class Installer:
             if not self.__is_installed(prog):
                 self.__exec_command(f"cargo install {prog}")
 
-    def __install_nerdfont(self) -> None:
-        """
-        Install a nerdfont from
-        https://github.com/ryanoasis/nerd-fonts
-        """
-        self.info_msg("🧰 Installing Nerd Font\n")
-        self.__exec_command(
-            "wget https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/FiraCode/Regular/complete/Fira%20Code%20Regular%20Nerd%20Font%20Complete.ttf"
-        )
-        for source in Path.cwd().iterdir():
-            if source.suffix == '.ttf':
-                if not self.font_dir.is_dir():
-                    self.font_dir.mkdir(parents=True)
-
-                destination = self.font_dir / source.name
-                if not destination.exists():
-                    self.info_msg(f"Installing nerd font: {source.name}\n")
-                    # move the font to $USER/.local/share/fonts
-                    source.replace(destination)
-                    # install the font
-                    self.__exec_command("fc-cache -f -v")
-                    self.__exec_command(
-                        'fc-list | grep "Fira Code" &>/dev/null')
-                    self.warn_msg(
-                        f"{source.name} has been installed properly,\n\t"
-                        " but you will have enable it in your terminal\n")
-                else:
-                    # the user already has the font locally installed,
-                    # so remove it from the repo directory
-                    self.info_msg(f"{source.name} already installed\n")
-                    source.unlink()
-
     def __install_config(self) -> None:
         """
         Install the actual configuration files
@@ -336,8 +304,6 @@ class Installer:
         self.__install_node_version_manager()
 
         self.__install_rustup()
-
-        self.__install_nerdfont()
 
         self.__install_config()
 
