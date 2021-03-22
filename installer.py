@@ -85,7 +85,7 @@ class Installer:
         currently supporting only Debian bases, and Arch bases
 
         NOTE: Some distros such as antiX don't use the distro.like() method for listing
-              the parent distro, this is lazyness on there part.
+              the parent distro, this is lazyness on their part.
 
         :return: None, exit with an error message if users distro is not supported
         """
