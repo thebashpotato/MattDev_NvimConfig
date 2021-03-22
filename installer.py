@@ -15,12 +15,14 @@ if os.getenv('USER') == 'root':
     sys.stderr.write(
         "\033[1;31mError\033[0m We humbly request that you do not run this script as root \n"
     )
+    sys.exit(1)
 
 # check for the users platform
 if sys.platform != 'linux':
     sys.stderr.write(
         f"\033[1;31mError\033 [0m💻 '{sys.platform}' is currently not supported \n"
     )
+    sys.exit(1)
 
 # make sure the user isn't running this script with a virutal env activated, if they are exit,
 # as the python dependencies need to be installed for the $USER,
@@ -216,9 +218,8 @@ class Installer:
             self.__exec_command(
                 "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
             )
-
-        # source the file
-        self.__exec_command("source $HOME/.cargo/env")
+            # source the file
+            self.__exec_command('bash -c "source $HOME/.cargo/env"')
 
         for prog in RUST_DEPS:
             if not self.__is_installed(prog):
