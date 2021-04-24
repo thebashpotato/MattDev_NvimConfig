@@ -26,9 +26,11 @@ Plug 'sainnhe/edge'
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
-" Better tsx highlighting and indention
-Plug 'leafgarland/typescript-vim'
-Plug 'peitalin/vim-jsx-typescript'
+" clang format
+Plug 'rhysd/vim-clang-format'
+
+" Javascript syntax highlighting
+Plug 'yuezk/vim-js'
 
 " Vim wiki
 Plug 'vimwiki/vimwiki'
@@ -143,22 +145,26 @@ command! HorizontalAndSwitch :split | :wincmd j
 autocmd FileType javascript set filetype=javascriptreact
 autocmd FileType typescript set filetype=typescriptreact
 
+" Set for lex and yacc
+autocmd BufRead,BufNewFile *.fl,*.flex,*.l,*.lm setlocal ft=lex
+autocmd BufRead,BufNewFile *.y,*.ypp,*.ym,*.yacc setlocal ft=yacc
+
 " Set expand witdth for web based languages
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=2 sw=2 expandtab
-autocmd FileType javascriptreact setlocal ts=2 sw=2 expandtab
-autocmd FileType typescript setlocal ts=2 sw=2 expandtab
-autocmd FileType typescriptreact setlocal ts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=4 sw=4 expandtab
+autocmd FileType javascriptreact setlocal ts=4 sw=4 expandtab
+autocmd FileType typescript setlocal ts=4 sw=4 expandtab
+autocmd FileType typescriptreact setlocal ts=4 sw=4 expandtab
 autocmd FileType json setlocal ts=4 sw=4 expandtab
-autocmd FileType vue setlocal ts=2 sw=2 expandtab
+autocmd FileType vue setlocal ts=4 sw=4 expandtab
 " Set expand width for Low level languages
-autocmd FileType c setlocal ts=2 sw=2 expandtab
-autocmd FileType h setlocal ts=2 sw=2 expandtab
-autocmd FileType cpp setlocal ts=2 sw=2 expandtab
-autocmd FileType hpp setlocal ts=2 sw=2 expandtab
-autocmd FileType rs setlocal ts=2 sw=2 expandtab
+autocmd FileType c setlocal ts=4 sw=4 expandtab
+autocmd FileType h setlocal ts=4 sw=4 expandtab
+autocmd FileType cpp setlocal ts=4 sw=4 expandtab
+autocmd FileType hpp setlocal ts=4 sw=4 expandtab
+autocmd FileType rs setlocal ts=4 sw=4 expandtab
 " Set expand width for scripting languages
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
@@ -171,7 +177,6 @@ autocmd FileType py setlocal ts=4 sw=4 expandtab
 " Set expand width to 2 for markdown
 autocmd FileType md setlocal ts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sw=2 expandtab
-
 
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %

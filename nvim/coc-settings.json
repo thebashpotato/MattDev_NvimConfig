@@ -26,11 +26,13 @@
     },
     "explorer.width": 30,
     "eslint.enable": true,
-    "eslint.filetypes": [
+    "eslint.probe": [
         "javascript",
         "javascriptreact",
         "typescript",
-        "typescriptreact"
+        "typescriptreact",
+        "html",
+        "markdown"
     ],
     "eslint.autoFixOnSave": true,
     "explorer.icon.enableNerdfont": true,
@@ -43,5 +45,6 @@
         ],
         "v": "open:vsplit"
     },
-    "coc.preferences.extensionUpdateCheck": "daily"
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "clangd.path": "/home/matt/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
 }

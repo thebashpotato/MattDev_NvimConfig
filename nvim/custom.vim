@@ -4,6 +4,12 @@
 " ============================================================================
 
 " ============================================================================
+" Clang Format shortcut
+" ============================================================================
+nnoremap <leader>f :<C-u>ClangFormat<CR>
+
+
+" ============================================================================
 " VimWiki
 " ============================================================================
 " Set path to hold all wiki information, and prefer markdown syntax over wiki
@@ -237,9 +243,6 @@ nnoremap <leader>tt :FloatermToggle<CR>
 
 " kill isntance of FloatermNew if you have too many
 nnoremap <leader>kk :FloatermKill<CR>
-
-
-
 
 " ============================================================================
 " Conquer of Compiletion
