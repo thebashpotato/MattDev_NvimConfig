@@ -23,11 +23,17 @@ call plug#begin('~/.config/nvim/plugged')
 " Main colorscheme
 Plug 'sainnhe/edge'
 
+" Gruv box
+Plug 'morhetz/gruvbox'
+
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
-" clang format
-Plug 'rhysd/vim-clang-format'
+" Neoformat (universal formatting tool)
+Plug 'sbdchd/neoformat'
+
+" Cmake highlighting
+Plug 'pboettch/vim-cmake-syntax'
 
 " Javascript syntax highlighting
 Plug 'yuezk/vim-js'
@@ -153,17 +159,17 @@ autocmd BufRead,BufNewFile *.y,*.ypp,*.ym,*.yacc setlocal ft=yacc
 autocmd FileType html setlocal ts=2 sw=2 expandtab
 autocmd FileType css setlocal ts=2 sw=2 expandtab
 autocmd FileType scss setlocal ts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=4 sw=4 expandtab
-autocmd FileType javascriptreact setlocal ts=4 sw=4 expandtab
-autocmd FileType typescript setlocal ts=4 sw=4 expandtab
-autocmd FileType typescriptreact setlocal ts=4 sw=4 expandtab
-autocmd FileType json setlocal ts=4 sw=4 expandtab
-autocmd FileType vue setlocal ts=4 sw=4 expandtab
+autocmd FileType javascript setlocal ts=2 sw=2 expandtab
+autocmd FileType javascriptreact setlocal ts=2 sw=2 expandtab
+autocmd FileType typescript setlocal ts=2 sw=2 expandtab
+autocmd FileType typescriptreact setlocal ts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sw=2 expandtab
+autocmd FileType vue setlocal ts=2 sw=2 expandtab
 " Set expand width for Low level languages
-autocmd FileType c setlocal ts=4 sw=4 expandtab
-autocmd FileType h setlocal ts=4 sw=4 expandtab
-autocmd FileType cpp setlocal ts=4 sw=4 expandtab
-autocmd FileType hpp setlocal ts=4 sw=4 expandtab
+autocmd FileType c setlocal ts=2 sw=2 expandtab
+autocmd FileType h setlocal ts=2 sw=2 expandtab
+autocmd FileType cpp setlocal ts=2 sw=2 expandtab
+autocmd FileType hpp setlocal ts=2 sw=2 expandtab
 autocmd FileType rs setlocal ts=4 sw=4 expandtab
 " Set expand width for scripting languages
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
@@ -319,19 +325,23 @@ set background=dark
 syntax enable
 
 " Only for the edge colorscheme
-let g:edge_style = 'default'
+let g:edge_style = 'aura'
 let g:edge_enable_italic = 1
 let g:edge_disable_italic_comment = 1
 let g:edge_transparent_background = 1
 let g:edge_diagnostic_line_highlight = 1
 let g:edge_current_word = 'bold'
 
+" Only for Gruvbox theme
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_bold='1'
+
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme edge
+  colorscheme gruvbox
 else
-  colorscheme quantum
+  colorscheme edge
 endif
 
 " =============================================================================
