@@ -114,6 +114,9 @@ Plug 'tpope/vim-fugitive'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
 
+" Git blame plugin, similar to git lens in vscode
+Plug 'APZelos/blamer.nvim'
+
 " Linters
 Plug 'neomake/neomake'
 
@@ -144,7 +147,7 @@ let g:coc_global_extensions = [
       \ 'coc-cmake',
       \ 'coc-clangd',
       \ 'coc-texlab',
-      \ 'coc-markdownlint'
+      \ 'coc-markdownlint',
       \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -213,43 +216,14 @@ autocmd BufWritePost config.h,config.def.h !sudo make install; make clean
 " Comile any latex document into pdf form
 autocmd BufWritePost answers.tex !pdflatex answers.tex
 
-" Compile VIU markdown notes to pdf
+" Compile markdown notes to pdf
 autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
-
-" =============================================================================
-" Code folding settings
-" =============================================================================
-augroup weblang_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
-    au FileType typescript setlocal foldmethod=syntax
-    au FileType html setlocal foldmethod=syntax
-    au FileType css setlocal foldmethod=syntax
-    au FileType scss setlocal foldmethod=syntax
-augroup END
-
-augroup scriptinglang_folding
-    au!
-    au FileType sh setlocal foldmethod=syntax
-    au FileType bash setlocal foldmethod=syntax
-    au FileType fish setlocal foldmethod=syntax
-    au FileType python setlocal foldmethod=syntax
-augroup END
-
-augroup systemlang_folding
-    au!
-    au FileType cpp setlocal foldmethod=syntax
-    au FileType hpp setlocal foldmethod=syntax
-    au FileType c setlocal foldmethod=syntax
-    au FileType h setlocal foldmethod=syntax
-    au FileType rust setlocal foldmethod=syntax
-augroup END
 
 " =============================================================================
 " General Neovim settings and key mappings
 " =============================================================================
 " remap default leader key to comma
-let mapleader = ","
+let mapleader = ";"
 " Reload nvim config
 nnoremap <leader>vr :source $MYVIMRC<CR>
 
