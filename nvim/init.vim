@@ -127,8 +127,6 @@ Plug 'junegunn/goyo.vim'
 "  Conquer of completion extensions extensions
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
-
-" web programming based extenstions
 let g:coc_global_extensions = [
       \ 'coc-html'
       \ 'coc-tsserver'
