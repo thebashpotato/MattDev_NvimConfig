@@ -4,12 +4,6 @@
 " ============================================================================
 
 " ============================================================================
-" Neoformat shortcut
-" ============================================================================
-nnoremap <leader>f :<C-u>Neoformat<CR>
-
-
-" ============================================================================
 " VimWiki
 " ============================================================================
 " Set path to hold all wiki information, and prefer markdown syntax over wiki
@@ -75,7 +69,6 @@ let g:startify_custom_header =
 let g:startify_custom_footer =
       \ 'startify#center(startify#fortune#boxed())'
 
-
 let g:startify_session_sort = 1
 let g:startify_fortune_use_unicode = 1
 let g:startify_change_to_vcs_root = 1
@@ -83,6 +76,17 @@ let g:startify_update_oldfiles = 1
 let g:startify_use_env = 1
 
 autocmd User Startified setlocal cursorline
+
+" ============================================================================
+" Typescript syntax highlighting
+" ============================================================================
+" This plugin has a custom indenter, sometimes it fails, disable it here
+let g:typescript_indent_disable = 1
+
+" ============================================================================
+" Neoformat shortcut
+" ============================================================================
+nnoremap <leader>f :<C-u>Neoformat<CR>
 
 " ============================================================================
 " Latex preview
@@ -99,13 +103,11 @@ nmap <leader>tb :TagbarToggle<CR>
 " autofocus on tagbar open
 let g:tagbar_autofocus = 1
 
-
 " ============================================================================
 " Tasklist
 " ============================================================================
 " show pending tasks list
 map <leader>tl :TaskList<CR>
-
 
 " ============================================================================
 " NERDTree
@@ -116,7 +118,6 @@ nmap <leader>nn :NERDTreeToggle<CR>
 nmap <leader>nf :NERDTreeFind<CR>
 " don;t show these file types
 let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
-
 
 " ============================================================================
 " Neomake
@@ -130,7 +131,6 @@ let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
 let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
 " Disable error messages inside the buffer, next to the problematic line
 let g:neomake_virtualtext_current_error = 1
-
 
 " ============================================================================
 " Fzf
@@ -147,7 +147,6 @@ nmap <leader>fz :BLines<CR>
 nmap <leader>af :Lines<CR>
 " commands finder mapping
 nmap <leader>co :Commands<CR>
-
 
 " ============================================================================
 " Signify
@@ -167,7 +166,6 @@ highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
 highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
 highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
-
 " ============================================================================
 " Autoclose
 " ============================================================================
@@ -176,12 +174,10 @@ highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 let g:AutoClosePairs = "() {} [] ' ` \" "
 
-
 " ============================================================================
 " Goyo mappings 
 " ============================================================================
 nmap <leader>dd :Goyo 100x60<CR>
-
 
 " ============================================================================
 " Rainbow brackets
@@ -190,19 +186,11 @@ nmap <leader>dd :Goyo 100x60<CR>
 "set to 0 if you want to enable it later via :RainbowToggle
 let g:rainbow_active = 1
 
-
-" ============================================================================
-" Custom Typescript syntax highlighting
-" ============================================================================
-" let coc-prettier handle the indenting
-let g:typescript_indent_disable = 1
-
 " ============================================================================
 " Emmet mappings < this might be deprecated soon >
 " ============================================================================
 let g:user_emmet_mode='a'  " enable all functions in all modes
 let g:user_emmet_leader_key='<C-S>'
-
 
 " ============================================================================
 " Devicon 
@@ -218,7 +206,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='gruvbox'
 
-
 " ============================================================================
 " Floaterm
 " ============================================================================
@@ -228,7 +215,6 @@ let g:floaterm_height        = 0.8
 let g:floaterm_width         = 0.8
 
 " custom mappings for my personal tools in normal mode only A = Alt key
-
 " Launch ipython in Floaterm
 nnoremap <leader>pp :FloatermNew ipython<CR>
 

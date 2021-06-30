@@ -38,6 +38,9 @@ Plug 'pboettch/vim-cmake-syntax'
 " Javascript syntax highlighting
 Plug 'yuezk/vim-js'
 
+" Typescript syntax highlighting
+Plug 'leafgarland/typescript-vim'
+
 " Vim wiki
 Plug 'vimwiki/vimwiki'
 
@@ -79,7 +82,7 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Code and files fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim' 
+Plug 'junegunn/fzf.vim'
 
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
@@ -98,9 +101,6 @@ Plug 'jeetsukumaran/vim-indentwise'
 
 " Better language packs
 Plug 'sheerun/vim-polyglot'
-
-" Ack code search (requires ack installed in the system)
-Plug 'mileszs/ack.vim'
 
 " Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
@@ -123,9 +123,38 @@ Plug 'ryanoasis/vim-devicons'
 " Distraction free programming
 Plug 'junegunn/goyo.vim'
 
+" ============================================================================
+"  Conquer of completion extensions extensions
+"  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
+" ============================================================================
+
+" web programming based extenstions
+let g:coc_global_extensions = ['coc-html']
+let g:coc_global_extensions = ['coc-tsserver']
+let g:coc_global_extensions = ['coc-prettier']
+let g:coc_global_extensions = ['coc-eslint']
+let g:coc_global_extensions = ['coc-emmet']
+let g:coc_global_extensions = ['coc-json']
+let g:coc_global_extensions = ['coc-css']
+
+" scripting language extenstions
+let g:coc_global_extensions = ['coc-sh']
+let g:coc_global_extensions = ['coc-fish']
+let g:coc_global_extensions = ['coc-vimlsp']
+let g:coc_global_extensions = ['coc-python']
+
+" systems programming language extenstions
+let g:coc_global_extensions = ['coc-rust-analyzer']
+let g:coc_global_extensions = ['coc-rls']
+let g:coc_global_extensions = ['coc-cmake']
+let g:coc_global_extensions = ['coc-clangd']
+
+" misc extensions
+let g:coc_global_extensions = ['coc-texlab']
+let g:coc_global_extensions = ['coc-markdownlint']
+
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
-
 
 " =============================================================================
 " Automate the plugin install process if this is the first time nvim is ran
@@ -137,11 +166,9 @@ if vim_plug_just_installed
   :PlugInstall
 endif
 
-
 " =============================================================================
 " Custom commands and autocommands
 " =============================================================================
-
 " Kill all open buffers accepts for active one
 command! KillAllButOne execute '%bdelete|edit #|normal `"'
 command! VerticalAndSwitch :vs | :wincmd l
@@ -150,10 +177,6 @@ command! HorizontalAndSwitch :split | :wincmd j
 " Make neovim see .js, .ts files as jsx, tsx files: FIX for coc-tsserver
 autocmd FileType javascript set filetype=javascriptreact
 autocmd FileType typescript set filetype=typescriptreact
-
-" Set for lex and yacc
-autocmd BufRead,BufNewFile *.fl,*.flex,*.l,*.lm setlocal ft=lex
-autocmd BufRead,BufNewFile *.y,*.ypp,*.ym,*.yacc setlocal ft=yacc
 
 " Set expand witdth for web based languages
 autocmd FileType html setlocal ts=2 sw=2 expandtab
@@ -165,12 +188,14 @@ autocmd FileType typescript setlocal ts=2 sw=2 expandtab
 autocmd FileType typescriptreact setlocal ts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=2 sw=2 expandtab
 autocmd FileType vue setlocal ts=2 sw=2 expandtab
+
 " Set expand width for Low level languages
 autocmd FileType c setlocal ts=2 sw=2 expandtab
 autocmd FileType h setlocal ts=2 sw=2 expandtab
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
 autocmd FileType hpp setlocal ts=2 sw=2 expandtab
-autocmd FileType rs setlocal ts=4 sw=4 expandtab
+autocmd FileType rust setlocal ts=4 sw=4 expandtab
+
 " Set expand width for scripting languages
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
 autocmd FileType zsh setlocal ts=2 sw=2 expandtab
@@ -180,6 +205,7 @@ autocmd FileType bash setlocal ts=2 sw=2 expandtab
 autocmd FileType lisp setlocal ts=2 sw=2 expandtab
 autocmd FileType pl setlocal ts=2 sw=2 expandtab
 autocmd FileType py setlocal ts=4 sw=4 expandtab
+
 " Set expand width to 2 for markdown
 autocmd FileType md setlocal ts=2 sw=2 expandtab
 autocmd FileType markdown setlocal ts=2 sw=2 expandtab
@@ -188,13 +214,42 @@ autocmd FileType markdown setlocal ts=2 sw=2 expandtab
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 
 " Recompile suckless programs. only for files that are config.h
-autocmd BufWritePost config.h,config.def.h !sudo make install; make clean    
+autocmd BufWritePost config.h,config.def.h !sudo make install; make clean
 
 " Comile any latex document into pdf form
-autocmd BufWritePost answers.tex !pdflatex answers.tex   
+autocmd BufWritePost answers.tex !pdflatex answers.tex
 
 " Compile VIU markdown notes to pdf
 autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
+
+" =============================================================================
+" Code folding settings
+" =============================================================================
+augroup weblang_folding
+    au!
+    au FileType javascript setlocal foldmethod=syntax
+    au FileType typescript setlocal foldmethod=syntax
+    au FileType html setlocal foldmethod=syntax
+    au FileType css setlocal foldmethod=syntax
+    au FileType scss setlocal foldmethod=syntax
+augroup END
+
+augroup scriptinglang_folding
+    au!
+    au FileType sh setlocal foldmethod=syntax
+    au FileType bash setlocal foldmethod=syntax
+    au FileType fish setlocal foldmethod=syntax
+    au FileType python setlocal foldmethod=syntax
+augroup END
+
+augroup systemlang_folding
+    au!
+    au FileType cpp setlocal foldmethod=syntax
+    au FileType hpp setlocal foldmethod=syntax
+    au FileType c setlocal foldmethod=syntax
+    au FileType h setlocal foldmethod=syntax
+    au FileType rust setlocal foldmethod=syntax
+augroup END
 
 " =============================================================================
 " General Neovim settings and key mappings
@@ -237,8 +292,12 @@ nnoremap <leader>qa :qa<CR>
 " Split horizontally
 nnoremap bb :HorizontalAndSwitch<CR>
 
-" Split vertically 
+" Split vertically
 nnoremap vv :VerticalAndSwitch<CR>
+
+" code folding
+nnoremap <leader>fo :foldopen<CR>
+nnoremap <leader>fc :foldclose<CR>
 
 " Remap keys to move between splits easier
 nmap <C-h> <C-w>h
@@ -264,7 +323,7 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 " remove ugly vertical lines on window division
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 
 " Global Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -286,7 +345,7 @@ set wildmode=list:longest
 ca w!! w !sudo tee "%"
 
 " tab navigation mappings
-map tt :tabnew 
+map tt :tabnew
 map <M-l> :tabn<CR>
 imap <M-l> <ESC>:tabn<CR>
 map <M-h> :tabp<CR>
@@ -307,7 +366,6 @@ set shell=$SHELL
 " Ability to add python breakpoints
 " (I use ipdb, but you can change it to whatever tool you use for debugging)
 au FileType python map <silent> <leader>b Oimport ipdb; ipdb.set_trace()<esc>
-
 
 " =============================================================================
 " Set colorscheme and Color rendering workarounds
