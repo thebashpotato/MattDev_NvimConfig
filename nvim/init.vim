@@ -128,22 +128,22 @@ Plug 'junegunn/goyo.vim'
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
 let g:coc_global_extensions = [
-      \ 'coc-html'
-      \ 'coc-tsserver'
-      \ 'coc-prettier'
-      \ 'coc-eslint'
-      \ 'coc-emmet'
-      \ 'coc-json'
-      \ 'coc-css'
-      \ 'coc-sh'
-      \ 'coc-fish'
-      \ 'coc-vimlsp'
-      \ 'coc-python'
-      \ 'coc-rust-analyzer'
-      \ 'coc-rls'
-      \ 'coc-cmake'
-      \ 'coc-clangd'
-      \ 'coc-texlab'
+      \ 'coc-html',
+      \ 'coc-tsserver',
+      \ 'coc-prettier',
+      \ 'coc-eslint',
+      \ 'coc-emmet',
+      \ 'coc-json',
+      \ 'coc-css',
+      \ 'coc-sh',
+      \ 'coc-fish',
+      \ 'coc-vimlsp',
+      \ 'coc-python',
+      \ 'coc-rust-analyzer',
+      \ 'coc-rls',
+      \ 'coc-cmake',
+      \ 'coc-clangd',
+      \ 'coc-texlab',
       \ 'coc-markdownlint'
       \ ]
 
