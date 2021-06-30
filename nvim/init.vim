@@ -129,29 +129,25 @@ Plug 'junegunn/goyo.vim'
 " ============================================================================
 
 " web programming based extenstions
-let g:coc_global_extensions = ['coc-html']
-let g:coc_global_extensions = ['coc-tsserver']
-let g:coc_global_extensions = ['coc-prettier']
-let g:coc_global_extensions = ['coc-eslint']
-let g:coc_global_extensions = ['coc-emmet']
-let g:coc_global_extensions = ['coc-json']
-let g:coc_global_extensions = ['coc-css']
-
-" scripting language extenstions
-let g:coc_global_extensions = ['coc-sh']
-let g:coc_global_extensions = ['coc-fish']
-let g:coc_global_extensions = ['coc-vimlsp']
-let g:coc_global_extensions = ['coc-python']
-
-" systems programming language extenstions
-let g:coc_global_extensions = ['coc-rust-analyzer']
-let g:coc_global_extensions = ['coc-rls']
-let g:coc_global_extensions = ['coc-cmake']
-let g:coc_global_extensions = ['coc-clangd']
-
-" misc extensions
-let g:coc_global_extensions = ['coc-texlab']
-let g:coc_global_extensions = ['coc-markdownlint']
+let g:coc_global_extensions = [
+      \ 'coc-html'
+      \ 'coc-tsserver'
+      \ 'coc-prettier'
+      \ 'coc-eslint'
+      \ 'coc-emmet'
+      \ 'coc-json'
+      \ 'coc-css'
+      \ 'coc-sh'
+      \ 'coc-fish'
+      \ 'coc-vimlsp'
+      \ 'coc-python'
+      \ 'coc-rust-analyzer'
+      \ 'coc-rls'
+      \ 'coc-cmake'
+      \ 'coc-clangd'
+      \ 'coc-texlab'
+      \ 'coc-markdownlint'
+      \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
 call plug#end()
