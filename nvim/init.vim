@@ -220,6 +220,37 @@ autocmd BufWritePost answers.tex !pdflatex answers.tex
 autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
 
 " =============================================================================
+" Code folding:
+" https://www.linux.com/training-tutorials/vim-tips-folding-fun/#:~:text=Open%20it%20in%20Vim%2C%20and,and%20the%20next%20two%20lines.
+" =============================================================================
+augroup weblang_folding
+  au!
+  au FileType javascript setlocal foldmethod=marker
+  au FileType typescript setlocal foldmethod=marker
+  au FileType html setlocal foldmethod=marker
+  au FileType css setlocal foldmethod=marker
+  au FileType scss setlocal foldmethod=marker
+augroup END
+
+augroup scriptlang_folding
+  au!
+  au FileType sh setlocal foldmethod=marker
+  au FileType bash setlocal foldmethod=marker
+  au FileType fish setlocal foldmethod=marker
+  au FileType python setlocal foldmethod=marker
+  au FileType perl setlocal foldmethod=marker
+augroup END
+
+augroup systemslang_folding
+  au!
+  au FileType cpp setlocal foldmethod=marker
+  au FileType hpp setlocal foldmethod=marker
+  au FileType c setlocal foldmethod=marker
+  au FileType h setlocal foldmethod=marker
+  au FileType rust setlocal foldmethod=marker
+augroup END
+
+" =============================================================================
 " General Neovim settings and key mappings
 " =============================================================================
 " remap default leader key to comma
@@ -346,7 +377,6 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-
 set background=dark
 syntax enable
 
