@@ -149,7 +149,18 @@ nmap <leader>af :Lines<CR>
 nmap <leader>co :Commands<CR>
 
 " ============================================================================
-" Signify
+" Git Blame - Displays git blame information on the current line
+" ============================================================================
+" start blamer on neovim open
+let g:blamer_enabled = 1
+" the delay for showing blame information, setting too low will result in
+" performance issues
+let g:blamer_delay = 1000
+highlight Blamer guifg=LightBlue
+
+
+" ============================================================================
+" Git Signify - Displays git diff icons in the gutter
 " ============================================================================
 " this first setting decides in which order try to guess your current vcs
 " UPDATE it to reflect your preferences, it will speed up opening files
@@ -157,6 +168,10 @@ let g:signify_vcs_list = [ 'git' ]
 " mappings to jump to changed blocks
 nmap <leader>sn <plug>(signify-next-hunk)
 nmap <leader>sp <plug>(signify-prev-hunk)
+
+" ============================================================================
+" Git Signify
+" ============================================================================
 
 " nicer colors
 highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
@@ -237,7 +252,7 @@ nnoremap <leader>kk :FloatermKill<CR>
 " Any coc extension specific configuration should go under
 " this banner.
 " ============================================================================
-" Use auocmd to force lightline update.
+" Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " Fancy markdown syntax

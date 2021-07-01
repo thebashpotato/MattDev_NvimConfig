@@ -114,6 +114,9 @@ Plug 'tpope/vim-fugitive'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
 
+" Git blame plugin, similar to git lens in vscode
+Plug 'APZelos/blamer.nvim'
+
 " Linters
 Plug 'neomake/neomake'
 
@@ -128,23 +131,23 @@ Plug 'junegunn/goyo.vim'
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
 let g:coc_global_extensions = [
-      \ 'coc-html'
-      \ 'coc-tsserver'
-      \ 'coc-prettier'
-      \ 'coc-eslint'
-      \ 'coc-emmet'
-      \ 'coc-json'
-      \ 'coc-css'
-      \ 'coc-sh'
-      \ 'coc-fish'
-      \ 'coc-vimlsp'
-      \ 'coc-python'
-      \ 'coc-rust-analyzer'
-      \ 'coc-rls'
-      \ 'coc-cmake'
-      \ 'coc-clangd'
-      \ 'coc-texlab'
-      \ 'coc-markdownlint'
+      \ 'coc-html',
+      \ 'coc-tsserver',
+      \ 'coc-prettier',
+      \ 'coc-eslint',
+      \ 'coc-emmet',
+      \ 'coc-json',
+      \ 'coc-css',
+      \ 'coc-sh',
+      \ 'coc-fish',
+      \ 'coc-vimlsp',
+      \ 'coc-python',
+      \ 'coc-rust-analyzer',
+      \ 'coc-rls',
+      \ 'coc-cmake',
+      \ 'coc-clangd',
+      \ 'coc-texlab',
+      \ 'coc-markdownlint',
       \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -213,43 +216,45 @@ autocmd BufWritePost config.h,config.def.h !sudo make install; make clean
 " Comile any latex document into pdf form
 autocmd BufWritePost answers.tex !pdflatex answers.tex
 
-" Compile VIU markdown notes to pdf
+" Compile markdown notes to pdf
 autocmd BufWritePost notes.md !pandoc -s -o notes.pdf notes.md
 
 " =============================================================================
-" Code folding settings
+" Code folding:
+" https://www.linux.com/training-tutorials/vim-tips-folding-fun/#:~:text=Open%20it%20in%20Vim%2C%20and,and%20the%20next%20two%20lines.
 " =============================================================================
 augroup weblang_folding
-    au!
-    au FileType javascript setlocal foldmethod=syntax
-    au FileType typescript setlocal foldmethod=syntax
-    au FileType html setlocal foldmethod=syntax
-    au FileType css setlocal foldmethod=syntax
-    au FileType scss setlocal foldmethod=syntax
+  au!
+  au FileType javascript setlocal foldmethod=marker
+  au FileType typescript setlocal foldmethod=marker
+  au FileType html setlocal foldmethod=marker
+  au FileType css setlocal foldmethod=marker
+  au FileType scss setlocal foldmethod=marker
 augroup END
 
-augroup scriptinglang_folding
-    au!
-    au FileType sh setlocal foldmethod=syntax
-    au FileType bash setlocal foldmethod=syntax
-    au FileType fish setlocal foldmethod=syntax
-    au FileType python setlocal foldmethod=syntax
+augroup scriptlang_folding
+  au!
+  au FileType sh setlocal foldmethod=marker
+  au FileType bash setlocal foldmethod=marker
+  au FileType fish setlocal foldmethod=marker
+  au FileType python setlocal foldmethod=marker
+  au FileType perl setlocal foldmethod=marker
 augroup END
 
-augroup systemlang_folding
-    au!
-    au FileType cpp setlocal foldmethod=syntax
-    au FileType hpp setlocal foldmethod=syntax
-    au FileType c setlocal foldmethod=syntax
-    au FileType h setlocal foldmethod=syntax
-    au FileType rust setlocal foldmethod=syntax
+augroup systemslang_folding
+  au!
+  au FileType cpp setlocal foldmethod=marker
+  au FileType hpp setlocal foldmethod=marker
+  au FileType c setlocal foldmethod=marker
+  au FileType h setlocal foldmethod=marker
+  au FileType rust setlocal foldmethod=marker
 augroup END
 
 " =============================================================================
 " General Neovim settings and key mappings
 " =============================================================================
 " remap default leader key to comma
-let mapleader = ","
+let mapleader = ";"
 " Reload nvim config
 nnoremap <leader>vr :source $MYVIMRC<CR>
 
@@ -372,7 +377,6 @@ endif
 if (has("termguicolors"))
   set termguicolors
 endif
-
 set background=dark
 syntax enable
 
