@@ -39,7 +39,7 @@ Plug 'pboettch/vim-cmake-syntax'
 Plug 'yuezk/vim-js'
 
 " Typescript syntax highlighting
-Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
 
 " Vim wiki
 Plug 'vimwiki/vimwiki'
@@ -389,8 +389,8 @@ let g:edge_diagnostic_line_highlight = 1
 let g:edge_current_word = 'bold'
 
 " Only for Gruvbox theme
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_bold='1'
+let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_bold = '1'
 
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
