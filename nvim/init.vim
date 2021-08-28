@@ -20,12 +20,6 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-" Main colorscheme
-Plug 'sainnhe/edge'
-
-" Gruv box
-Plug 'morhetz/gruvbox'
-
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
@@ -380,24 +374,12 @@ endif
 set background=dark
 syntax enable
 
-" Only for the edge colorscheme
-let g:edge_style = 'aura'
-let g:edge_enable_italic = 1
-let g:edge_disable_italic_comment = 1
-let g:edge_transparent_background = 1
-let g:edge_diagnostic_line_highlight = 1
-let g:edge_current_word = 'bold'
-
-" Only for Gruvbox theme
-let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_bold = '1'
-
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme gruvbox
+  colorscheme quantum
 else
-  colorscheme edge
+  colorscheme blue
 endif
 
 " =============================================================================
