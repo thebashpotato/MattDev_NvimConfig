@@ -10,48 +10,89 @@ import subprocess as sp
 import sys
 from pathlib import Path
 
-# check if user is root
-if os.getenv('USER') == 'root':
+# check for the users platform
+if sys.platform != "linux":
     sys.stderr.write(
-        "\033[1;31mError\033[0m We humbly request that you do not run this script as root \n"
+        f"\033[1;31mError\033 [0m💻 '{sys.platform}' is currently not supported \n"
     )
     sys.exit(1)
 
-# check for the users platform
-if sys.platform != 'linux':
+# check if user is root
+if os.getenv("USER") == "root":
     sys.stderr.write(
-        f"\033[1;31mError\033 [0m💻 '{sys.platform}' is currently not supported \n"
+        "\033[1;31mError\033[0m We humbly request that you do not run this script as root \n"
     )
     sys.exit(1)
 
 # make sure the user isn't running this script with a virutal env activated, if they are exit,
 # as the python dependencies need to be installed for the $USER,
 # if they are not neovim won't be able to use them
-if os.getenv('VIRTUAL_ENV'):
+if os.getenv("VIRTUAL_ENV"):
     sys.stderr.write(
         "\033[1;31mError\033[0m The python dependencies are meant to be installed globally\n"
-        "      Please deactivate your virutal environment\n")
+        "      Please deactivate your virutal environment\n"
+    )
     sys.exit(1)
 
 import distro
 
+SUPPORTED_DISTROS = {
+    "debian": {
+        "apt": {
+            "install": [
+                "curl",
+                "wget",
+                "python3-pip",
+                "python3-venv",
+                "exuberant-ctags",
+            ]
+        },
+    },
+    "ubuntu": {
+        "apt": {
+            "install": [
+                "curl",
+                "wget",
+                "python3-pip",
+                "python3-venv",
+                "exuberant-ctags",
+            ]
+        },
+    },
+    "fedora": {
+        "dnf": {
+            "install": ["curl", "ctags"],
+        },
+    },
+    "arch": {
+        "pacman": {
+            "-Ss": ["curl", "python-pip", "ctags"],
+        },
+    },
+}
+
 DEBIAN_DEPS = [
-    'curl', 'wget', 'python3-pip', 'python3-venv', 'exuberant-ctags',
-    'ack-grep'
-]
-ARCH_DEPS = ['curl', 'python-pip', 'ctags']
-
-PYTHON_DEPS = [
-    'pynvim', 'flake8', 'pylint', 'isort', 'yapf', 'jedi', 'ranger-fm'
+    "curl",
+    "wget",
+    "python3-pip",
+    "python3-venv",
+    "exuberant-ctags",
 ]
 
-RUST_DEPS = ['sefr']
+ARCH_DEPS = ["curl", "python-pip", "ctags"]
+
+FEDORA_DEPS = ["curl", "ctags"]
+
+PYTHON_DEPS = ["pynvim", "flake8", "pylint", "isort", "yapf", "jedi", "ranger-fm"]
+
+RUST_DEPS = ["sefr"]
 
 
 class Colors:
     """
     Struct to represent colors
     """
+
     BBlack = "\033[1;30m"
     BRed = "\033[1;31m"
     BGreen = "\033[1;32m"
@@ -67,14 +108,26 @@ class Installer:
     """
     Installer object
     """
+
     def __init__(self):
-        self.package_manager: str = ""
-        self.distro_root: str = ""
-        self.neovim_home: Path = Path.home() / '.config' / 'nvim'
-        self.nvm_home: Path = Path.home() / '.nvm'
-        if not self.nvm_home.is_dir():
-            self.nvm_home = Path.home() / '.config' / 'nvm'
-        self.shell: str = os.getenv('SHELL')
+        self.package_manager = None
+        self.distro_name = None
+        self.install_cmd = None
+        self.deps: list
+        self.config_home: Path
+        self.nvm_home: Path
+
+        # if the user has defined XDG_CONFIG_HOME we know where nvm
+        # will choose to install its configuration files
+        if os.getenv("XDG_CONFIG_HOME"):
+            self.config_home = Path(os.getenv("XDG_CONFIG_HOME"))
+            self.nvm_home = self.config_home / ".nvm"
+        else:
+            self.config_home = Path.home() / ".config"
+            self.nvm_home = Path.home() / ".nvm"
+
+        self.neovim_home: self.config_home / "nvim"
+        self.shell: str = os.getenv("SHELL")
 
         # fill all variables with system requires before beginning install
         self.__system_requires()
@@ -84,23 +137,19 @@ class Installer:
         get the name of the users linux distribution,
         currently supporting only Debian bases, and Arch bases
 
-        NOTE: Some distros such as antiX don't use the distro.like() method for listing
-              the parent distro, this is lazyness on their part.
-
         :return: None, exit with an error message if users distro is not supported
         """
         # see if the users distro is a debian or arch based system
-        for distribution in distro.like().split(" "):
-            if distribution in ('debian', 'ubuntu'):
-                self.package_manager = "apt-get"
-                self.distro_root = distribution
-            elif distribution == "arch":
-                self.package_manager = "pacman"
-                self.distro_root = distribution
-            else:
-                self.error_msg(
-                    f"Your distro: {distro.name()} is not currently supported, "
-                    f"please open an issue for support, or submit a pr")
+        for dist, pkgman in SUPPORTED_DISTROS.items():
+            if distro.id() == dist:
+                self.distro_root = dist
+                self.package_manager = pkgman
+
+        if self.distro_root is None or self.package_manager is None:
+            self.error_msg(
+                f"Your distro: {distro.id()} is not currently supported, "
+                f"please open an issue for support, or submit a pr"
+            )
 
         self.info_msg(f"Found: {self.distro_root} based distro")
         self.info_msg(f"Setting package manager to: {self.package_manager}\n")
@@ -112,16 +161,15 @@ class Installer:
         :return: True, False
         """
         cmd = f"command -v {command}"
-        ret: sp.CompletedProcess = sp.run(cmd,
-                                          check=False,
-                                          capture_output=True,
-                                          shell=True)
+        ret: sp.CompletedProcess = sp.run(
+            cmd, check=False, capture_output=True, shell=True
+        )
         if ret.returncode != 0:
             # the program is not installed
             return False
 
         # the program is installed
-        prog = ret.stdout.decode().strip('\n')
+        prog = ret.stdout.decode().strip("\n")
         self.info_msg(f"Found installation of {prog} Skipping...\n")
         return True
 
@@ -154,7 +202,8 @@ class Installer:
             for prog in DEBIAN_DEPS:
                 if not self.__is_installed(prog):
                     self.__exec_command(
-                        f"sudo {self.package_manager} install {prog} -y")
+                        f"sudo {self.package_manager} install {prog} -y"
+                    )
 
         if self.distro_root == "arch":
             self.info_msg(f"🛫 Installing {distro.name()} dependencies\n")
@@ -162,8 +211,7 @@ class Installer:
 
             for prog in ARCH_DEPS:
                 if not self.__is_installed(prog):
-                    self.__exec_command(
-                        f"sudo {self.package_manager} -S {prog}")
+                    self.__exec_command(f"sudo {self.package_manager} -S {prog}")
 
     def __install_python_dependencies(self) -> None:
         """
@@ -198,8 +246,7 @@ class Installer:
                     self.info_msg("Installing nvm for fisher\n")
                     self.__exec_command("fisher install jorgebucaran/nvm.fish")
                     self.__exec_command("nvm install latest")
-                    self.__exec_command(
-                        "set --universal nvm_default_version latest")
+                    self.__exec_command("set --universal nvm_default_version latest")
             else:
                 ...
                 # TODO: Run nvm commands for other shells
@@ -231,7 +278,7 @@ class Installer:
         self.info_msg("🧰 Installing Neovim Configuration files\n")
 
         def copy_config() -> None:
-            new_config = Path.cwd() / 'nvim'
+            new_config = Path.cwd() / "nvim"
             self.info_msg("Installing new config\n")
             shutil.copytree(new_config, self.neovim_home)
 
@@ -239,7 +286,7 @@ class Installer:
             self.info_msg("Backing up your existing configurations")
             # back up the users existing configs
             config_dir = self.neovim_home.parent
-            backup_config = config_dir / 'nvim.bak'
+            backup_config = config_dir / "nvim.bak"
 
             if not backup_config.exists():
                 self.info_msg(
@@ -264,8 +311,7 @@ class Installer:
         :return: None
         """
         c = Colors
-        sys.stderr.write(
-            f"{c.BRed}ERROR{c.Reset}  {c.BWhite}{message}{c.Reset}\n")
+        sys.stderr.write(f"{c.BRed}ERROR{c.Reset}  {c.BWhite}{message}{c.Reset}\n")
         sys.exit(1)
 
     @staticmethod
@@ -275,8 +321,7 @@ class Installer:
         :return: None
         """
         c = Colors
-        sys.stdout.write(
-            f"{c.BYellow}WARNING{c.Reset}  {c.BWhite}{message}{c.Reset}\n")
+        sys.stdout.write(f"{c.BYellow}WARNING{c.Reset}  {c.BWhite}{message}{c.Reset}\n")
 
     @staticmethod
     def info_msg(message: str) -> None:
@@ -285,8 +330,7 @@ class Installer:
         :return: None
         """
         c = Colors
-        sys.stdout.write(
-            f"{c.BGreen}INFO{c.Reset}  {c.BBlue}{message}{c.Reset}\n")
+        sys.stdout.write(f"{c.BGreen}INFO{c.Reset}  {c.BBlue}{message}{c.Reset}\n")
 
     def install_dependencies(self) -> None:
         """
@@ -300,13 +344,13 @@ class Installer:
 
         :returns: None
         """
-        self.__install_distro_dependencies()
+        # self.__install_distro_dependencies()
 
         self.__install_python_dependencies()
 
         self.__install_node_version_manager()
 
-        self.__install_rustup()
+        # self.__install_rustup()
 
         self.__install_config()
 
