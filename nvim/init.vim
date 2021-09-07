@@ -135,7 +135,7 @@ let g:coc_global_extensions = [
       \ 'coc-sh',
       \ 'coc-fish',
       \ 'coc-vimlsp',
-      \ 'coc-python',
+      \ 'coc-pyright',
       \ 'coc-rust-analyzer',
       \ 'coc-rls',
       \ 'coc-cmake',
