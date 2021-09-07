@@ -234,7 +234,7 @@ class Installer:
         :returns: None
         """
         # install distro package manager based dependencies
-        Log.info(f"Installing {self.meta.distro} dependencies\n")
+        Log.info(f"Installing system dependencies for..\n{self.meta}")
         for prog in self.meta.dependencies:
             if not self.__is_installed(prog):
                 self.__exec_command(
@@ -258,8 +258,8 @@ class Installer:
         if they do not, install node version manager
         :returns: None
         """
-        if not self.__is_installed("nvm"):
-            Log.info("Installing Node Version Manager\n")
+        Log.info("Installing Node Version Manager\n")
+        if not self.__is_installed("node"):
             self.__exec_command(
                 "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash"
             )
@@ -348,16 +348,12 @@ class Installer:
             Log.error("Uninstalling is not yet supported")
 
         if arguments.install:
-            Log.info(f"Installing for:\n{self.meta}")
-            Log.info(f"Installing for:\n{self.meta.__repr__()}")
             self.__install_distro_dependencies()
 
             if arguments.rustup:
-                Log.info("Installing rust up")
                 self.__install_rustup()
 
             if arguments.nvm:
-                Log.info("Install node version manager")
                 self.__install_node_version_manager()
 
             self.__install_config()
