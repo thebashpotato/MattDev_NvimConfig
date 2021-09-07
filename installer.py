@@ -13,12 +13,6 @@ import sys
 from pathlib import Path
 from typing import List, Dict
 
-# check for the users platform
-if sys.platform != "linux":
-    sys.stderr.write(
-        f"\033[1;31mError\033 [0m'{sys.platform}' is currently not supported \n"
-    )
-    sys.exit(1)
 
 # check if user is root
 if os.getenv("USER") == "root":
@@ -91,10 +85,10 @@ class MetaInfo:
     """
 
     def __init__(self):
-        self.user: str = os.getenv("USER")
-        self.distro: str = None
-        self.pkgmanager: str = None
-        self.install_commands: str = None
+        self.user = os.getenv("USER")
+        self.distro = None
+        self.pkgmanager = None
+        self.install_commands = None
         self.dependencies: List[str] = list()
         self.python_dependencies: List[str] = list()
         self.rust_dependencies: List[str] = list()
@@ -194,7 +188,7 @@ class Installer:
 
         self.nvm_home.mkdir(parents=True, exist_ok=True)
         self.neovim_home = self.config_home / "nvim"
-        self.shell: str = os.getenv("SHELL")
+        self.shell = os.getenv("SHELL")
 
     def __is_installed(self, command: str) -> bool:
         """
@@ -330,7 +324,7 @@ class Installer:
         else:
             copy_config()
 
-    def install_dependencies(self, arguments: argparse.ArgumentParser) -> None:
+    def install_dependencies(self, arguments: argparse.Namespace) -> None:
         """
         public wrapper method around other modular methods
         that handle very specific installtion methods
@@ -349,6 +343,7 @@ class Installer:
 
         if arguments.install:
             self.__install_distro_dependencies()
+            self.__install_python_dependencies()
 
             if arguments.rustup:
                 self.__install_rustup()
@@ -409,8 +404,8 @@ def main():
     try:
         installer = Installer()
         installer.install_dependencies(args)
-    except RuntimeError as e:
-        Log.error(e)
+    except RuntimeError as error:
+        Log.error(str(error))
 
 
 if __name__ == "__main__":
