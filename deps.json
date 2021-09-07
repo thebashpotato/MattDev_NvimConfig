@@ -1,0 +1,24 @@
+{
+  "distros": {
+    "debian": {
+      "apt": {
+        "cmd": "install -y --allow-downgrades",
+        "deps": ["curl", "wget", "python3-pip", "python3-venv", "exuberant-ctags"]
+      }
+    },
+    "fedora": {
+      "dnf": {
+        "cmd": "install -y",
+        "deps": ["curl", "ctags"]
+      }
+    },
+    "arch": {
+      "pacman": {
+        "cmd": "-Ssy",
+        "deps": ["curl", "python-pip", "ctags"]
+      }
+    }
+  },
+  "python-deps": [ "pynvim", "flake8", "isort", "ranger-fm" ],
+  "rust-deps": [ "sefr" ]
+}
