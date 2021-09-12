@@ -11,8 +11,13 @@ import shutil
 import subprocess as sp
 import sys
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Any
 
+if "linux" not in sys.platform:
+    sys.stderr.write(
+        f"\033[1;31mError\033[0m {sys.platform} is currently not supported\n"
+    )
+    sys.exit(1)
 
 # check if user is root
 if os.getenv("USER") == "root":
@@ -52,14 +57,14 @@ class Log:
     @staticmethod
     def info(msg: str):
         """
-        Log a blue highlighted info msg
+        Log a green highlighted info msg
         """
-        sys.stdout.write(f"{Log.grn}[✓]{Log.reset}  {Log.grn}{msg}{Log.reset}\n")
+        sys.stdout.write(f"{Log.grn}[✓]{Log.reset}  {Log.white}{msg}{Log.reset}\n")
 
     @staticmethod
     def complete(msg: str):
         """
-        Log a green completion message
+        Log a blue completion message
         """
         sys.stdout.write(f"{Log.blue}[✓]{Log.reset}  {Log.white}{msg}{Log.reset}\n")
 
@@ -89,9 +94,9 @@ class MetaInfo:
         self.distro = None
         self.pkgmanager = None
         self.install_commands = None
-        self.dependencies: List[str] = list()
-        self.python_dependencies: List[str] = list()
-        self.rust_dependencies: List[str] = list()
+        self.dependencies: List[str] = []
+        self.python_dependencies: List[str] = []
+        self.rust_dependencies: List[str] = []
 
         if not self.__parse_contents():
             raise RuntimeError("Could not load distro configuration")
@@ -121,20 +126,21 @@ class MetaInfo:
         )
 
     @staticmethod
-    def __load_file() -> (Dict[str, any] or None):
+    def __load_file() -> Dict[str, Any]:
         """
         load the json file
         """
         here = Path(__file__).resolve(strict=True).parent
+        data: Dict[str, Any] = {}
         for file in here.iterdir():
             if file.name == "deps.json":
                 try:
                     with open(file, "r") as contents:
-                        data: Dict[str, any] = json.load(contents)
+                        data: Dict[str, Any] = json.load(contents)
                         return data
                 except KeyError:
-                    return None
-        return None
+                    pass
+        return data
 
     def __parse_contents(self) -> bool:
         """
@@ -142,10 +148,10 @@ class MetaInfo:
         get the users distribution or parent distribution
         """
         try:
-            json_data: Dict[str, any] = self.__load_file()
+            json_data: Dict[str, Any] = self.__load_file()
             if not json_data:
                 return False
-            distro_data: Dict[str, any] = json_data["distros"]
+            distro_data: Dict[str, Any] = json_data["distros"]
             self.python_dependencies = json_data["python-deps"]
             self.rust_dependencies = json_data["rust-deps"]
 
@@ -168,7 +174,6 @@ class Installer:
     """
 
     def __init__(self):
-        self.meta: MetaInfo
         self.config_home: Path
         self.nvm_home: Path
         self.meta = MetaInfo()
@@ -177,20 +182,21 @@ class Installer:
         # node version manager will choose to install
         # its configuration files
         if os.getenv("XDG_CONFIG_HOME"):
-            self.config_home = Path(os.getenv("XDG_CONFIG_HOME"))
+            self.config_home = Path(str(os.getenv("XDG_CONFIG_HOME")))
         else:
             self.config_home = Path.home() / ".config"
 
         if os.getenv("NVM_DIR"):
-            self.nvm_home = Path(os.getenv("NVM_DIR"))
+            self.nvm_home = Path(str(os.getenv("NVM_DIR")))
         else:
             self.nvm_home = self.config_home / "nvm"
 
         self.nvm_home.mkdir(parents=True, exist_ok=True)
         self.neovim_home = self.config_home / "nvim"
-        self.shell = os.getenv("SHELL")
+        self.shell = str(os.getenv("SHELL"))
 
-    def __is_installed(self, command: str) -> bool:
+    @staticmethod
+    def __is_installed(command: str) -> bool:
         """
         wrapper around subproccess, to test if a program is already installed,
         this will not work for libraries etc, but only for executables
@@ -258,7 +264,7 @@ class Installer:
                 "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash"
             )
             # the fish shell requires extra set up
-            if os.path.basename(self.shell) in "fish":
+            if os.path.basename(str(self.shell)) in "fish":
                 Log.info("Found fish shell\n")
                 if not self.__is_installed("fisher"):
                     Log.info("Installing Fisher package manager\n")
