@@ -41,49 +41,21 @@
 
 * **Full Fledged terminal file browser** [Install instructions and Docs](https://github.com/ranger/ranger)
 
-## :keyboard: Commands to help you out
+## :keyboard: Install script (installer.py)
 
 ```bash
-# Install more dependencies
+usage: installer [options]
 
-# for debian bases
-sudo apt install git curl python3-pip python3-venv exuberant-ctags ack-grep
-pip3 install pynvim flake8 pylint isort --user
+Install neovim config on supported platforms and include optional parameters
 
+optional arguments:
+  -h, --help       show this help message and exit
+  -i, --install
+  -u, --uninstall
+  --rustup         Install the rustup toolchain, and install sefr command line search engine program for neovim
+  --nvm            Install node version manager
 
-# for arch/manjaro bases
-sudo pacman -S git curl python-pip ctags
-pip install pynvim flake8 isort --user
-
-# Get the sefr (the rust cli to search engines) it is written in Rust,
-# so you will need cargo installed (the Rust package manager)
-cargo install sefr
-
-# now clone the repo
-git clone https://github.com/mattcoding4days/MattDev_NvimConfig.git
-
-# make directory for nvim if you dont already have it
-mkdir ~/.config/nvim
-
-# cp contents of repo into nvim Dir
-cp -v MattDev_NvimConfig/* ~/.config/nvim/
-
-# Install coc extensions with :CocInstall coc-python
-
-# list of my most used extension
-coc-eslint
-coc-emmet
-coc-tsserver
-coc-python
-coc-markdownlint
-coc-json
-coc-html
-coc-css
-coc-fish
-coc-git
-coc-sh
-coc-clangd
-coc-vimlsp
+I hope you enjoy my config, please submit a pull request or open an issue for improvements
 ```
 
 ### :information_source: More information on Conquer of Completetion extensions
