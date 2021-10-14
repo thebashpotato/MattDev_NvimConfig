@@ -20,6 +20,9 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
+" solarized colorscheme
+Plug 'lifepillar/vim-solarized8'
+
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
@@ -108,9 +111,6 @@ Plug 'tpope/vim-fugitive'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
 
-" Git blame plugin, similar to git lens in vscode
-Plug 'APZelos/blamer.nvim'
-
 " Linters
 Plug 'neomake/neomake'
 
@@ -125,13 +125,10 @@ Plug 'junegunn/goyo.vim'
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
 let g:coc_global_extensions = [
-      \ 'coc-html',
       \ 'coc-tsserver',
       \ 'coc-prettier',
       \ 'coc-eslint',
-      \ 'coc-emmet',
       \ 'coc-json',
-      \ 'coc-css',
       \ 'coc-sh',
       \ 'coc-fish',
       \ 'coc-vimlsp',
@@ -377,9 +374,9 @@ syntax enable
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme quantum
+  colorscheme solarized8
 else
-  colorscheme blue
+  colorscheme quantum
 endif
 
 " =============================================================================

@@ -149,17 +149,6 @@ nmap <leader>af :Lines<CR>
 nmap <leader>co :Commands<CR>
 
 " ============================================================================
-" Git Blame - Displays git blame information on the current line
-" ============================================================================
-" start blamer on neovim open
-let g:blamer_enabled = 1
-" the delay for showing blame information, setting too low will result in
-" performance issues
-let g:blamer_delay = 1000
-highlight Blamer guifg=LightBlue
-
-
-" ============================================================================
 " Git Signify - Displays git diff icons in the gutter
 " ============================================================================
 " this first setting decides in which order try to guess your current vcs
@@ -219,7 +208,9 @@ let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='base16_material'
+let g:airline_theme='solarized'
+
+"let g:airline_theme='base16_material'
 
 " ============================================================================
 " Floaterm
@@ -310,7 +301,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-"nnoremap <silent> K :call <SID>show_documentation()<CR>
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
