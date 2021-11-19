@@ -1,13 +1,21 @@
 <div align="center">
   <h1>One Neovim config to rule them all</h1>
   <img width="800" height="300" src="assets/contra.gif">
+  <br>
+</div>
+
+<div align="center">
   <h5>
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/mattcoding4days/MattDev_NvimConfig?color=red&logo=Github&logoColor=red&style=for-the-badge"> 
+    <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr-raw/mattcoding4days/MattDev_NvimConfig?label=OPEN%20PR%27s&logo=Github&logoColor=green&style=for-the-badge">
+    <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mattcoding4days/MattDev_NvimConfig?logo=Github&logoColor=blue&style=for-the-badge">
     Note: My configurations are heavily inspired by Fisa Dev's nvim configs,
     over a year and a half, my config has came into its own. Much thanks to Fisa
     and all the contributors to his repo
   </h5>
-  <br>
+
 </div>
+
 
 ## :rocket: Features
 
@@ -22,6 +30,15 @@
 * :white_check_mark: uses fancy symbols (You need to install a Nerdfont and enable in your terminal)
 * :white_check_mark: fzf (fuzzy finder search)
 * :white_check_mark: So many other features, Read the Docs for more information
+
+## :neckbeard: Nerdy Screen Shots
+
+<div align="center">
+  <h2>Startify Ascii Art</h2>
+  <img src="assets/nvim1.png">
+  <img src="assets/nvim2.png">
+  <img src="assets/nvim3.png">
+</div>
 
 ## :traffic_light: Dependencies
 
