@@ -5,10 +5,11 @@
 </div>
 
 <div align="center">
-  <h5>
     <img alt="GitHub issues" src="https://img.shields.io/github/issues/mattcoding4days/MattDev_NvimConfig?color=red&logo=Github&logoColor=red&style=for-the-badge"> 
     <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr-raw/mattcoding4days/MattDev_NvimConfig?label=OPEN%20PR%27s&logo=Github&logoColor=green&style=for-the-badge">
     <img alt="GitHub code size in bytes" src="https://img.shields.io/github/languages/code-size/mattcoding4days/MattDev_NvimConfig?logo=Github&logoColor=blue&style=for-the-badge">
+    
+  <h5>
     Note: My configurations are heavily inspired by Fisa Dev's nvim configs,
     over a year and a half, my config has came into its own. Much thanks to Fisa
     and all the contributors to his repo
