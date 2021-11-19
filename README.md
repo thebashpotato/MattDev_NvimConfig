@@ -35,9 +35,14 @@
 
 <div align="center">
   <h2>Startify Ascii Art</h2>
+  
   <img src="assets/nvim1.png">
   <img src="assets/nvim2.png">
   <img src="assets/nvim3.png">
+  
+  <h2>Supported Langauges</h2>
+  
+  <img src="assets/nvim-rust.png">
 </div>
 
 ## :building_construction: Installation
