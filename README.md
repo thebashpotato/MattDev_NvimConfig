@@ -17,16 +17,15 @@
 
 </div>
 
-
 ## :rocket: Features
 
+* :white_check_mark: Uses Conquer of Completion for a language server (VScode backend)
 * :white_check_mark: latex support
 * :white_check_mark: polyglot language support
 * :white_check_mark: better C/C++ highlighting and language support
-* :white_check_mark: Uses Conquer of Completion for a language server (VScode backend)
 * :white_check_mark: floating terminal support
-* :white_check_mark: internal browser search engine
-* :white_check_mark: file browsing through Nerdtree, and ranger
+* :white_check_mark: internal browser search engine (Optional via sefr)
+* :white_check_mark: file browsing through Nerdtree (Optional via ranger)
 * :white_check_mark: uses airline
 * :white_check_mark: uses fancy symbols (You need to install a Nerdfont and enable in your terminal)
 * :white_check_mark: fzf (fuzzy finder search)
@@ -41,25 +40,9 @@
   <img src="assets/nvim3.png">
 </div>
 
-## :traffic_light: Dependencies
-
-### :loudspeaker:  Node is required, using NVM is the preferred method
-
-* **Node version manager is a better way** [Install instructions and Docs](https://github.com/nvm-sh/nvm)
-
-### :loudspeaker:  If you are using Fish, get the following
-
-* **fisher** package manager [Install instructions and Docs](https://github.com/jorgebucaran/fisher)
-
-* **nvm for fisher** fish wrapper for nvm [Install instructions and Docs](https://github.com/jorgebucaran/nvm.fish)
-
 ## :building_construction: Installation
 
-### :hammer: Optional
-
-* **Full Fledged terminal file browser** [Install instructions and Docs](https://github.com/ranger/ranger)
-
-## :keyboard: Install script (installer.py)
+### :keyboard: Install script (installer.py)
 
 ```bash
 usage: installer [options]
@@ -79,7 +62,5 @@ I hope you enjoy my config, please submit a pull request or open an issue for im
 ### :information_source: More information on Conquer of Completetion extensions
 
 * **Coc extensions** [coc](https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions)
-
-## :godmode: Screenshots and Gifs
 
 ## :scroll: Documentation ( To be completed later )
