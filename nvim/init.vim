@@ -23,6 +23,9 @@ call plug#begin('~/.config/nvim/plugged')
 " solarized colorscheme
 Plug 'lifepillar/vim-solarized8'
 
+" Ayu colorscheme
+Plug 'ayu-theme/ayu-vim'
+
 " rainbow brackets
 Plug 'luochen1990/rainbow'
 
@@ -139,6 +142,7 @@ let g:coc_global_extensions = [
       \ 'coc-clangd',
       \ 'coc-texlab',
       \ 'coc-markdownlint',
+      \ 'coc-lightbulb',
       \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -374,7 +378,9 @@ syntax enable
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme solarized8
+  "colorscheme solarized8
+  let ayucolor="dark"
+  colorscheme ayu
 else
   colorscheme quantum
 endif

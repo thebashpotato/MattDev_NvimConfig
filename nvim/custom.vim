@@ -20,7 +20,7 @@ let g:startify_custom_header_quotes = [
     \ [' Arch isnt that hard to install'],
     \ [' Linux for human beings'],
     \ [' Compile your binaries.. check your version dependencies'],
-    \ [' Steve the Super Villain', '  https://www.youtube.com/watch?v=8LsxmQV8AXk']
+    \ [' Steve the Super Villain https://www.youtube.com/watch?v=8LsxmQV8AXk']
     \ ]
 
 "let g:startify_ascii = [
@@ -208,7 +208,7 @@ let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='solarized'
+let g:airline_theme='ayu_dark'
 
 "let g:airline_theme='base16_material'
 
