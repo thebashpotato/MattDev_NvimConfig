@@ -41,27 +41,27 @@ let g:startify_custom_header_quotes = [
       "\ '   \_________/                              \__________/  ',
 "\]
 
-"let g:startify_ascii = [
-      "\ '                                        ▝▘            ',
-      "\ '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
-      "\ '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
-      "\ '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
-      "\ '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
-      "\ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
-      "\]
-
 let g:startify_ascii = [
-      \ ' ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------, ',
-      \ ' | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    | ',
-      \ ' |--- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,-----| ',
-      \ ' | ->| | Q | W | E | R | T | Y | U | I | O | P | [ | ] |  \  | ',
-      \ ' |----- ,--,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ------| ',
-      \ ' | Caps | A | S | D | F | G | H | J | K | L | ; | " |  Enter | ',
-      \ ' |------ -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- --------| ',
-      \ ' | Shift  | Z | X | C | V | B | N | M | , | . | / |  Shift   | ',
-      \ ' |------,- ,-- --, --- --- --- --- --- --- -,- --- ,--,------| ',
-      \ ' | ctrl |  | alt |                          | alt  |  | ctrl | ',
-      \ '  ------    ----- -------------------------- ------    ------  ', ]
+      \ '                                        ▝▘            ',
+      \ '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+      \ '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+      \ '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
+      \ '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
+      \ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+      \]
+
+"let g:startify_ascii = [
+      "\ ' ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------, ',
+      "\ ' | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    | ',
+      "\ ' |--- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,-----| ',
+      "\ ' | ->| | Q | W | E | R | T | Y | U | I | O | P | [ | ] |  \  | ',
+      "\ ' |----- ,--,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ------| ',
+      "\ ' | Caps | A | S | D | F | G | H | J | K | L | ; | " |  Enter | ',
+      "\ ' |------ -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- --------| ',
+      "\ ' | Shift  | Z | X | C | V | B | N | M | , | . | / |  Shift   | ',
+      "\ ' |------,- ,-- --, --- --- --- --- --- --- -,- --- ,--,------| ',
+      "\ ' | ctrl |  | alt |                          | alt  |  | ctrl | ',
+      "\ '  ------    ----- -------------------------- ------    ------  ', ]
 
 let g:startify_custom_header =
       \ 'startify#center(g:startify_ascii)'
@@ -122,15 +122,15 @@ let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
 " ============================================================================
 " Neomake
 " ============================================================================
-" Run linter on write
-autocmd! BufWritePost * Neomake
-" Check code as python3 by default
-let g:neomake_python_python_maker = neomake#makers#ft#python#python()
-let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
-let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
-let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
-" Disable error messages inside the buffer, next to the problematic line
-let g:neomake_virtualtext_current_error = 1
+"" Run linter on write
+"autocmd! BufWritePost * Neomake
+"" Check code as python3 by default
+"let g:neomake_python_python_maker = neomake#makers#ft#python#python()
+"let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
+"let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
+"let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
+"" Disable error messages inside the buffer, next to the problematic line
+"let g:neomake_virtualtext_current_error = 1
 
 " ============================================================================
 " Fzf

@@ -115,7 +115,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 
 " Linters
-Plug 'neomake/neomake'
+"Plug 'neomake/neomake'
 
 " Nice icons: Need to install patched font for this to work
 Plug 'ryanoasis/vim-devicons'
@@ -142,7 +142,6 @@ let g:coc_global_extensions = [
       \ 'coc-clangd',
       \ 'coc-texlab',
       \ 'coc-markdownlint',
-      \ 'coc-lightbulb',
       \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
