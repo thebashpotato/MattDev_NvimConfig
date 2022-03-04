@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """
 Installer script for my Neovim configuration
 Author: Matt Williams
