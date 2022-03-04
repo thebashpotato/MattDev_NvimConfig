@@ -14,7 +14,7 @@
     },
     "arch": {
       "pacman": {
-        "cmd": "-Ssy",
+        "cmd": "-Sy",
         "deps": ["curl", "python-pip", "ctags"]
       }
     }
