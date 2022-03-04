@@ -260,8 +260,9 @@ class Installer:
         """
         Log.info("Installing Node Version Manager\n")
         if not self.__is_installed("node"):
+            # just running the curl command should be fine for bash/zsh, fish shell will require more
             self.__exec_command(
-                "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.2/install.sh | bash"
+                "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash"
             )
             # the fish shell requires extra set up
             if os.path.basename(str(self.shell)) in "fish":
@@ -275,12 +276,9 @@ class Installer:
                     self.__exec_command("fisher install jorgebucaran/nvm.fish")
                     self.__exec_command("nvm install latest")
                     self.__exec_command("set --universal nvm_default_version latest")
-            else:
-                Log.warn("Need to run node version manager for other shells")
-                # TODO: Run nvm commands for other shells
 
         else:
-            Log.info("Found Node Version Manager.. Skipping...\n")
+            Log.warn("Node was already found on the system.. Skipping...\n")
 
     def __install_rustup(self) -> None:
         """
@@ -311,7 +309,6 @@ class Installer:
             shutil.copytree(new_config, self.neovim_home)
 
         if self.neovim_home.is_dir():
-            Log.info("Backing up your existing configurations")
             # back up the users existing configs
             config_dir = self.neovim_home.parent
             backup_config = config_dir / "nvim.bak"
@@ -321,14 +318,12 @@ class Installer:
                 self.neovim_home.replace(backup_config)
             else:
                 Log.warn(
-                    f"{backup_config.name} already exists, removing and re-backing up\n"
+                    f"{backup_config} already exists, removing and re-backing up\n"
                 )
                 shutil.rmtree(backup_config)
                 self.neovim_home.replace(backup_config)
 
-            copy_config()
-        else:
-            copy_config()
+        copy_config()
 
     def install_dependencies(self, arguments: argparse.Namespace) -> None:
         """

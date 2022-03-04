@@ -3,7 +3,13 @@
     "debian": {
       "apt": {
         "cmd": "install -y --allow-downgrades",
-        "deps": ["curl", "wget", "python3-pip", "python3-venv", "exuberant-ctags"]
+        "deps": [
+          "curl",
+          "wget",
+          "python3-pip",
+          "python3-venv",
+          "exuberant-ctags"
+        ]
       }
     },
     "fedora": {
@@ -14,11 +20,11 @@
     },
     "arch": {
       "pacman": {
-        "cmd": "-Sy",
+        "cmd": "-S --noconfirm",
         "deps": ["curl", "python-pip", "ctags"]
       }
     }
   },
-  "python-deps": [ "pynvim", "flake8", "isort", "ranger-fm" ],
-  "rust-deps": [ "sefr" ]
+  "python-deps": ["pynvim", "flake8", "isort", "ranger-fm"],
+  "rust-deps": ["sefr"]
 }
