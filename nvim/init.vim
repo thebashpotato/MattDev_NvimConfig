@@ -114,9 +114,6 @@ Plug 'tpope/vim-fugitive'
 " Git/mercurial/others diff icons on the side of the file lines
 Plug 'mhinz/vim-signify'
 
-" Linters
-"Plug 'neomake/neomake'
-
 " Nice icons: Need to install patched font for this to work
 Plug 'ryanoasis/vim-devicons'
 
@@ -204,9 +201,6 @@ autocmd FileType markdown setlocal ts=2 sw=2 expandtab
 " Run xrdb whenever Xdefaults or Xresources are updated.
 autocmd BufWritePost *Xresources,*Xdefaults !xrdb %
 
-" Recompile suckless programs. only for files that are config.h
-autocmd BufWritePost config.h,config.def.h !sudo make install; make clean
-
 " Comile any latex document into pdf form
 autocmd BufWritePost answers.tex !pdflatex answers.tex
 
@@ -249,6 +243,16 @@ augroup END
 " =============================================================================
 " remap default leader key to comma
 let mapleader = ";"
+
+" mksession wrapper for use with vsm: https://github.com/mattcoding4days/vsm
+if isdirectory(expand($VIM_SESSIONS))
+  nnoremap mk :mksession $VIM_SESSIONS/
+  nnoremap mo :mksession! $VIM_SESSIONS/
+else
+  nnoremap mk :echo "VIM_SESSIONS env variable is not defined"<CR>
+  nnoremap mo :echo "VIM_SESSIONS env variable is not defined"<CR>
+endif
+
 " Reload nvim config
 nnoremap <leader>vr :source $MYVIMRC<CR>
 
@@ -298,6 +302,13 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
+" tab navigation mappings
+map tt :tabnew
+map <M-l> :tabn<CR>
+imap <M-l> <ESC>:tabn<CR>
+map <M-h> :tabp<CR>
+imap <M-h> <ESC>:tabp<CR>
+
 "" Make vim scroll faster
 set ttyfast
 set mouse=a
@@ -315,8 +326,6 @@ set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
-" remove ugly vertical lines on window division
-set fillchars+=vert:\
 
 " Global Copy to clipboard
 vnoremap  <leader>y  "+y
@@ -330,19 +339,15 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 vnoremap <leader>P "+P
 
+" remove ugly vertical lines on window division
+"set fillchars+=vert:\
+
 " autocompletion of files and commands behaves like shell
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
 
 " save as sudo, must configure ask pass helper
 ca w!! w !sudo tee "%"
-
-" tab navigation mappings
-map tt :tabnew
-map <M-l> :tabn<CR>
-imap <M-l> <ESC>:tabn<CR>
-map <M-h> :tabp<CR>
-imap <M-h> <ESC>:tabp<CR>
 
 " when scrolling, keep cursor 3 lines away from screen border
 set scrolloff=3
@@ -377,7 +382,6 @@ syntax enable
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  "colorscheme solarized8
   let ayucolor="dark"
   colorscheme ayu
 else
