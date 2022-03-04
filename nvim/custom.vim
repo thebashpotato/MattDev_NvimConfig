@@ -215,10 +215,11 @@ let g:airline_theme='ayu_dark'
 " ============================================================================
 " Floaterm
 " ============================================================================
-let g:floaterm_position      = 'center'
-let g:floaterm_wintype       = 'floating'
-let g:floaterm_height        = 0.8
-let g:floaterm_width         = 0.8
+let g:floaterm_title          = 'Hack the planet'
+let g:floaterm_position       = 'center'
+let g:floaterm_wintype        = 'float'
+let g:floaterm_height         = 0.8
+let g:floaterm_width          = 0.8
 
 " custom mappings for my personal tools in normal mode only A = Alt key
 " Launch ipython in Floaterm
