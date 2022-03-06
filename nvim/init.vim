@@ -249,8 +249,8 @@ if isdirectory(expand($VIM_SESSIONS))
   nnoremap mk :mksession $VIM_SESSIONS/
   nnoremap mo :mksession! $VIM_SESSIONS/
 else
-  nnoremap mk :echo "VIM_SESSIONS env variable is not defined"<CR>
-  nnoremap mo :echo "VIM_SESSIONS env variable is not defined"<CR>
+  nnoremap mk :echo "VIM_SESSIONS env variable is not defined, get vim session manager at https://github.com/mattcoding4days/vsm"<CR>
+  nnoremap mo :echo "VIM_SESSIONS env variable is not defined, get vim session manager at https://github.com/mattcoding4days/vsm"<CR>
 endif
 
 " Reload nvim config
