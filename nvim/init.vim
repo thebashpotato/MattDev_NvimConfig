@@ -265,6 +265,9 @@ nnoremap <leader>vx :e $XDG_CONFIG_HOME/nvim/custom.vim<CR>
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>
 
+" Exit insert mode " 
+inoremap jk <ESC>
+
 " write and quit, no save
 nnoremap <leader>wq :wq<CR>
 
