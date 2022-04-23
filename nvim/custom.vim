@@ -91,7 +91,7 @@ nnoremap <leader>f :<C-u>Neoformat<CR>
 " ============================================================================
 " Latex preview
 " ============================================================================
-let g:livepreview_previewer = '$READER'
+let g:livepreview_previewer = $READER
 let g:livepreview_use_biber = 1
 nmap <leader>lp :LLPStartPreview<CR>
 
