@@ -1,4 +1,14 @@
 {
+    "languageserver": {
+        "golang": {
+            "command": "gopls",
+            "rootPatterns": ["go.work", "go.mod", ".vim/", ".git/", ".hg/"],
+            "filetypes": ["go"],
+            "initializationOptions": {
+                "usePlaceholders": true
+            }
+        }
+    },
     "suggest.echodocSupport": true,
     "suggest.autoTrigger": "always",
     "suggest.floatEnable": true,
