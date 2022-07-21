@@ -125,10 +125,10 @@ Plug 'junegunn/goyo.vim'
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
 let g:coc_global_extensions = [
+      \ 'coc-json',
       \ 'coc-tsserver',
       \ 'coc-prettier',
       \ 'coc-eslint',
-      \ 'coc-json',
       \ 'coc-sh',
       \ 'coc-fish',
       \ 'coc-vimlsp',
@@ -139,6 +139,7 @@ let g:coc_global_extensions = [
       \ 'coc-clangd',
       \ 'coc-texlab',
       \ 'coc-markdownlint',
+      \ 'coc-go',
       \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -183,6 +184,7 @@ autocmd FileType h setlocal ts=2 sw=2 expandtab
 autocmd FileType cpp setlocal ts=2 sw=2 expandtab
 autocmd FileType hpp setlocal ts=2 sw=2 expandtab
 autocmd FileType rust setlocal ts=4 sw=4 expandtab
+autocmd FileType go setlocal ts=4 sw=4 expandtab
 
 " Set expand width for scripting languages
 autocmd FileType sh setlocal ts=2 sw=2 expandtab
@@ -249,8 +251,8 @@ if isdirectory(expand($VIM_SESSIONS))
   nnoremap mk :mksession $VIM_SESSIONS/
   nnoremap mo :mksession! $VIM_SESSIONS/
 else
-  nnoremap mk :echo "VIM_SESSIONS env variable is not defined, get vim session manager at https://github.com/mattcoding4days/vsm"<CR>
-  nnoremap mo :echo "VIM_SESSIONS env variable is not defined, get vim session manager at https://github.com/mattcoding4days/vsm"<CR>
+  nnoremap mk :echo "VIM_SESSIONS directory does not exist, get vim session manager at https://github.com/mattcoding4days/vsm"<CR>
+  nnoremap mo :echo "VIM_SESSIONS directory does not exist, get vim session manager at https://github.com/mattcoding4days/vsm"<CR>
 endif
 
 " Reload nvim config
@@ -260,7 +262,7 @@ nnoremap <leader>vr :source $MYVIMRC<CR>
 nnoremap <leader>vc :e $MYVIMRC<CR>
 
 " Open custom.vim in current buffer
-nnoremap <leader>vx :e $XDG_CONFIG_HOME/nvim/custom.vim<CR>
+nnoremap <leader>vx :e $HOME/.config/nvim/custom.vim<CR>
 
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>

@@ -13,9 +13,12 @@
     "suggest.autoTrigger": "always",
     "suggest.floatEnable": true,
     "coc.preferences.formatOnSaveFiletypes": [
-        "ruby",
         "json",
         "javascript",
+        "cpp",
+        "hpp",
+        "c",
+        "h",
         "typescript",
         "python",
         "typescriptreact",
