@@ -125,6 +125,8 @@ Plug 'junegunn/goyo.vim'
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
 let g:coc_global_extensions = [
+      \ 'coc-flutter',
+      \ 'coc-snippets',
       \ 'coc-json',
       \ 'coc-tsserver',
       \ 'coc-prettier',

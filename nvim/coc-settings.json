@@ -13,6 +13,7 @@
     "suggest.autoTrigger": "always",
     "suggest.floatEnable": true,
     "coc.preferences.formatOnSaveFiletypes": [
+        "dart",
         "json",
         "javascript",
         "cpp",
@@ -59,5 +60,10 @@
         "v": "open:vsplit"
     },
     "coc.preferences.extensionUpdateCheck": "daily",
-    "clangd.path": "/home/matt/.config/coc/extensions/coc-clangd-data/install/11.0.0/clangd_11.0.0/bin/clangd"
+    "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.3/clangd_14.0.3/bin/clangd",
+    "flutter.provider.enableSnippet": true,
+    "flutter.lsp.initialization.closingLabels": true,
+    "snippets.autoTrigger": true,
+    "snippets.ultisnips.enable": true,
+    "snippets.textmateSnippetsRoots": ["~/.config/nvim/snippets/"]
 }
