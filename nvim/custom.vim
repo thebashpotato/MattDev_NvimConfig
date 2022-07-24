@@ -41,27 +41,27 @@ let g:startify_custom_header_quotes = [
       "\ '   \_________/                              \__________/  ',
 "\]
 
-let g:startify_ascii = [
-      \ '                                        ▝▘            ',
-      \ '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
-      \ '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
-      \ '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
-      \ '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
-      \ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
-      \]
-
 "let g:startify_ascii = [
-      "\ ' ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------, ',
-      "\ ' | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    | ',
-      "\ ' |--- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,-----| ',
-      "\ ' | ->| | Q | W | E | R | T | Y | U | I | O | P | [ | ] |  \  | ',
-      "\ ' |----- ,--,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ------| ',
-      "\ ' | Caps | A | S | D | F | G | H | J | K | L | ; | " |  Enter | ',
-      "\ ' |------ -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- --------| ',
-      "\ ' | Shift  | Z | X | C | V | B | N | M | , | . | / |  Shift   | ',
-      "\ ' |------,- ,-- --, --- --- --- --- --- --- -,- --- ,--,------| ',
-      "\ ' | ctrl |  | alt |                          | alt  |  | ctrl | ',
-      "\ '  ------    ----- -------------------------- ------    ------  ', ]
+      "\ '                                        ▝▘            ',
+      "\ '██▃▅▇█▆▖  ▗▟████▙▖   ▄████▄   ██▄  ▄██  ██  ▗▟█▆▄▄▆█▙▖',
+      "\ '██▛▔ ▝██  ██▄▄▄▄██  ██▛▔▔▜██  ▝██  ██▘  ██  ██▛▜██▛▜██',
+      "\ '██    ██  ██▀▀▀▀▀▘  ██▖  ▗██   ▜█▙▟█▛   ██  ██  ██  ██',
+      "\ '██    ██  ▜█▙▄▄▄▟▊  ▀██▙▟██▀   ▝████▘   ██  ██  ██  ██',
+      "\ '▀▀    ▀▀   ▝▀▀▀▀▀     ▀▀▀▀       ▀▀     ▀▀  ▀▀  ▀▀  ▀▀',
+      "\]
+
+let g:startify_ascii = [
+      \ ' ,---,---,---,---,---,---,---,---,---,---,---,---,---,-------, ',
+      \ ' | ~ | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 | [ | ] | <-    | ',
+      \ ' |--- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,-----| ',
+      \ ' | ->| | Q | W | E | R | T | Y | U | I | O | P | [ | ] |  \  | ',
+      \ ' |----- ,--,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ,-- ------| ',
+      \ ' | Caps | A | S | D | F | G | H | J | K | L | ; | " |  Enter | ',
+      \ ' |------ -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- -,- --------| ',
+      \ ' | Shift  | Z | X | C | V | B | N | M | , | . | / |  Shift   | ',
+      \ ' |------,- ,-- --, --- --- --- --- --- --- -,- --- ,--,------| ',
+      \ ' | ctrl |  | alt |                          | alt  |  | ctrl | ',
+      \ '  ------    ----- -------------------------- ------    ------  ', ]
 
 let g:startify_custom_header =
       \ 'startify#center(g:startify_ascii)'
@@ -91,8 +91,8 @@ nnoremap <leader>f :<C-u>Neoformat<CR>
 " ============================================================================
 " Latex preview
 " ============================================================================
-let g:livepreview_previewer = '$READER'
-let g:livepreview_use_biber = 1
+let g:livepreview_previewer = "zathura"
+let g:livepreview_use_biber = 0
 nmap <leader>lp :LLPStartPreview<CR>
 
 " ============================================================================
@@ -336,6 +336,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
+
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -364,18 +365,25 @@ set statusline^=%{StatusDiagnostic()}
 " Using CocList
 " Show all diagnostics
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+
 " Manage extensions
 nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+
 " Show commands
 nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+
 " Find symbol of current document
 nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+
 " Search workspace symbols
 nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+
 " Do default action for next item.
 nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+
 " Do default action for previous item.
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+
 " Resume latest coc list
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
@@ -384,6 +392,7 @@ autocmd FileType python let b:coc_root_patterns = ['.git', '.env']
 
 " Auto command for correct comment highlighting in Json files
 autocmd FileType json syntax match Comment +\/\/.\+$+
+
 " status line function
 function! StatusDiagnostic() abort
   let info = get(b:, 'coc_diagnostic_info', {})
@@ -406,3 +415,25 @@ let g:markdown_fenced_languages = [
       \ 'vim',
       \ 'help'
       \]
+
+" ============================================================================
+" Coc-snippet configuration
+" ============================================================================
+
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
+
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-j> for jump to next placeholder, it's default of coc.nvim
+let g:coc_snippet_next = '<c-j>'
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+" Use <leader>x for convert visual selected code to snippet
+xmap <leader>x  <Plug>(coc-convert-snippet)
