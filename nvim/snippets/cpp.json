@@ -1,0 +1,236 @@
+{
+  "for": {
+    "prefix": "for",
+    "body": [
+      "for (${std::size_t} ${i:Name} = ${1:0}; ${i} < ${2:length}; ${i}++)",
+      "{",
+      "	$3",
+      "}"
+    ],
+    "description": "Code snippet for 'for' loop"
+  },
+  "forr": {
+    "prefix": "forr",
+    "body": [
+      "for (int ${i} = ${1:length} - 1; ${i} >= ${2:0}; ${i}--)",
+      "{",
+      "	$3",
+      "}"
+    ],
+    "description": "Code snippet for reverse 'for' loop"
+  },
+  "do": {
+    "prefix": "do",
+    "body": ["do", "{", "	$1", "} while($2);"],
+    "description": "Code snippet for do...while loop"
+  },
+  "while": {
+    "prefix": "while",
+    "body": ["while ($1)", "{", "	$2", "}"],
+    "description": "Code snippet for while loop"
+  },
+  "foreach": {
+    "prefix": "foreach",
+    "body": [
+      "for(auto const& ${1:Name} : ${collection_to_loop})",
+      "{",
+      " ${1:Name}",
+      "}"
+    ],
+    "description": "Code snippet for range-based for loop (c++11) statement"
+  },
+  "if": {
+    "prefix": "if",
+    "body": ["if (${1})", "{", "${2}", "}"],
+    "description": "Code snippet for if statement"
+  },
+  "else": {
+    "prefix": "else",
+    "body": ["else", "{", "${1}", "}"],
+    "description": "Code snippet for else statement"
+  },
+  "else if": {
+    "prefix": "else if",
+    "body": ["else if ($1)", "{", "${2}", "}"],
+    "description": "Code snippet for else-if statement"
+  },
+  "enum": {
+    "prefix": "enum",
+    "body": ["enum ${1:Name}", "{", "${1}", "};"],
+    "description": "Code snippet for enum"
+  },
+  "enum class": {
+    "prefix": "enum class",
+    "body": ["enum class ${1:Name} { };"],
+    "description": "Code snippet for enum class (c++11)"
+  },
+  "class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:Name}",
+      "{",
+      "public:",
+      " ${1:Name}();",
+      " ~${1:Name}();",
+      " ${1:Name}(${1:Name} &&) noexcept = default;",
+      " ${1:Name} &operator=(${1:Name} &&) noexcept = default;",
+      " ${1:Name}(const ${1:Name} &) = default;",
+      " ${1:Name} &operator=(const ${1:Name} &) = default;",
+      "",
+      "private:",
+      "std::int32_t ${2:var};",
+      "};",
+      "",
+      "${1:Name}::${1:Name}()",
+      "{",
+      "}",
+      "",
+      "${1:Name}::~${1:Name}()",
+      "{",
+      "}"
+    ],
+    "description": "Code snippet for class"
+  },
+  "meyers singleton": {
+    "prefix": "meyerss",
+    "body": [
+      "/**",
+      " * \\brief C++17 version of a Meyers singleton",
+      " *",
+      " * \\code{.cpp}",
+      " *   ${1:Name}::instance().init();",
+      " * \\endcode",
+      " * */",
+      "class ${1:Name}",
+      "{",
+      "public:",
+      " ${1:Name}(const ${1:Name} &) = delete;",
+      " ${1:Name} &operator=(const ${1:Name} &) = delete;",
+      "",
+      " ${1:Name}(${1:Name} &&) noexcept = default;",
+      " ${1:Name} &operator=(${1:Name} &&) noexcept = default;",
+      "",
+      " [[nodiscard]] static auto instance() noexcept -> ${1:Name} &;",
+      "",
+      " auto init() -> void;",
+      "",
+      "private:",
+      " ${1:Name}() = default;",
+      " ~${1:Name}() = default;",
+      "",
+      " bool mIs${1:Name}Initialized{};",
+      "};",
+      "",
+      "auto ${1:Name}::instance() noexcept -> ${1:Name} &",
+      "{",
+      " static ${1:Name} instance;",
+      " return instance;",
+      "}",
+      "",
+      "auto ${1:Name}::init() -> void",
+      "{",
+      " /* Initialize ${1:Name} in what ever way you see fit here..*/",
+      "}",
+      ""
+    ],
+    "description": "Create a C++17/20 Meyers Singleton"
+  },
+  "classi": {
+    "prefix": "classi",
+    "body": [
+      "class ${1:Name}",
+      "{",
+      "public:",
+      " ${1:Name}() = default;",
+      " ${1:Name}(${1:Name} &&) = default;",
+      " ${1:Name}(const ${1:Name} &) = default;",
+      " ${1:Name} &operator=(${1:Name} &&) = default;",
+      " ${1:Name} &operator=(const ${1:Name} &) = default;",
+      " ~${1:Name}() = default;",
+      "",
+      "private:",
+      "int ${2:var}",
+      "};"
+    ],
+    "description": "Code snippet for class with inline constructor/destructor"
+  },
+  "interface": {
+    "prefix": "interface",
+    "body": ["struct I${1:Name}", "{", "  ", "};"],
+    "description": "Code snippet for interface (Visual C++)"
+  },
+  "namespace": {
+    "prefix": "namespace",
+    "body": ["namespace ${1:Name}", "{", " ${1} ", "}"],
+    "description": "Code snippet for namespace"
+  },
+  "#ifdef": {
+    "prefix": "#ifdef",
+    "body": ["#ifdef ${DEBUG}", "$1", "#endif // ${DEBUG}"],
+    "description": "Code snippet for #ifdef"
+  },
+  "#ifndef": {
+    "prefix": "#ifndef",
+    "body": ["#ifndef ${1:1}", "$2", "#endif // !$1"],
+    "description": "Code snippet for #ifndef"
+  },
+  "#if": {
+    "prefix": "#if",
+    "body": ["#ifdef ${1:0}", "$2", "#endif // $1"],
+    "description": "Code snippet for #if"
+  },
+  "struct": {
+    "prefix": "struct",
+    "body": ["struct ${1:Name}", "{", "${1}", "};"],
+    "description": "Code snippet for struct"
+  },
+  "switch": {
+    "prefix": "switch",
+    "body": ["switch (${switch_on})", "{", "default:", "	break;$1", "}"],
+    "description": "Code snippet for switch statement"
+  },
+  "try": {
+    "prefix": "try",
+    "body": [
+      "try",
+      "{",
+      "",
+      "}",
+      "catch (std::exception const& e)",
+      "{",
+      "${1}",
+      "}"
+    ],
+    "description": "Code snippet for try catch"
+  },
+  "union": {
+    "prefix": "union",
+    "body": ["union ${1:Name}", "{", "${1}", "};"],
+    "description": "Code snippet for union"
+  },
+  "cout": {
+    "prefix": "cout",
+    "body": ["std::cout << \"${1:/* message */}\" << '\n';"],
+    "description": "Code snippet for printing to std::cout, provided the header is set"
+  },
+  "#inc": {
+    "prefix": "#inc",
+    "body": ["#include \"$1\""],
+    "description": "Code snippet for #include \" \""
+  },
+  "#inc<": {
+    "prefix": "#inc<",
+    "body": ["#include <$1>"],
+    "description": "Code snippet for #include \" \""
+  },
+  "#def": {
+    "prefix": "#def",
+    "body": ["#define \"$1\" \"$2\" "],
+    "description": "Code snippet for #define \" \""
+  },
+  "main": {
+    "prefix": "main",
+    "body": ["int main(int argc, const char** argv) {", "    return 0;", "}"],
+    "description": "Code snippet for main function"
+  }
+}
