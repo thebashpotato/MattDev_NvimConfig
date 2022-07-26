@@ -177,8 +177,8 @@ autocmd FileType javascript setlocal ts=2 sw=2 expandtab
 autocmd FileType javascriptreact setlocal ts=2 sw=2 expandtab
 autocmd FileType typescript setlocal ts=2 sw=2 expandtab
 autocmd FileType typescriptreact setlocal ts=2 sw=2 expandtab
+autocmd FileType dart setlocal ts=2 sw=2 expandtab
 autocmd FileType json setlocal ts=2 sw=2 expandtab
-autocmd FileType vue setlocal ts=2 sw=2 expandtab
 
 " Set expand width for Low level languages
 autocmd FileType c setlocal ts=2 sw=2 expandtab
