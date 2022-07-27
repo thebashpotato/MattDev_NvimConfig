@@ -20,6 +20,9 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
+" Tokyo night color scheme
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
 " solarized colorscheme
 Plug 'lifepillar/vim-solarized8'
 
@@ -383,13 +386,24 @@ endif
 set background=dark
 syntax enable
 
+" Configure color scheme dark, or light
+let ayucolor="dark"
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+
+" Change the "hint" color to the "orange" color, and make the "error" color bright red
+let g:tokyonight_colors = {
+  \ 'hint': 'orange',
+  \ 'error': '#ff0000'
+\ }
+
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  let ayucolor="dark"
-  colorscheme ayu
+  colorscheme tokyonight
 else
-  colorscheme quantum
+  colorscheme ayu
 endif
 
 " =============================================================================

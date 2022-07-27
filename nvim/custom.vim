@@ -91,7 +91,7 @@ nnoremap <leader>f :<C-u>Neoformat<CR>
 " ============================================================================
 " Latex preview
 " ============================================================================
-let g:livepreview_previewer = "zathura"
+let g:livepreview_previewer = "evince"
 let g:livepreview_use_biber = 0
 nmap <leader>lp :LLPStartPreview<CR>
 
@@ -208,7 +208,7 @@ let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='ayu_dark'
+let g:airline_theme='onedark'
 
 "let g:airline_theme='base16_material'
 
