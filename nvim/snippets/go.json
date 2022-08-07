@@ -80,6 +80,10 @@
     "prefix": "fme",
     "body": ["fmt.Errorf(\"${1:%+v}\", ${0:err})"]
   },
+  "fmt.Printf": {
+    "prefix": "fpf",
+    "body": ["fmt.Printf(\"${1:%+v}\", $0)"]
+  },
 
   "ctx context.Context": {
     "prefix": "ctx",
