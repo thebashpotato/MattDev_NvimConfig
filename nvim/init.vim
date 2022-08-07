@@ -263,9 +263,6 @@ nnoremap <leader>vc :e $MYVIMRC<CR>
 " Open custom.vim in current buffer
 nnoremap <leader>vx :e $HOME/.config/nvim/custom.vim<CR>
 
-" Exit insert mode " 
-inoremap jk <ESC>
-
 " write and quit, no save
 nnoremap <leader>wq :wq<CR>
 
