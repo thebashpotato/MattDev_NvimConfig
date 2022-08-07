@@ -263,15 +263,6 @@ nnoremap <leader>vc :e $MYVIMRC<CR>
 " Open custom.vim in current buffer
 nnoremap <leader>vx :e $HOME/.config/nvim/custom.vim<CR>
 
-<<<<<<< HEAD
-" Change Ctrl N mapping to Ctrl Space "
-inoremap <C-space> <C-n>
-
-" Exit insert mode " 
-inoremap jk <ESC>
-
-=======
->>>>>>> master
 " write and quit, no save
 nnoremap <leader>wq :wq<CR>
 
