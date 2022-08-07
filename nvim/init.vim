@@ -23,9 +23,6 @@ call plug#begin('~/.config/nvim/plugged')
 " Tokyo night color scheme
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
-" solarized colorscheme
-Plug 'lifepillar/vim-solarized8'
-
 " Ayu colorscheme
 Plug 'ayu-theme/ayu-vim'
 
@@ -34,9 +31,6 @@ Plug 'luochen1990/rainbow'
 
 " Neoformat (universal formatting tool)
 Plug 'sbdchd/neoformat'
-
-" Cmake highlighting
-Plug 'pboettch/vim-cmake-syntax'
 
 " Javascript syntax highlighting
 Plug 'yuezk/vim-js'
@@ -268,9 +262,6 @@ nnoremap <leader>vc :e $MYVIMRC<CR>
 
 " Open custom.vim in current buffer
 nnoremap <leader>vx :e $HOME/.config/nvim/custom.vim<CR>
-
-" Change Ctrl N mapping to Ctrl Space "
-inoremap <C-space> <C-n>
 
 " write and quit, no save
 nnoremap <leader>wq :wq<CR>
