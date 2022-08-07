@@ -20,8 +20,8 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-" solarized colorscheme
-Plug 'lifepillar/vim-solarized8'
+" Tokyo night color scheme
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " Ayu colorscheme
 Plug 'ayu-theme/ayu-vim'
@@ -31,9 +31,6 @@ Plug 'luochen1990/rainbow'
 
 " Neoformat (universal formatting tool)
 Plug 'sbdchd/neoformat'
-
-" Cmake highlighting
-Plug 'pboettch/vim-cmake-syntax'
 
 " Javascript syntax highlighting
 Plug 'yuezk/vim-js'
@@ -266,12 +263,15 @@ nnoremap <leader>vc :e $MYVIMRC<CR>
 " Open custom.vim in current buffer
 nnoremap <leader>vx :e $HOME/.config/nvim/custom.vim<CR>
 
+<<<<<<< HEAD
 " Change Ctrl N mapping to Ctrl Space "
 inoremap <C-space> <C-n>
 
 " Exit insert mode " 
 inoremap jk <ESC>
 
+=======
+>>>>>>> master
 " write and quit, no save
 nnoremap <leader>wq :wq<CR>
 
@@ -386,13 +386,24 @@ endif
 set background=dark
 syntax enable
 
+" Configure color scheme dark, or light
+let ayucolor="dark"
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+
+" Change the "hint" color to the "orange" color, and make the "error" color bright red
+let g:tokyonight_colors = {
+  \ 'hint': 'orange',
+  \ 'error': '#ff0000'
+\ }
+
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  let ayucolor="dark"
-  colorscheme ayu
+  colorscheme tokyonight
 else
-  colorscheme quantum
+  colorscheme ayu
 endif
 
 " =============================================================================

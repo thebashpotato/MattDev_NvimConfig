@@ -67,6 +67,14 @@
   "class": {
     "prefix": "class",
     "body": [
+      "/**",
+      " * \\brief Description",
+      " * \\details Details",
+      " *",
+      " * \\code{.cpp}",
+      " *   Example code here ",
+      " * \\endcode",
+      " * */",
       "class ${1:Name}",
       "{",
       "public:",
@@ -96,6 +104,8 @@
     "body": [
       "/**",
       " * \\brief C++17 version of a Meyers singleton",
+      " *",
+      " * \\details",
       " *",
       " * \\code{.cpp}",
       " *   ${1:Name}::instance().init();",
@@ -138,6 +148,15 @@
   "classi": {
     "prefix": "classi",
     "body": [
+      "/**",
+      " * \\brief Description",
+      " *",
+      " * \\details Details",
+      " *",
+      " * \\code{.cpp}",
+      " *   Example code here",
+      " * \\endcode",
+      " * */",
       "class ${1:Name}",
       "{",
       "public:",
@@ -149,14 +168,28 @@
       " ~${1:Name}() = default;",
       "",
       "private:",
-      "int ${2:var}",
+      "std::int32_t ${mVar};",
       "};"
     ],
     "description": "Code snippet for class with inline constructor/destructor"
   },
   "interface": {
     "prefix": "interface",
-    "body": ["struct I${1:Name}", "{", "  ", "};"],
+    "body": [
+      "/**",
+      " * \\brief Description",
+      " *",
+      " * \\details Details",
+      " *",
+      " * \\code{.cpp}",
+      " *   Example code here",
+      " * \\endcode",
+      " * */",
+      "struct I${1:Name}",
+      "{",
+      "  ",
+      "};"
+    ],
     "description": "Code snippet for interface (Visual C++)"
   },
   "namespace": {
