@@ -20,6 +20,7 @@
         "hpp",
         "c",
         "h",
+        "rust",
         "typescript",
         "python",
         "typescriptreact",
@@ -65,5 +66,14 @@
     "flutter.lsp.initialization.closingLabels": true,
     "snippets.autoTrigger": true,
     "snippets.ultisnips.enable": true,
-    "snippets.textmateSnippetsRoots": ["~/.config/nvim/snippets/"]
+    "snippets.textmateSnippetsRoots": [
+      "~/.config/nvim/snippets/"
+    ],
+    "git.enableGutters": true,
+    "git.addedSign.hlGroup": "GitGutterAdd",
+    "git.changedSign.hlGroup": "GitGutterChange",
+    "git.removedSign.hlGroup": "GitGutterDelete",
+    "git.topRemovedSign.hlGroup": "GitGutterDelete",
+    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+    "git.addGBlameToVirtualText": true
 }

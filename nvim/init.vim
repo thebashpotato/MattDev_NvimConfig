@@ -20,8 +20,14 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
+" Moonfly irblack like colorscheme
+Plug 'bluz71/vim-moonfly-colors'
+
 " Tokyo night color scheme
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+
+" Aquarium color scheme
+Plug 'frenzyexists/aquarium-vim', { 'branch': 'develop' }
 
 " Ayu colorscheme
 Plug 'ayu-theme/ayu-vim'
@@ -52,9 +58,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Override configs by directory
 Plug 'arielrossanigo/dir-configs-override.vim'
-
-" Better file browser
-Plug 'scrooloose/nerdtree'
 
 " Class/module browser
 Plug 'majutsushi/tagbar'
@@ -105,12 +108,6 @@ Plug 'lilydjwg/colorizer'
 " Generate html in a simple way
 Plug 'mattn/emmet-vim'
 
-" Git integration
-Plug 'tpope/vim-fugitive'
-
-" Git/mercurial/others diff icons on the side of the file lines
-Plug 'mhinz/vim-signify'
-
 " Nice icons: Need to install patched font for this to work
 Plug 'ryanoasis/vim-devicons'
 
@@ -133,12 +130,9 @@ let g:coc_global_extensions = [
       \ 'coc-vimlsp',
       \ 'coc-pyright',
       \ 'coc-rust-analyzer',
-      \ 'coc-rls',
       \ 'coc-cmake',
       \ 'coc-clangd',
-      \ 'coc-texlab',
-      \ 'coc-markdownlint',
-      \ 'coc-go',
+      \ 'coc-git',
       \ ]
 
 " Tell vim-plug we finished declaring plugins, so it can load them
@@ -371,28 +365,38 @@ if (has("nvim"))
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 endif
 
-if (has("termguicolors"))
+if has("termguicolors")
   set termguicolors
+  if &t_8f == ''
+    " The first characters after the equals sign are literal escape characters.
+    set t_8f=[38;2;%lu;%lu;%lum
+    set t_8b=[48;2;%lu;%lu;%lum
+  endif
 endif
 set background=dark
 syntax enable
 
-" Configure color scheme dark, or light
+" Configure Ayu color scheme
 let ayucolor="dark"
+
+" Configure Tokyo night color scheme
 let g:tokyonight_style = "night"
 let g:tokyonight_italic_functions = 1
 let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
-
-" Change the "hint" color to the "orange" color, and make the "error" color bright red
 let g:tokyonight_colors = {
   \ 'hint': 'orange',
   \ 'error': '#ff0000'
 \ }
 
+" Configure Aqua color scheme
+let g:aqua_bold = 1
+let g:aquarium_style="dark"
+
+
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
   let &t_Co = 256
-  colorscheme tokyonight
+  colorscheme moonfly
 else
   colorscheme ayu
 endif

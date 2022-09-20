@@ -12,7 +12,7 @@ let g:vimwiki_list = [{'path': '~/.config/vimwiki',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 
 " ============================================================================
-" Startify 
+" Startify
 " ============================================================================
 let g:startify_custom_header_quotes = [
     \ [' Linux gives us the power we need to', '      crush those who oppose us'],
@@ -110,29 +110,6 @@ let g:tagbar_autofocus = 1
 map <leader>tl :TaskList<CR>
 
 " ============================================================================
-" NERDTree
-" ============================================================================
-" toggle nerdtree display
-nmap <leader>nn :NERDTreeToggle<CR>
-" open nerdtree with the current file selected
-nmap <leader>nf :NERDTreeFind<CR>
-" don;t show these file types
-let NERDTreeIgnore = ['\.pyc$', '\.pyo$']
-
-" ============================================================================
-" Neomake
-" ============================================================================
-"" Run linter on write
-"autocmd! BufWritePost * Neomake
-"" Check code as python3 by default
-"let g:neomake_python_python_maker = neomake#makers#ft#python#python()
-"let g:neomake_python_flake8_maker = neomake#makers#ft#python#flake8()
-"let g:neomake_python_python_maker.exe = 'python3 -m py_compile'
-"let g:neomake_python_flake8_maker.exe = 'python3 -m flake8'
-"" Disable error messages inside the buffer, next to the problematic line
-"let g:neomake_virtualtext_current_error = 1
-
-" ============================================================================
 " Fzf
 " ============================================================================
 " file finder mapping
@@ -149,29 +126,12 @@ nmap <leader>af :Lines<CR>
 nmap <leader>co :Commands<CR>
 
 " ============================================================================
-" Git Signify - Displays git diff icons in the gutter
+" Coc git:  https://github.com/neoclide/coc-git
 " ============================================================================
-" this first setting decides in which order try to guess your current vcs
-" UPDATE it to reflect your preferences, it will speed up opening files
-let g:signify_vcs_list = [ 'git' ]
-" mappings to jump to changed blocks
-nmap <leader>sn <plug>(signify-next-hunk)
-nmap <leader>sp <plug>(signify-prev-hunk)
+nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
 
 " ============================================================================
-" Git Signify
-" ============================================================================
-
-" nicer colors
-highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
-highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
-highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
-highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
-highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
-highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
-
-" ============================================================================
-" Autoclose
+" Auto close:
 " ============================================================================
 " Fix to let ESC work as espected with Autoclose plugin
 " (without this, when showing an autocompletion window, ESC won't leave insert mode)
@@ -179,7 +139,7 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 let g:AutoClosePairs = "() {} [] ' ` \" "
 
 " ============================================================================
-" Goyo mappings 
+" Goyo mappings
 " ============================================================================
 nmap <leader>dd :Goyo 100x60<CR>
 
@@ -197,7 +157,7 @@ let g:user_emmet_mode='a'  " enable all functions in all modes
 let g:user_emmet_leader_key='<C-S>'
 
 " ============================================================================
-" Devicon 
+" Devicon
 " ============================================================================
 " loading the plugin
 let g:webdevicons_enable = 1
@@ -208,9 +168,7 @@ let g:webdevicons_enable = 1
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='onedark'
-
-"let g:airline_theme='base16_material'
+let g:airline_theme="base16_irblack"
 
 " ============================================================================
 " Floaterm
