@@ -119,7 +119,6 @@ Plug 'junegunn/goyo.vim'
 "  https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions
 " ============================================================================
 let g:coc_global_extensions = [
-      \ 'coc-flutter',
       \ 'coc-snippets',
       \ 'coc-json',
       \ 'coc-tsserver',
@@ -146,6 +145,63 @@ if vim_plug_just_installed
   echo "Installing all plugins for"$USER
   echo ""
   :PlugInstall
+endif
+
+" =============================================================================
+" Add neovide support
+"
+" If on Wayland, set this environment variable
+" export WINIT_UNIX_BACKEND="x11"
+" =============================================================================
+if exists("g:neovide")
+  " Set a gui font for neovide
+  set guifont=FiraCode\ Nerd\ Font\ Mono:h14
+  " RefreshRate: May need to change this depending on your system specs
+  let g:neovide_refresh_rate=60
+
+  " UnFocusedRefreshRate: When neovide is not in focus, don't refresh so often
+  let g:neovide_refresh_rate_idle=5
+
+  " Transparency: Set values where (t >= 0.0 && t <= 100.00)
+  let g:neovide_transparency=0.95
+
+  " ConfirmQuit: (Incase someone exits with out saving code)
+  let g:neovide_confirm_quit=1
+
+  " Profiler: Setting this to v:true enables the profiler, which shows the
+  " frametime graph in the upper left corner
+  let g:neovide_profiler=v:false
+
+  " Mouse: Hide the mouse while typing
+  let g:neovide_hide_mouse_when_typing=v:true
+
+  " InputSettings: Use the logo key,
+  " This enables the use of the Super key, or cmd key on Mac
+  let g:neovide_input_use_logo=v:false
+  
+  " AnimationTrailSize: Determines how much the trail of the cursor lags
+  " behind the front edge.
+  let g:neovide_cursor_trail_size=0.8
+
+  " AntiAliasing: Enables or disables antialiasing of the cursor quad.
+  " Disabling may fix some cursor issues.
+  let g:neovide_cursor_antialiasing=v:true
+
+  " CursorParticles: There are a number of vfx modes you can enable which
+  " produce particles behind the cursor. Default is an empty string.
+  "
+  " Options: "railgun", "torpedo", "pixiedust", "sonicboom", "ripple", "wireframe"
+  let g:neovide_cursor_vfx_mode="wireframe"
+  
+  " ParticleSettings: Options for configuring the particle generation and
+  " behavior.
+  let g:neovide_cursor_vfx_opacity=200.0
+  let g:neovide_cursor_vfx_particle_lifetime=1.2
+  let g:neovide_cursor_vfx_particle_density=7.0
+  let g:neovide_cursor_vfx_particle_speed=10.0
+  " Only for railgun mode
+  let g:neovide_cursor_vfx_particle_phase=10.0
+  let g:neovide_cursor_vfx_particle_curl=1.0
 endif
 
 " =============================================================================
@@ -320,16 +376,17 @@ set softtabstop=4
 set shiftwidth=4
 
 " Global Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy "+yy
+"map <M-l> :tabn<CR>
+vnoremap  <M-y>  "+y
+nnoremap  <M-Y>  "+yg_
+nnoremap  <M-y>  "+y
+nnoremap  <M-yy> "+yy
 
 " Global Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
+nnoremap <M-p> "+p
+nnoremap <M-P> "+P
+vnoremap <M-p> "+p
+vnoremap <M-P> "+P
 
 " remove ugly vertical lines on window division
 "set fillchars+=vert:\
