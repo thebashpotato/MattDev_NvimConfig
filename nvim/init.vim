@@ -20,98 +20,101 @@ endif
 " ============================================================================
 call plug#begin('~/.config/nvim/plugged')
 
-" Moonfly irblack like colorscheme
+" Colorscheme: Moonfly
 Plug 'bluz71/vim-moonfly-colors'
 
-" Tokyo night color scheme
+" Colorscheme: Tokyo night
 Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
-" Aquarium color scheme
+" Colorscheme: Aquarium 
 Plug 'frenzyexists/aquarium-vim', { 'branch': 'develop' }
 
-" Ayu colorscheme
+" Colorscheme: Ayu colorscheme
 Plug 'ayu-theme/ayu-vim'
 
-" rainbow brackets
+" Syntax: Rainbow brackets 
 Plug 'luochen1990/rainbow'
 
-" Neoformat (universal formatting tool)
+" Utility: Neoformat (universal formatting tool)
 Plug 'sbdchd/neoformat'
 
-" Javascript syntax highlighting
+" Syntax: Javascript syntax highlighting
 Plug 'yuezk/vim-js'
 
-" Typescript syntax highlighting
+" Syntax: Typescript syntax highlighting
 Plug 'HerringtonDarkholme/yats.vim'
 
-" Vim wiki
+" Utility: Vim wiki
 Plug 'vimwiki/vimwiki'
 
-" quick commenter
+" Utility: quick commenter
 Plug 'preservim/nerdcommenter'
 
-" vim-smoothie
+" Utility: vim-smoothie
 Plug 'psliwka/vim-smoothie'
 
-" Conquer of Completion
+" LanguageServiceProviderFramework: Conquer of Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Override configs by directory
+" Utility: Override configs by directory
 Plug 'arielrossanigo/dir-configs-override.vim'
 
-" Class/module browser
+" Utility: Code module browser/organizer
 Plug 'majutsushi/tagbar'
 
-" Search results counter
+" Utility: Search results counter
 Plug 'vim-scripts/IndexedSearch'
 
-" Startify, fancy start screen for vim
+" Rice: Fancy start screen for vim
 Plug 'mhinz/vim-startify'
 
-" Vim latex live preview
+" Utility: Vim latex live preview
 Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
-" Integrated Floating terminal
+" Utility: Integrated Floating terminal
 Plug 'voldikss/vim-floaterm'
 
-" Airline status line
+" Utility: A Lua based integrated terminal
+Plug 'akinsho/toggleterm.nvim', {'tag' : 'v2.2.1'}
+
+" Utility: Airline status line
 Plug 'vim-airline/vim-airline'
 
-" Themes for Airline
+" Colorscheme: Themes for Airline
 Plug 'vim-airline/vim-airline-themes'
 
-" Code and files fuzzy finder
+" Utility: Code and files fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
-" Pending tasks list
+" Utility: Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
 
-" Completion from other opened files
+" Utility: Completion from other opened files
 Plug 'Shougo/context_filetype.vim'
 
-" Automatically close parenthesis, etc
+" Utility: Automatically close parenthesis, etc
 Plug 'Townk/vim-autoclose'
 
-" Indent text object
+" Utility: Indent text object
 Plug 'michaeljsmith/vim-indent-object'
 
-" Indentation based movements
+" Utility: Indentation based movements
 Plug 'jeetsukumaran/vim-indentwise'
 
-" Better language packs
+" Syntax: Better language packs
 Plug 'sheerun/vim-polyglot'
 
-" Paint css colors with the real color
+" Utility: Paint css colors with the real color
 Plug 'lilydjwg/colorizer'
 
-" Generate html in a simple way
+" Utility: Generate html in a simple way
 Plug 'mattn/emmet-vim'
 
-" Nice icons: Need to install patched font for this to work
+" Rice: Fancy unicode icons (needs a Nerdfont to work)
 Plug 'ryanoasis/vim-devicons'
 
-" Distraction free programming
+" Utility: Distraction free programming
 Plug 'junegunn/goyo.vim'
 
 " ============================================================================

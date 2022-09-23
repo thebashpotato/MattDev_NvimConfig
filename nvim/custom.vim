@@ -126,11 +126,6 @@ nmap <leader>af :Lines<CR>
 nmap <leader>co :Commands<CR>
 
 " ============================================================================
-" Coc git:  https://github.com/neoclide/coc-git
-" ============================================================================
-nnoremap <silent> <space>g  :<C-u>CocList --normal gstatus<CR>
-
-" ============================================================================
 " Auto close:
 " ============================================================================
 " Fix to let ESC work as espected with Autoclose plugin
@@ -175,11 +170,11 @@ let g:airline_theme="base16_irblack"
 " ============================================================================
 let g:floaterm_title          = 'Hack the planet'
 let g:floaterm_position       = 'center'
-let g:floaterm_wintype        = 'float'
-let g:floaterm_height         = 0.8
-let g:floaterm_width          = 0.8
+let g:floaterm_wintype        = 'split'
+let g:floaterm_height         = 0.5
+let g:floaterm_width          = 0.5
+let g:floaterm_autoclose      = 1
 
-" custom mappings for my personal tools in normal mode only A = Alt key
 " Launch ipython in Floaterm
 nnoremap <leader>pp :FloatermNew ipython<CR>
 
